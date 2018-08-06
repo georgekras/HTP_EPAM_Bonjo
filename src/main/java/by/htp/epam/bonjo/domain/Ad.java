@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class Ad implements Serializable {
 
 	private static final long serialVersionUID = -2329117546911802391L;
-	
-    private int id;
-    private String title, smallDesc, description;
-    private int price;
-    private int users_ID, category_ID;
-    
+
+	private int id;
+	private String title, smallDesc, description;
+	private int price;
+	private int users_ID, category_ID;
+
 	public Ad(int id, String title, String smallDesc, String description, int price, int users_ID, int category_ID) {
 		super();
 		this.id = id;
@@ -21,7 +21,7 @@ public class Ad implements Serializable {
 		this.users_ID = users_ID;
 		this.category_ID = category_ID;
 	}
-	
+
 	public Ad() {
 	}
 
@@ -129,19 +129,12 @@ public class Ad implements Serializable {
 			return false;
 		return true;
 	}
-	
-    @Override
-    public String toString() {
-        return "Ad{" +
-                "ID=" + id +
-                ", Title='" + title + '\'' +
-                ", SmallDesc='" + smallDesc + '\'' +
-                ", Description='" + description + '\'' +
-                ", Price=" + price +
-                ", users_ID=" + users_ID +
-                ", category_ID=" + category_ID +
-                '}';
-    }
-   
-    
+
+	@Override
+	public String toString() {
+		return "Ad{" + "ID=" + id + ", Title='" + title + '\'' + ", SmallDesc='" + smallDesc + '\'' + ", Description='"
+				+ description + '\'' + ", Price=" + price + ", users_ID=" + users_ID + ", category_ID=" + category_ID
+				+ '}';
+	}
+
 }

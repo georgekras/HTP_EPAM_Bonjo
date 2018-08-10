@@ -119,7 +119,7 @@ public class UserDaoImpl implements UserDAO {
 			ps.setInt(1, user.getId());
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			logger.error("UserDao can't update user", e);
+			logger.error("UserDao can't delete user", e);
 		} finally {
 			ConnectionCreator.disconnect(connection);
 		}

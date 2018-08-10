@@ -8,25 +8,29 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import by.htp.epam.bonjo.dao.UserDAO;
 import by.htp.epam.bonjo.database.ConnectionCreator;
 import by.htp.epam.bonjo.domain.User;
 
-public class UserDaoImpl implements UserDAO{
+public class UserDaoImpl implements UserDAO {
+
+	private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
 	private static final String SQL_QUERY_USER_CREATE = "INSERT INTO `krasutski`.`users` (`Login`, `Password`, `Email`,"
 			+ " `Nickname`, `PhoneNumber`, `roles_ID`) VALUES(?,?,?,?,?,?);";
 	private static final String SQL_QUERY_USER_READ = "SELECT * FROM `krasutski`.`users` WHERE ID=?;";
-	private static final String SQL_QUERY_USER_READ_ALL	= "SELECT * FROM `krasutski`.`users`";
-	private final String SQL_QUERY_USER_UPDATE = "UPDATE `krasutski`.`users` SET `Login`=?, `Password`=?, `Email`=?,"
+	private static final String SQL_QUERY_USER_READ_ALL = "SELECT * FROM `krasutski`.`users`";
+	private static final String SQL_QUERY_USER_UPDATE = "UPDATE `krasutski`.`users` SET `Login`=?, `Password`=?, `Email`=?,"
 			+ " `NickName`=?, `PhoneNumber`=?, `roles_ID`=? WHERE `ID`=?;";
-	private final String SQL_QUERY_USER_DELETE = "DELETE FROM `krasutski`.`users` WHERE `ID`=?;";
-	
+	private static final String SQL_QUERY_USER_DELETE = "DELETE FROM `krasutski`.`users` WHERE `ID`=?;";
+
 	@Override
 	public void create(User user) {
 		Connection connection = ConnectionCreator.getConnection();
-		try(PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_CREATE)) {
+		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_CREATE)) {
 			ps.setString(1, user.getLogin());
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getEmail());
@@ -35,12 +39,11 @@ public class UserDaoImpl implements UserDAO{
 			ps.setInt(6, user.getRoles_ID());
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			//TODO logger
-			e.printStackTrace();
+			logger.error("UserDao can't create user", e);
 		} finally {
 			ConnectionCreator.disconnect(connection);
 		}
-		
+
 	}
 
 	@Override
@@ -53,8 +56,7 @@ public class UserDaoImpl implements UserDAO{
 			if (rs.next())
 				return buildUser(rs);
 		} catch (SQLException e) {
-			//TODO logger
-			e.printStackTrace();
+			logger.error("UserDao can't find user by id", e);
 		} finally {
 			ConnectionCreator.disconnect(connection);
 			try {
@@ -78,14 +80,13 @@ public class UserDaoImpl implements UserDAO{
 				users.add(buildUser(rs));
 			}
 		} catch (SQLException e) {
-			//TODO logger
-			e.printStackTrace();
+			logger.error("UserDao can't get users list", e);
 		} finally {
 			ConnectionCreator.disconnect(connection);
 			try {
 				rs.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				logger.error("Fail to close result set in UserDao readAll method", e);
 			}
 		}
 		return users;
@@ -94,7 +95,7 @@ public class UserDaoImpl implements UserDAO{
 	@Override
 	public void update(User user) {
 		Connection connection = ConnectionCreator.getConnection();
-		try(PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_UPDATE)) {
+		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_UPDATE)) {
 			ps.setString(1, user.getLogin());
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getEmail());
@@ -104,29 +105,27 @@ public class UserDaoImpl implements UserDAO{
 			ps.setInt(7, user.getId());
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			//TODO logger
-			e.printStackTrace();
+			logger.error("UserDao can't update user", e);
 		} finally {
 			ConnectionCreator.disconnect(connection);
 		}
-		
+
 	}
 
 	@Override
 	public void delete(User user) {
 		Connection connection = ConnectionCreator.getConnection();
-		try(PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_DELETE)) {
+		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_DELETE)) {
 			ps.setInt(1, user.getId());
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			//TODO logger
-			e.printStackTrace();
+			logger.error("UserDao can't update user", e);
 		} finally {
 			ConnectionCreator.disconnect(connection);
 		}
-		
+
 	}
-	
+
 	private User buildUser(ResultSet rs) throws SQLException {
 		User user = new User();
 		user.setId(rs.getInt("ID"));

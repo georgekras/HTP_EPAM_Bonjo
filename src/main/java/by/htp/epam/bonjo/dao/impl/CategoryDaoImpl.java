@@ -15,6 +15,10 @@ import by.htp.epam.bonjo.dao.CategoryDAO;
 import by.htp.epam.bonjo.database.ConnectionCreator;
 import by.htp.epam.bonjo.domain.Category;
 
+/**
+ * Works with a {@link by.htp.epam.bonjo.domain.Category} entity class and has access to the 'category' database table.
+ *
+ */
 public class CategoryDaoImpl implements CategoryDAO {
 
 	private static final Logger logger = LoggerFactory.getLogger(CategoryDaoImpl.class);
@@ -24,6 +28,11 @@ public class CategoryDaoImpl implements CategoryDAO {
 	private static final String SQL_QUERY_CATEGORY_UPDATE = "UPDATE `krasutski`.`category` SET `Name`=? WHERE `ID`=?;";
 	private static final String SQL_QUERY_CATEGORY_DELETE = "DELETE FROM `krasutski`.`category` WHERE `ID`=?;";
 
+    /**
+     * Creates a new category entry in the database.
+     *
+     * @param category the {@link by.htp.epam.bonjo.domain.Category} entity.
+     */
 	@Override
 	public void create(Category category) {
 		Connection connection = ConnectionCreator.getConnection();
@@ -37,6 +46,11 @@ public class CategoryDaoImpl implements CategoryDAO {
 		}
 	}
 
+    /**
+     * Retrieves a list of categories from the database.
+     *
+     * @return {@code List<Category>} - the list of categories.
+     */
 	@Override
 	public List<Category> readAll() {
 		List<Category> categories = null;
@@ -65,6 +79,11 @@ public class CategoryDaoImpl implements CategoryDAO {
 		return categories;
 	}
 
+    /**
+     * Updates category entry in the database.
+     *
+     * @param category the {@link by.htp.epam.bonjo.domain.Category} entity.
+     */
 	@Override
 	public void update(Category category) {
 		Connection connection = ConnectionCreator.getConnection();
@@ -79,6 +98,11 @@ public class CategoryDaoImpl implements CategoryDAO {
 		}
 	}
 
+    /**
+     * Deletes category entry in the database.
+     *
+     * @param category the {@link by.htp.epam.bonjo.domain.Category} entity.
+     */
 	@Override
 	public void delete(Category category) {
 		Connection connection = ConnectionCreator.getConnection();

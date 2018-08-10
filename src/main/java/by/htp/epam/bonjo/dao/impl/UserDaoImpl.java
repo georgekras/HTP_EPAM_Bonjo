@@ -15,6 +15,10 @@ import by.htp.epam.bonjo.dao.UserDAO;
 import by.htp.epam.bonjo.database.ConnectionCreator;
 import by.htp.epam.bonjo.domain.User;
 
+/**
+ * Works with a {@link by.htp.epam.bonjo.domain.User} entity class and has access to the 'users' database table.
+ *
+ */
 public class UserDaoImpl implements UserDAO {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
@@ -27,6 +31,11 @@ public class UserDaoImpl implements UserDAO {
 			+ " `NickName`=?, `PhoneNumber`=?, `roles_ID`=? WHERE `ID`=?;";
 	private static final String SQL_QUERY_USER_DELETE = "DELETE FROM `krasutski`.`users` WHERE `ID`=?;";
 
+    /**
+     * Creates a new user entry in the database.
+     *
+     * @param user the {@link by.htp.epam.bonjo.domain.User} entity.
+     */
 	@Override
 	public void create(User user) {
 		Connection connection = ConnectionCreator.getConnection();
@@ -46,6 +55,11 @@ public class UserDaoImpl implements UserDAO {
 
 	}
 
+    /**
+     * Find a user by id in the database.
+     *
+     * @param id the id of a user.
+     */
 	@Override
 	public User read(int id) {
 		ResultSet rs = null;
@@ -68,6 +82,11 @@ public class UserDaoImpl implements UserDAO {
 		return null;
 	}
 
+    /**
+     * Retrieves a list of users from the database.
+     *
+     * @return {@code List<User>} - the list of users.
+     */
 	@Override
 	public List<User> readAll() {
 		List<User> users = null;
@@ -92,6 +111,11 @@ public class UserDaoImpl implements UserDAO {
 		return users;
 	}
 
+    /**
+     * Updates user entry in the database.
+     *
+     * @param user the {@link by.htp.epam.bonjo.domain.User} entity.
+     */
 	@Override
 	public void update(User user) {
 		Connection connection = ConnectionCreator.getConnection();
@@ -112,6 +136,11 @@ public class UserDaoImpl implements UserDAO {
 
 	}
 
+    /**
+     * Deletes user entry in the database.
+     *
+     * @param user the {@link by.htp.epam.bonjo.domain.User} entity.
+     */
 	@Override
 	public void delete(User user) {
 		Connection connection = ConnectionCreator.getConnection();
@@ -126,6 +155,12 @@ public class UserDaoImpl implements UserDAO {
 
 	}
 
+    /**
+     * Build user.
+     *
+     * @param rs is result set.
+     * @return user the {@link by.academy.it.entity.User} entity.
+     */
 	private User buildUser(ResultSet rs) throws SQLException {
 		User user = new User();
 		user.setId(rs.getInt("ID"));

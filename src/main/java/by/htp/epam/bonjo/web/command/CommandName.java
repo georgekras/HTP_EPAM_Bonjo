@@ -1,6 +1,6 @@
 package by.htp.epam.bonjo.web.command;
 
-public enum CommandNames {
+public enum CommandName {
 
 	MAIN_PAGE, LOGIN_PAGE, LOGOUT_PAGE, PROFILE_PAGE, SIGNUP_PAGE,
 

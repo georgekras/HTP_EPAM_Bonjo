@@ -12,11 +12,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import by.htp.epam.bonjo.dao.CategoryDAO;
-import by.htp.epam.bonjo.database.ConnectionCreator;
+import by.htp.epam.bonjo.database.ConnectionPool;
 import by.htp.epam.bonjo.domain.Category;
 
 /**
- * Works with a {@link by.htp.epam.bonjo.domain.Category} entity class and has access to the 'category' database table.
+ * Works with a {@link by.htp.epam.bonjo.domain.Category} entity class and has
+ * access to the 'category' database table.
  *
  */
 public class CategoryDaoImpl implements CategoryDAO {
@@ -28,34 +29,35 @@ public class CategoryDaoImpl implements CategoryDAO {
 	private static final String SQL_QUERY_CATEGORY_UPDATE = "UPDATE `krasutski`.`category` SET `Name`=? WHERE `ID`=?;";
 	private static final String SQL_QUERY_CATEGORY_DELETE = "DELETE FROM `krasutski`.`category` WHERE `ID`=?;";
 
-    /**
-     * Creates a new category entry in the database.
-     *
-     * @param category the {@link by.htp.epam.bonjo.domain.Category} entity.
-     */
+	/**
+	 * Creates a new category entry in the database.
+	 *
+	 * @param category
+	 *            the {@link by.htp.epam.bonjo.domain.Category} entity.
+	 */
 	@Override
 	public void create(Category category) {
-		Connection connection = ConnectionCreator.getConnection();
+		Connection connection = ConnectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_CATEGORY_CREATE)) {
 			ps.setString(1, category.getName());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			logger.error("CategoryDao can't create category", e);
 		} finally {
-			ConnectionCreator.disconnect(connection);
+			ConnectionPool.putConnection(connection);
 		}
 	}
 
-    /**
-     * Retrieves a list of categories from the database.
-     *
-     * @return {@code List<Category>} - the list of categories.
-     */
+	/**
+	 * Retrieves a list of categories from the database.
+	 *
+	 * @return {@code List<Category>} - the list of categories.
+	 */
 	@Override
 	public List<Category> readAll() {
 		List<Category> categories = null;
 		ResultSet rs = null;
-		Connection connection = ConnectionCreator.getConnection();
+		Connection connection = ConnectionPool.getConnection();
 		try (Statement ps = connection.createStatement()) {
 			rs = ps.executeQuery(SQL_QUERY_CATEGORY_READ_ALL);
 			categories = new ArrayList<>();
@@ -69,7 +71,7 @@ public class CategoryDaoImpl implements CategoryDAO {
 		} catch (SQLException e) {
 			logger.error("CategoryDao can't get categories list", e);
 		} finally {
-			ConnectionCreator.disconnect(connection);
+			ConnectionPool.putConnection(connection);
 			try {
 				rs.close();
 			} catch (SQLException e) {
@@ -79,14 +81,15 @@ public class CategoryDaoImpl implements CategoryDAO {
 		return categories;
 	}
 
-    /**
-     * Updates category entry in the database.
-     *
-     * @param category the {@link by.htp.epam.bonjo.domain.Category} entity.
-     */
+	/**
+	 * Updates category entry in the database.
+	 *
+	 * @param category
+	 *            the {@link by.htp.epam.bonjo.domain.Category} entity.
+	 */
 	@Override
 	public void update(Category category) {
-		Connection connection = ConnectionCreator.getConnection();
+		Connection connection = ConnectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_CATEGORY_UPDATE)) {
 			ps.setString(1, category.getName());
 			ps.setInt(2, category.getId());
@@ -94,25 +97,26 @@ public class CategoryDaoImpl implements CategoryDAO {
 		} catch (SQLException e) {
 			logger.error("CategoryDao can't update category", e);
 		} finally {
-			ConnectionCreator.disconnect(connection);
+			ConnectionPool.putConnection(connection);
 		}
 	}
 
-    /**
-     * Deletes category entry in the database.
-     *
-     * @param category the {@link by.htp.epam.bonjo.domain.Category} entity.
-     */
+	/**
+	 * Deletes category entry in the database.
+	 *
+	 * @param category
+	 *            the {@link by.htp.epam.bonjo.domain.Category} entity.
+	 */
 	@Override
 	public void delete(Category category) {
-		Connection connection = ConnectionCreator.getConnection();
+		Connection connection = ConnectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_CATEGORY_DELETE)) {
 			ps.setInt(1, category.getId());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			logger.error("CategoryDao can't delete category", e);
 		} finally {
-			ConnectionCreator.disconnect(connection);
+			ConnectionPool.putConnection(connection);
 		}
 	}
 

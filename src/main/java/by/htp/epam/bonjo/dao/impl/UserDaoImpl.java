@@ -12,11 +12,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import by.htp.epam.bonjo.dao.UserDAO;
-import by.htp.epam.bonjo.database.ConnectionCreator;
+import by.htp.epam.bonjo.database.ConnectionPool;
 import by.htp.epam.bonjo.domain.User;
 
 /**
- * Works with a {@link by.htp.epam.bonjo.domain.User} entity class and has access to the 'users' database table.
+ * Works with a {@link by.htp.epam.bonjo.domain.User} entity class and has
+ * access to the 'users' database table.
  *
  */
 public class UserDaoImpl implements UserDAO {
@@ -31,14 +32,15 @@ public class UserDaoImpl implements UserDAO {
 			+ " `NickName`=?, `PhoneNumber`=?, `roles_ID`=? WHERE `ID`=?;";
 	private static final String SQL_QUERY_USER_DELETE = "DELETE FROM `krasutski`.`users` WHERE `ID`=?;";
 
-    /**
-     * Creates a new user entry in the database.
-     *
-     * @param user the {@link by.htp.epam.bonjo.domain.User} entity.
-     */
+	/**
+	 * Creates a new user entry in the database.
+	 *
+	 * @param user
+	 *            the {@link by.htp.epam.bonjo.domain.User} entity.
+	 */
 	@Override
 	public void create(User user) {
-		Connection connection = ConnectionCreator.getConnection();
+		Connection connection = ConnectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_CREATE)) {
 			ps.setString(1, user.getLogin());
 			ps.setString(2, user.getPassword());
@@ -50,20 +52,21 @@ public class UserDaoImpl implements UserDAO {
 		} catch (SQLException e) {
 			logger.error("UserDao can't create user", e);
 		} finally {
-			ConnectionCreator.disconnect(connection);
+			ConnectionPool.putConnection(connection);
 		}
 
 	}
 
-    /**
-     * Find a user by id in the database.
-     *
-     * @param id the id of a user.
-     */
+	/**
+	 * Find a user by id in the database.
+	 *
+	 * @param id
+	 *            the id of a user.
+	 */
 	@Override
 	public User read(int id) {
 		ResultSet rs = null;
-		Connection connection = ConnectionCreator.getConnection();
+		Connection connection = ConnectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_READ)) {
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
@@ -72,7 +75,7 @@ public class UserDaoImpl implements UserDAO {
 		} catch (SQLException e) {
 			logger.error("UserDao can't find user by id", e);
 		} finally {
-			ConnectionCreator.disconnect(connection);
+			ConnectionPool.putConnection(connection);
 			try {
 				rs.close();
 			} catch (SQLException e) {
@@ -82,16 +85,16 @@ public class UserDaoImpl implements UserDAO {
 		return null;
 	}
 
-    /**
-     * Retrieves a list of users from the database.
-     *
-     * @return {@code List<User>} - the list of users.
-     */
+	/**
+	 * Retrieves a list of users from the database.
+	 *
+	 * @return {@code List<User>} - the list of users.
+	 */
 	@Override
 	public List<User> readAll() {
 		List<User> users = null;
 		ResultSet rs = null;
-		Connection connection = ConnectionCreator.getConnection();
+		Connection connection = ConnectionPool.getConnection();
 		try (Statement ps = connection.createStatement()) {
 			rs = ps.executeQuery(SQL_QUERY_USER_READ_ALL);
 			users = new ArrayList<>();
@@ -101,7 +104,7 @@ public class UserDaoImpl implements UserDAO {
 		} catch (SQLException e) {
 			logger.error("UserDao can't get users list", e);
 		} finally {
-			ConnectionCreator.disconnect(connection);
+			ConnectionPool.putConnection(connection);
 			try {
 				rs.close();
 			} catch (SQLException e) {
@@ -111,14 +114,15 @@ public class UserDaoImpl implements UserDAO {
 		return users;
 	}
 
-    /**
-     * Updates user entry in the database.
-     *
-     * @param user the {@link by.htp.epam.bonjo.domain.User} entity.
-     */
+	/**
+	 * Updates user entry in the database.
+	 *
+	 * @param user
+	 *            the {@link by.htp.epam.bonjo.domain.User} entity.
+	 */
 	@Override
 	public void update(User user) {
-		Connection connection = ConnectionCreator.getConnection();
+		Connection connection = ConnectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_UPDATE)) {
 			ps.setString(1, user.getLogin());
 			ps.setString(2, user.getPassword());
@@ -131,36 +135,38 @@ public class UserDaoImpl implements UserDAO {
 		} catch (SQLException e) {
 			logger.error("UserDao can't update user", e);
 		} finally {
-			ConnectionCreator.disconnect(connection);
+			ConnectionPool.putConnection(connection);
 		}
 
 	}
 
-    /**
-     * Deletes user entry in the database.
-     *
-     * @param user the {@link by.htp.epam.bonjo.domain.User} entity.
-     */
+	/**
+	 * Deletes user entry in the database.
+	 *
+	 * @param user
+	 *            the {@link by.htp.epam.bonjo.domain.User} entity.
+	 */
 	@Override
 	public void delete(User user) {
-		Connection connection = ConnectionCreator.getConnection();
+		Connection connection = ConnectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_DELETE)) {
 			ps.setInt(1, user.getId());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			logger.error("UserDao can't delete user", e);
 		} finally {
-			ConnectionCreator.disconnect(connection);
+			ConnectionPool.putConnection(connection);
 		}
 
 	}
 
-    /**
-     * Build user.
-     *
-     * @param rs is result set.
-     * @return user the {@link by.academy.it.entity.User} entity.
-     */
+	/**
+	 * Build user.
+	 *
+	 * @param rs
+	 *            is result set.
+	 * @return user the {@link by.academy.it.entity.User} entity.
+	 */
 	private User buildUser(ResultSet rs) throws SQLException {
 		User user = new User();
 		user.setId(rs.getInt("ID"));

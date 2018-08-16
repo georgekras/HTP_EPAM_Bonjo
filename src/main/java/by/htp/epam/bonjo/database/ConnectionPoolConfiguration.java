@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 public class ConnectionPoolConfiguration {
 
 	
-	final static int POOL_SIZE = 10;
+	final static int POOL_SIZE = 40;
 	
 	private final static ResourceBundle rb = ResourceBundle.getBundle("db_config");
 

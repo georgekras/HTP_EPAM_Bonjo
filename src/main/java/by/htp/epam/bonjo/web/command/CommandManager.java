@@ -1,21 +1,17 @@
 package by.htp.epam.bonjo.web.command;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
-import by.htp.epam.bonjo.web.command.impl.MainPageCommand;
+import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
+import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 
 public class CommandManager {
 
-	private Map<CommandName, Command> commands = new HashMap<>();
-
-	public CommandManager() {
-		commands.put(CommandName.MAIN_PAGE, new MainPageCommand());
-	}
-	
-	public Command getCommand(String commandName) {
-		Command command;
-		command = commands.get(CommandName.valueOf(commandName.toUpperCase()));
-		return command;
+	public static CommandName defineAction(HttpServletRequest request) {
+		String commandName = request.getParameter(ParamNameConstantDeclaration.REQUEST_PARAM_COMMAND);
+		if (commandName == null) {
+			commandName = CommandNameConstantDeclaration.COMMAND_NAME_VIEW_HOME_PAGE;
+		}
+		return CommandName.valueOf(commandName.toUpperCase());
 	}
 }

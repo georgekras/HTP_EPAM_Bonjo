@@ -8,7 +8,7 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-	
+
 	<servlet>
 		<servlet-name>Controller</servlet-name>
 		<servlet-class>by.htp.epam.bonjo.web.controller.Controller</servlet-class>
@@ -16,7 +16,11 @@
 
 	<servlet-mapping>
 		<servlet-name>Controller</servlet-name>
-		<url-pattern>/Controller</url-pattern>
+		<url-pattern>/bonjo</url-pattern>
 	</servlet-mapping>
+
+	<listener>
+		<listener-class>by.htp.epam.bonjo.web.Filter</listener-class>
+	</listener>
 
 </web-app>

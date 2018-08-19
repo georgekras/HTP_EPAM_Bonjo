@@ -1,10 +1,14 @@
 package by.htp.epam.bonjo.web.command;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-public interface Command {
+public abstract class Command {
 
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public abstract CommandName execute(HttpServletRequest request);
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName().replace("Command", "");
+	}
 
 }

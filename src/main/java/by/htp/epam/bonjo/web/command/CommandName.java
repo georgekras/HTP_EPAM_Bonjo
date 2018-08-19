@@ -1,11 +1,18 @@
 package by.htp.epam.bonjo.web.command;
 
+import by.htp.epam.bonjo.web.command.impl.MainPageCommand;
+import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
+
 public enum CommandName {
 
-	MAIN_PAGE, LOGIN_PAGE, LOGOUT_PAGE, PROFILE_PAGE, SIGNUP_PAGE,
+	HOME {
+		{
+			this.command = new MainPageCommand();
+			this.jspPage = PagePathConstantDeclaration.PAGE_USER_MAIN;
+		}
+	};
 
-	CREATE_AD_PAGE, EDIT_AD_PAGE, USER_ADS_PAGE, VIEW_AD_PAGE,
-
-	CREATE_CATEGORY_PAGE, EDIT_CATEGORY_PAGE, EDIT_USERS_PAGE
+	public Command command;
+	public String jspPage;
 
 }

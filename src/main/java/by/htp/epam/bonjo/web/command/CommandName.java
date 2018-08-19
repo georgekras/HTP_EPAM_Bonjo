@@ -1,5 +1,7 @@
 package by.htp.epam.bonjo.web.command;
 
+import by.htp.epam.bonjo.web.command.impl.CreateAdCommand;
+import by.htp.epam.bonjo.web.command.impl.ErrorCommand;
 import by.htp.epam.bonjo.web.command.impl.LogInCommand;
 import by.htp.epam.bonjo.web.command.impl.LogOutCommand;
 import by.htp.epam.bonjo.web.command.impl.MainPageCommand;
@@ -15,7 +17,7 @@ public enum CommandName {
 	},
 	ERROR {
 		{
-			this.command = new MainPageCommand();
+			this.command = new ErrorCommand();
 			this.jspPage = PagePathConstantDeclaration.PAGE_USER_ERROR;
 		}
 	},
@@ -29,6 +31,12 @@ public enum CommandName {
 		{
 			this.command = new LogOutCommand();
 			this.jspPage = PagePathConstantDeclaration.PAGE_USER_LOGOUT;
+		}
+	},
+	CREATEAD {
+		{
+			this.command = new CreateAdCommand();
+			this.jspPage = PagePathConstantDeclaration.PAGE_ADS_CREATE_AD;
 		}
 	};
 

@@ -30,14 +30,14 @@ public class Controller extends HttpServlet{
 	}
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
-		CommandName currentAction = CommandManager.defineAction(request);
-		CommandName nextAction = null;
+		CommandName currentCommand = CommandManager.defineCommand(request);
+		CommandName nextCommand = null;
 		try {
-			nextAction = currentAction.command.execute(request);
-			if (nextAction == null || nextAction == currentAction) {
-				request.getRequestDispatcher(currentAction.jspPage).forward(request, response);
+			nextCommand = currentCommand.command.execute(request);
+			if (nextCommand == null || nextCommand == currentCommand) {
+				request.getRequestDispatcher(currentCommand.jspPage).forward(request, response);
 			} else
-				response.sendRedirect("bonjo?action=" + nextAction.toString().toLowerCase());
+				response.sendRedirect("bonjo?command=" + nextCommand.toString().toLowerCase());
 		} catch (ServletException | IOException e) {
 			logger.error(e.getMessage() + " in Controller class", e);
 		}

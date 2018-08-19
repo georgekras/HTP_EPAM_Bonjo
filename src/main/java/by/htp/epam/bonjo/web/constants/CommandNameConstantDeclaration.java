@@ -8,7 +8,7 @@ public class CommandNameConstantDeclaration {
 	public static final String COMMAND_NAME_VIEW_SIGNUP_PAGE = "signup";
 	public static final String COMMAND_NAME_VIEW_PROFILE_PAGE = "profile";
 
-	public static final String COMMAND_NAME_VIEW_CREATE_AD_PAGE = "create_ad";
+	public static final String COMMAND_NAME_VIEW_CREATE_AD_PAGE = "createad";
 	public static final String COMMAND_NAME_VIEW_USER_ADS_PAGE = "user_ads";
 	public static final String COMMAND_NAME_VIEW_AD_PAGE = "ad";
 	public static final String COMMAND_NAME_VIEW_EDIT_AD_PAGE = "edit_ad";

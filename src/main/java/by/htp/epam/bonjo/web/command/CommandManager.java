@@ -7,11 +7,11 @@ import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 
 public class CommandManager {
 
-	public static CommandName defineAction(HttpServletRequest request) {
+	public static CommandName defineCommand(HttpServletRequest request) {
 		String commandName = request.getParameter(ParamNameConstantDeclaration.REQUEST_PARAM_COMMAND);
-		if (commandName == null) {
-			commandName = CommandNameConstantDeclaration.COMMAND_NAME_VIEW_HOME_PAGE;
-		}
+//		if (commandName == null) {
+//			commandName = CommandNameConstantDeclaration.COMMAND_NAME_VIEW_HOME_PAGE;
+//		}
 		return CommandName.valueOf(commandName.toUpperCase());
 	}
 }

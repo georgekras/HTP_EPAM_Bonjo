@@ -6,7 +6,7 @@
 	version="3.0">
 	<display-name>bonjo</display-name>
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>pages/user/home.jsp</welcome-file>
 	</welcome-file-list>
 
 	<servlet>
@@ -20,7 +20,7 @@
 	</servlet-mapping>
 
 	<listener>
-		<listener-class>by.htp.epam.bonjo.web.Filter</listener-class>
+		<listener-class>by.htp.epam.bonjo.web.util.listeners.ConnectionPoolInitListener</listener-class>
 	</listener>
 
 </web-app>

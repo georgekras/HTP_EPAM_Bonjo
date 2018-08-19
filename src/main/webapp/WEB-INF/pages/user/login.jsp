@@ -7,14 +7,14 @@
 			<h2>Welcome back!</h2>
 		</div>
 		<br>
-		<form class="form-horizontal" action="login_action" method="post">
+		<form class="form-horizontal" action="bonjo?command=login" method="post">
 			<fieldset>
 
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="Login">Login</label>
+					<label class="col-md-4 control-label" for="login">Login</label>
 					<div class="col-md-4">
-						<input id="Login" name="user_login" type="text"
+						<input id="login" name="user_login" type="text"
 							placeholder="put your login here" class="form-control input-md"
 							required=""> <span class="help-block">Login (hint)</span>
 					</div>
@@ -22,9 +22,9 @@
 
 				<!-- Password input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="Password">Password</label>
+					<label class="col-md-4 control-label" for="password">Password</label>
 					<div class="col-md-4">
-						<input id="Password" name="user_password" type="password"
+						<input id="password" name="user_password" type="password"
 							placeholder="put your password here"
 							class="form-control input-md" required=""> <span
 							class="help-block">(min 5 symbols)</span>

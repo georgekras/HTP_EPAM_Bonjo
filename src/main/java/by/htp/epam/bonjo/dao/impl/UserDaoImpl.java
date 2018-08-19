@@ -27,6 +27,7 @@ public class UserDaoImpl implements UserDAO {
 	private static final String SQL_QUERY_USER_CREATE = "INSERT INTO `krasutski`.`users` (`Login`, `Password`, `Email`,"
 			+ " `Nickname`, `PhoneNumber`, `roles_ID`) VALUES(?,?,?,?,?,?);";
 	private static final String SQL_QUERY_USER_READ = "SELECT * FROM `krasutski`.`users` WHERE ID=?;";
+	private static final String SQL_QUERY_USER_READ_BY_LOGIN_AND_PASSWORD = "SELECT * FROM `krasutski`.`users` WHERE `login`=? AND `password`=?;";
 	private static final String SQL_QUERY_USER_READ_ALL = "SELECT * FROM `krasutski`.`users`";
 	private static final String SQL_QUERY_USER_UPDATE = "UPDATE `krasutski`.`users` SET `Login`=?, `Password`=?, `Email`=?,"
 			+ " `NickName`=?, `PhoneNumber`=?, `roles_ID`=? WHERE `ID`=?;";
@@ -79,7 +80,38 @@ public class UserDaoImpl implements UserDAO {
 			try {
 				rs.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				logger.error("Fail to close result set in userDao read method", e);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Find a user by login and password in the database.
+	 *
+	 * @param login
+	 *            the login of a user.
+	 * @param password
+	 *            the password of a user.
+	 */
+	@Override
+	public User loginRead(String login, String password) {
+		ResultSet rs = null;
+		Connection con = ConnectionPool.getConnection();
+		try (PreparedStatement ps = con.prepareStatement(SQL_QUERY_USER_READ_BY_LOGIN_AND_PASSWORD)) {
+			ps.setString(1, login);
+			ps.setString(2, password);
+			rs = ps.executeQuery();
+			if (rs.next())
+				return buildUser(rs);
+		} catch (SQLException e) {
+			logger.error("SQLException in read(String login, String password) method of UserDaoImpl class", e);
+		} finally {
+			ConnectionPool.putConnection(con);
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				logger.error("Fail to close result set in userDao loginRead method", e);
 			}
 		}
 		return null;

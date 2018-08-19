@@ -9,6 +9,8 @@ public interface UserDAO {
 	void create(User user);
 
 	User read(int id);
+	
+	User loginRead(String login, String password);
 
 	List<User> readAll();
 

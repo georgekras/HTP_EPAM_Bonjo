@@ -11,10 +11,11 @@ public class PagePathConstantDeclaration {
 	public static final String PAGE_ADS_VIEW_AD = "/WEB-INF/pages/ads/viewad.jsp";
 	public static final String PAGE_ADS_EDIT_AD = "/WEB-INF/pages/ads/editad.jsp";
 
-	public static final String PAGE_USER_MAIN = "/WEB-INF/pages/user/home.jsp";
+	public static final String PAGE_USER_HOME = "/WEB-INF/pages/user/home.jsp";
 	public static final String PAGE_USER_LOGIN = "/WEB-INF/pages/user/login.jsp";
 	public static final String PAGE_USER_LOGOUT = "/WEB-INF/pages/user/logout.jsp";
 	public static final String PAGE_USER_SIGNUP = "/WEB-INF/pages/user/signup.jsp";
 	public static final String PAGE_USER_PROFILE = "/WEB-INF/pages/user/profile.jsp";
+	public static final String PAGE_USER_ERROR = "/WEB-INF/pages/user/error.jsp";
 
 }

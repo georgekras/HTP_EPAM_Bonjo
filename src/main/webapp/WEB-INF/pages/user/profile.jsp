@@ -10,11 +10,11 @@
 			</div>
 		</b> <br>
 		<div class="row" align="center">
-			<div class="col-md-6">${user.phoneNumber}</div>
-			<div class="col-md-6">${user.password}</div>
+			<div class="col-md-6">${currentUser.phoneNumber}</div>
+			<div class="col-md-6">${currentUser.password}</div>
 		</div>
 		<br>
-		<form class="form-horizontal" action="profile_action" method="post">
+		<form class="form-horizontal" action="bonjo?command=profile" method="post">
 			<fieldset>
 
 				<!-- Form Name -->
@@ -22,23 +22,23 @@
 
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="PhoneNumber">Phone
+					<label class="col-md-4 control-label" for="phoneNumber">Phone
 						Number</label>
 					<div class="col-md-4">
-						<input id="PhoneNumber" name="user_phone" type="text"
+						<input id="phoneNumber" name="user_phone" type="text"
 							placeholder="" class="form-control input-md" required=""
-							value="${user.phoneNumber}">
+							value="${currentUser.phoneNumber}">
 					</div>
 				</div>
 
 				<!-- Password input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="Password">Password
+					<label class="col-md-4 control-label" for="password">Password
 						Input</label>
 					<div class="col-md-4">
-						<input id="Password" name="user_password" type="password"
+						<input id="password" name="user_password" type="password"
 							placeholder="" class="form-control input-md" required=""
-							value="${user.password}"> <span class="help-block">(min
+							value="${currentUser.password}"> <span class="help-block">(min
 							5 symbols)</span>
 					</div>
 				</div>

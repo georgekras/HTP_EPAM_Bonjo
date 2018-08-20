@@ -32,8 +32,7 @@ public class CreateAdCommand extends Command {
 		List<Category> categories = categoryService.getAllCategories();
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, categories);
 		if (HttpRequestParamValidator.isPost(request)) {
-			String title;
-			title = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_TITLE);
+			String title = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_TITLE);
 			String smallDesc = RequestParamUtil.getString(request,
 					ParamNameConstantDeclaration.REQUEST_PARAM_AD_SMALLDESC);
 			String description = RequestParamUtil.getString(request,

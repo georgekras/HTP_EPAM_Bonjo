@@ -7,12 +7,18 @@ public class Ad implements Serializable {
 	private static final long serialVersionUID = -2329117546911802391L;
 
 	private int id;
-	private String title, smallDesc, description;
+	private String title;
+	private String smallDesc;
+	private String description;
 	private int price;
-	private int users_ID, category_ID;
-
+	private int users_ID;
+	private int category_ID;
+	
+	public Ad() {
+		
+	}
+	
 	public Ad(int id, String title, String smallDesc, String description, int price, int users_ID, int category_ID) {
-		super();
 		this.id = id;
 		this.title = title;
 		this.smallDesc = smallDesc;
@@ -20,9 +26,6 @@ public class Ad implements Serializable {
 		this.price = price;
 		this.users_ID = users_ID;
 		this.category_ID = category_ID;
-	}
-
-	public Ad() {
 	}
 
 	public int getId() {

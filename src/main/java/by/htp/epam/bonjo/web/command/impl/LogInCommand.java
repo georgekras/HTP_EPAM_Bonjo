@@ -18,10 +18,6 @@ public class LogInCommand extends Command {
 	@Override
 	public CommandName execute(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		if (session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER) != null) {
-			session.setAttribute(ParamNameConstantDeclaration.SESSION_PARAM_ERROR_MESSAGE, "You are already logged in");
-			return CommandName.ERROR;
-		}
 		if (HttpRequestParamValidator.isPost(request)) {
 			String login = request.getParameter(ParamNameConstantDeclaration.REQUEST_PARAM_USER_LOGIN);
 			String password = request.getParameter(ParamNameConstantDeclaration.REQUEST_PARAM_USER_PASSWORD);

@@ -27,8 +27,9 @@ public class CreateAdCommand extends Command {
 	public CommandName execute(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER);
+		int role_id = (int) session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER_ROLE_ID);
 		User user;
-		if (obj != null) {
+		if (obj != null && role_id == 2) {
 			user = (User) obj;
 		} else {
 			return CommandName.LOGIN;

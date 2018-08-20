@@ -23,9 +23,10 @@ public class CreateCategoryCommand extends Command {
 	public CommandName execute(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER);
-		int role_id = (int) session.getAttribute("user_role_id");
+		int role_id = (int) session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER_ROLE_ID);
+		User user;
 		if (obj != null && role_id == 1) {
-			User user = (User) obj;
+			user = (User) obj;
 		} else {
 			return CommandName.LOGIN;
 		}

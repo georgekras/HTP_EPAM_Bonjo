@@ -28,7 +28,7 @@ public class LogInCommand extends Command {
 			User user = userService.loginRead(login, password);
 			if (user != null) {
 				session.setAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER, user);
-				session.setAttribute("user_role_id", user.getRoles_ID());
+				session.setAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER_ROLE_ID, user.getRoles_ID());
 				session.setMaxInactiveInterval(500);
 				return CommandName.HOME;
 			} else {

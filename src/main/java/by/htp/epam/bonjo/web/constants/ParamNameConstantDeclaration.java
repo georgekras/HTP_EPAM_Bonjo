@@ -3,6 +3,7 @@ package by.htp.epam.bonjo.web.constants;
 public class ParamNameConstantDeclaration {
 
 	public static final String SESSION_PARAM_CURRENT_USER = "currentUser";
+	public static final String SESSION_PARAM_CURRENT_USER_ROLE_ID = "user_role_id";
 	public static final String SESSION_PARAM_ERROR_MESSAGE = "errorMessage";
 	
 	public static final String REQUEST_PARAM_COMMAND = "command";

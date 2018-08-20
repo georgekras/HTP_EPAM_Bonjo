@@ -9,16 +9,6 @@ public class HttpRequestParamValidator {
 
 	private static Logger logger = LoggerFactory.getLogger(HttpRequestParamValidator.class);
 
-	public static String getString(HttpServletRequest request, String field) {
-		String value = request.getParameter(field);
-		return value;
-	}
-
-	public static int getInt(HttpServletRequest request, String field) {
-		String value = request.getParameter(field);
-		return Integer.parseInt(value);
-	}
-
 	public static boolean validateRequestParamNotNull(String... str) {
 		for (String s : str) {
 			if (s == null) {

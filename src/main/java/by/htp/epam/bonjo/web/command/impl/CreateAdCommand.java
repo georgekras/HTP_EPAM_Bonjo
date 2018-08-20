@@ -15,13 +15,14 @@ import by.htp.epam.bonjo.service.impl.CategoryServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
 import by.htp.epam.bonjo.web.command.CommandName;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
+import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
 
 public class CreateAdCommand extends Command {
 
 	private AdService adService = new AdServiceImpl();
 	private CategoryService categoryService = new CategoryServiceImpl();
-	
+
 	@Override
 	public CommandName execute(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -31,15 +32,14 @@ public class CreateAdCommand extends Command {
 		List<Category> categories = categoryService.getAllCategories();
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, categories);
 		if (HttpRequestParamValidator.isPost(request)) {
-			String title = HttpRequestParamValidator.getString(request,
-					ParamNameConstantDeclaration.REQUEST_PARAM_AD_TITLE);
-			String smallDesc = HttpRequestParamValidator.getString(request,
+			String title;
+			title = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_TITLE);
+			String smallDesc = RequestParamUtil.getString(request,
 					ParamNameConstantDeclaration.REQUEST_PARAM_AD_SMALLDESC);
-			String description = HttpRequestParamValidator.getString(request,
+			String description = RequestParamUtil.getString(request,
 					ParamNameConstantDeclaration.REQUEST_PARAM_AD_DESCRIPTION);
-			int price = HttpRequestParamValidator.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_PRICE);
-			int category_Id = HttpRequestParamValidator.getInt(request,
-					ParamNameConstantDeclaration.REQUEST_PARAM_AD_CATEGORY_ID);
+			int price = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_PRICE);
+			int category_Id = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_CATEGORY_ID);
 			Ad ad = new Ad(0, title, smallDesc, description, price, user.getId(), category_Id);
 			adService.create(ad);
 		}

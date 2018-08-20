@@ -8,15 +8,15 @@
 				<h2>Hello new Bonjo user!</h2>
 			</div>
 			<br>
-			<form class="form-horizontal" action="signup_action" method="post">
+			<form class="form-horizontal" action="bonjo?command=signup"
+				method="post">
 				<fieldset>
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="Login">Login</label>
+						<label class="col-md-4 control-label" for="login">Login</label>
 						<div class="col-md-4">
-							<input id="Login" name="user_login" type="text"
-								pattern="[A-Za-z0-9]{5-15}"
+							<input id="login" name="user_login" type="text"
 								title="login must be 5-15 characters" placeholder="ExampleLogin"
 								class="form-control input-md" required="">
 						</div>
@@ -24,9 +24,9 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="Email">Email</label>
+						<label class="col-md-4 control-label" for="email">Email</label>
 						<div class="col-md-4">
-							<input id="Email" name="user_email" type="text"
+							<input id="email" name="user_email" type="text"
 								placeholder="example@google.com" class="form-control input-md"
 								required="">
 						</div>
@@ -34,10 +34,9 @@
 
 					<!-- Password input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="Password">Password</label>
+						<label class="col-md-4 control-label" for="password">Password</label>
 						<div class="col-md-4">
-							<input id="Password" name="user_password" type="password"
-								pattern="[A-Za-z0-9]{5-15}"
+							<input id="password" name="user_password" type="password"
 								title="password must be 5-15 characters"
 								placeholder="min 5 symbols" class="form-control input-md"
 								required="">
@@ -46,19 +45,19 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="Nickname">Nickname</label>
+						<label class="col-md-4 control-label" for="nickname">Nickname</label>
 						<div class="col-md-4">
-							<input id="Nickname" name="user_nickname" type="text"
+							<input id="nickname" name="user_nickname" type="text"
 								placeholder="example" class="form-control input-md" required="">
 						</div>
 					</div>
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="PhoneNumber">Phone
+						<label class="col-md-4 control-label" for="phoneNumber">Phone
 							Number</label>
 						<div class="col-md-4">
-							<input id="PhoneNumber" name="user_phone" type="text"
+							<input id="phoneNumber" name="user_phone" type="text"
 								placeholder="+375297777777" class="form-control input-md"
 								required="">
 						</div>

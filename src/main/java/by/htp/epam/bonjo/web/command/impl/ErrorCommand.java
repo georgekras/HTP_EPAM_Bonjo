@@ -9,8 +9,7 @@ public class ErrorCommand extends Command{
 
 	@Override
 	public CommandName execute(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		return CommandName.ERROR;
 	}
 
 }

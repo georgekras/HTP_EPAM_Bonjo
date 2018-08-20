@@ -5,6 +5,7 @@ import by.htp.epam.bonjo.web.command.impl.ErrorCommand;
 import by.htp.epam.bonjo.web.command.impl.LogInCommand;
 import by.htp.epam.bonjo.web.command.impl.LogOutCommand;
 import by.htp.epam.bonjo.web.command.impl.MainPageCommand;
+import by.htp.epam.bonjo.web.command.impl.SignUpCommand;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 
 public enum CommandName {
@@ -31,6 +32,12 @@ public enum CommandName {
 		{
 			this.command = new LogOutCommand();
 			this.jspPage = PagePathConstantDeclaration.PAGE_USER_LOGOUT;
+		}
+	},
+	SIGNUP {
+		{
+			this.command = new SignUpCommand();
+			this.jspPage = PagePathConstantDeclaration.PAGE_USER_SIGNUP;
 		}
 	},
 	CREATEAD {

@@ -11,19 +11,19 @@
 
 		<div class="container">
 			<div class="row">
-				<c:forEach items="${ads_list}" var="ad">
+				<c:forEach items="${ads}" var="ad">
 					<div class=" col-md-4">
 						<div class="card text-white bg-primary mb-3"
 							style="max-width: 20rem;">
 							<div class="card-header">
-								<c:forEach items="${categories_list}" var="category">
-									<c:if test="${category.ID==ad.category_ID}">
+								<c:forEach items="${categories}" var="category">
+									<c:if test="${category.id==ad.category_ID}">
                         ${category.name}
                     </c:if>
 								</c:forEach>
 							</div>
 							<div class="card-body">
-								<a href="/ad_project/edit_ad_action=<c:out value="${ad.ID}"/>"
+								<a href="/ad_project/edit_ad_action=<c:out value="${ad.id}"/>"
 									style="color: white;">
 									<h4 class="card-title">${ad.title}</h4>
 								</a>

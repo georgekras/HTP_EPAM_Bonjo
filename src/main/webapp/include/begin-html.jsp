@@ -37,8 +37,8 @@
 					<c:if test="${currentUser!=null && currentUser.roles_ID==2}">
 						<li class="nav-item active"><a class="nav-link"
 							href="bonjo?command=createad">Create Ad</a></li>
-<!-- 						<li class="nav-item active"><a class="nav-link"
-							href="bonjo?command=user_ads">My Ads</a></li> -->
+						<li class="nav-item active"><a class="nav-link"
+							href="bonjo?command=userads">My Ads</a></li>
 					</c:if>
 				</ul>
 				<ul class="navbar-nav navbar-right">

@@ -13,16 +13,16 @@
 
 	<div class="container">
 		<c:forEach items="${categories}" var="category">
-			<form class="form-horizontal" action="do?command=EditCategory"
+			<form class="form-horizontal" action="bonjo?command=editcategory"
 				method=post>
 				<div class="row">
 					<div class=col-md-2>
-						<input id="ID" class="form-control input-md" name="ID"
-							value="${category.ID}" />
+						<input id="id" class="form-control input-md" name="category_id"
+							value="${category.id}" />
 					</div>
 					<div class=col-md-4>
-						<input id="name" class="form-control input-md" name="Name"
-							value="${category.name}" />
+						<input id="name" class="form-control input-md"
+							name="category_name" value="${category.name}" />
 					</div>
 					<div class=col-md-1>
 						<button id="Update" value="Update" name="Update"

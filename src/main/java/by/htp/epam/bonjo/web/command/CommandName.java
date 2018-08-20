@@ -1,6 +1,7 @@
 package by.htp.epam.bonjo.web.command;
 
 import by.htp.epam.bonjo.web.command.impl.CreateAdCommand;
+import by.htp.epam.bonjo.web.command.impl.CreateCategoryCommand;
 import by.htp.epam.bonjo.web.command.impl.ErrorCommand;
 import by.htp.epam.bonjo.web.command.impl.LogInCommand;
 import by.htp.epam.bonjo.web.command.impl.LogOutCommand;
@@ -58,6 +59,12 @@ public enum CommandName {
 		{
 			this.command = new CreateAdCommand();
 			this.jspPage = PagePathConstantDeclaration.PAGE_ADS_CREATE_AD;
+		}
+	},
+	CREATECATEGORY {
+		{
+			this.command = new CreateCategoryCommand();
+			this.jspPage = PagePathConstantDeclaration.PAGE_ADMIN_CREATE_CATEGORY;
 		}
 	};
 

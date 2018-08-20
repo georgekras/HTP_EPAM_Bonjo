@@ -28,11 +28,11 @@
 						href="bonjo?command=home">Home</a></li>
 					<c:if test="${currentUser!=null && currentUser.roles_ID==1}">
 						<li class="nav-item active"><a class="nav-link"
-							href="bonjo?command=edit_users">Edit Users</a></li>
+							href="bonjo?command=editusers">Edit Users</a></li>
 						<li class="nav-item active"><a class="nav-link"
-							href="bonjo?command=create_category">Create Category</a></li>
+							href="bonjo?command=createcategory">Create Category</a></li>
 						<li class="nav-item active"><a class="nav-link"
-							href="bonjo?command=edit_category">Edit Category</a></li>
+							href="bonjo?command=editcategory">Edit Category</a></li>
 					</c:if>
 					<c:if test="${currentUser!=null && currentUser.roles_ID==2}">
 						<li class="nav-item active"><a class="nav-link"

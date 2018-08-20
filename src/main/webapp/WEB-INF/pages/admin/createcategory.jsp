@@ -7,16 +7,16 @@
 			<h2>Create Category</h2>
 		</div>
 		<br>
-		<form class="form-horizontal" action="create_category_action"
+		<form class="form-horizontal" action="bonjo?command=createcategory"
 			method="post">
 			<fieldset>
 
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="Name">Category
+					<label class="col-md-4 control-label" for="name">Category
 						Name</label>
 					<div class="col-md-4">
-						<input id="Name" name="category_name" type="text" placeholder=""
+						<input id="name" name="category_name" type="text" placeholder=""
 							class="form-control input-md">
 					</div>
 				</div>

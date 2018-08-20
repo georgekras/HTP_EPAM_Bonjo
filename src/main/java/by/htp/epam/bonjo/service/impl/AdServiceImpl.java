@@ -2,18 +2,14 @@ package by.htp.epam.bonjo.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import by.htp.epam.bonjo.dao.AdDAO;
+import by.htp.epam.bonjo.dao.impl.AdDaoImpl;
+import by.htp.epam.bonjo.domain.Ad;
+import by.htp.epam.bonjo.service.AdService;
 
-import by.htp.ad_project.dao.AdDao;
-import by.htp.ad_project.domain.Ad;
-import by.htp.ad_project.service.AdService;
-
-@Service
 public class AdServiceImpl implements AdService {
 
-	@Autowired
-	private AdDao adDao;
+	private AdDAO adDao = new AdDaoImpl();
 
 	@Override
 	public void create(Ad ad) {

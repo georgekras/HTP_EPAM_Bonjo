@@ -3,8 +3,9 @@ package by.htp.epam.bonjo.web.command.impl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import by.htp.epam.bonjo.dao.DAOFactory;
 import by.htp.epam.bonjo.domain.User;
+import by.htp.epam.bonjo.service.UserService;
+import by.htp.epam.bonjo.service.impl.UserServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
 import by.htp.epam.bonjo.web.command.CommandName;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
@@ -12,6 +13,8 @@ import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
 
 public class LogInCommand extends Command {
 
+	private UserService userService = new UserServiceImpl();
+	
 	@Override
 	public CommandName execute(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -26,7 +29,7 @@ public class LogInCommand extends Command {
 				session.setAttribute(ParamNameConstantDeclaration.SESSION_PARAM_ERROR_MESSAGE, "Something went wrong. Try again.");
 				return CommandName.ERROR;
 			}
-			User user = DAOFactory.getDaoInstance().getUserDao().loginRead(login, password);
+			User user = userService.loginRead(login, password);
 			if (user != null) {
 				session.setAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER, user);
 				session.setMaxInactiveInterval(500);

@@ -36,17 +36,15 @@ public class EditCategoryCommand extends Command {
 			int id = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORY_ID);
 			String name = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORY_NAME);
 			Category category = new Category(id, name);
-			if (request.getAttribute("Update") != null) {
-				categoryService.update(category);
+			if (request.getParameter("Update") != null) {
 				request.setAttribute("msg", "category updated.");
-				return CommandName.EDITCATEGORY;
+				categoryService.update(category);
 			} else if (request.getParameter("Delete") != null) {
-				categoryService.delete(category);
 				request.setAttribute("msg", "category deleted.");
-				return CommandName.EDITCATEGORY;
+				categoryService.delete(category);
 			}
 		}
-		return null;
+		return CommandName.EDITCATEGORY;
 	}
 
 //    @Override

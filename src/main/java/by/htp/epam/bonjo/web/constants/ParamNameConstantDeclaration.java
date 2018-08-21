@@ -16,7 +16,7 @@ public class ParamNameConstantDeclaration {
 	public static final String REQUEST_PARAM_USER_NICKNAME = "user_nickname";
 	public static final String REQUEST_PARAM_USER_PHONENUMBER = "user_phone";
 	public static final String REQUEST_PARAM_USER_ROLES_ID = "user_roles_id";
-	public static final String REQUEST_PARAM_USER_LIST = "user";
+	public static final String REQUEST_PARAM_USER_LIST = "users";
 
 	public static final String REQUEST_PARAM_AD = "ad";
 	public static final String REQUEST_PARAM_USER_AD = "user_ad";

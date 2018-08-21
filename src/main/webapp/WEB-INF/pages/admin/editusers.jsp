@@ -14,11 +14,11 @@
 	</div>
 	<br>
 	<div class="container">
-		<c:forEach items="${user_list}" var="user">
-			<form class="form-horizontal" action="edit_users_action" method=post>
+		<c:forEach items="${users}" var="user">
+			<form class="form-horizontal" action="bonjo?command=editusers" method=post>
 				<div class="row">
 					<input id="login" class="form-control input-md" name="user_id"
-						type="hidden" value="${user.ID}" />
+						type="hidden" value="${user.id}" />
 					<div class=col-md-2>
 						<input id="login" class="form-control input-md" name="user_login"
 							value="${user.login}" />
@@ -55,9 +55,9 @@
 			</form>
 			<br>
 		</c:forEach>
-		<c:if test="${msg_success!=null}">
+		<c:if test="${msg!=null}">
 			<div class="alert alert-success" role="alert">
-				<c:out value="${msg_success}"></c:out>
+				<c:out value="${msg}"></c:out>
 			</div>
 		</c:if>
 		<c:if test="${msg!=null}">

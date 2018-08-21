@@ -11,6 +11,7 @@ import by.htp.epam.bonjo.web.command.impl.MainPageCommand;
 import by.htp.epam.bonjo.web.command.impl.ProfileCommand;
 import by.htp.epam.bonjo.web.command.impl.SignUpCommand;
 import by.htp.epam.bonjo.web.command.impl.UserAdsCommand;
+import by.htp.epam.bonjo.web.command.impl.ViewAdCommand;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 
 public enum CommandName {
@@ -55,6 +56,12 @@ public enum CommandName {
 		{
 			this.command = new UserAdsCommand();
 			this.jspPage = PagePathConstantDeclaration.PAGE_ADS_USER_ADS;
+		}
+	},
+	VIEWAD {
+		{
+			this.command = new ViewAdCommand();
+			this.jspPage = PagePathConstantDeclaration.PAGE_ADS_VIEW_AD;
 		}
 	},
 	CREATEAD {

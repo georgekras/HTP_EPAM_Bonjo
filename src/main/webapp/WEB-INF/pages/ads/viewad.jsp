@@ -18,7 +18,7 @@
 			<br>
 			<p>
 				<b>Category: </b>
-				<c:if test="${category.ID==ad.category_ID}">
+				<c:if test="${category.id==ad.category_ID}">
                         ${category.name}
 	</c:if>
 			</p>

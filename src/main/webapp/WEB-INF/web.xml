@@ -6,7 +6,7 @@
 	version="3.0">
 	<display-name>bonjo</display-name>
 	<welcome-file-list>
-		<welcome-file>pages/user/home.jsp</welcome-file>
+		<welcome-file>/WEB-INF/index.jsp</welcome-file>
 	</welcome-file-list>
 
 	<servlet>

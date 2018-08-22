@@ -60,9 +60,9 @@
 				<c:out value="${msg}"></c:out>
 			</div>
 		</c:if>
-		<c:if test="${msg!=null}">
+		<c:if test="${msg_alert!=null}">
 			<div class="alert alert-danger" role="alert">
-				<c:out value="${msg}"></c:out>
+				<c:out value="${msg_alert}"></c:out>
 			</div>
 		</c:if>
 	</div>

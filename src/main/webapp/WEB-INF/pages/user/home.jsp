@@ -38,7 +38,7 @@
 	</div>
 	<div id="pagination">
 
-		<c:url value="/main_action" var="prev">
+		<c:url value="/bonjo?command=home" var="prev">
 			<c:param name="page" value="${page-1}" />
 		</c:url>
 		<c:if test="${page > 1}">
@@ -58,7 +58,7 @@
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-		<c:url value="/main_action" var="next">
+		<c:url value="/bonjo?command=home" var="next">
 			<c:param name="page" value="${page + 1}" />
 		</c:url>
 		<c:if test="${page + 1 <= maxPages}">

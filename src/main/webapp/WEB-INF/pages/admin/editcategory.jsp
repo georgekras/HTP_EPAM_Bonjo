@@ -5,11 +5,11 @@
 	<br>
 	<div class="container">
 		<div class="row">
-			<div class=col-md-2>ID</div>
-			<div class=col-md-4>Name</div>
-
+			<div class=col-md-8><h4>Category Name</h4></div>
 		</div>
 	</div>
+	
+	<br>
 
 	<div class="container">
 		<c:forEach items="${categories}" var="category">
@@ -17,10 +17,10 @@
 				method=post>
 				<div class="row">
 					<div class=col-md-2>
-						<input id="id" class="form-control input-md" name="category_id"
-							value="${category.id}" />
+						<input id="id" class="form-control input-md" type="hidden"
+							name="category_id" value="${category.id}" />
 					</div>
-					<div class=col-md-4>
+					<div class=col-md-6>
 						<input id="name" class="form-control input-md"
 							name="category_name" value="${category.name}" />
 					</div>

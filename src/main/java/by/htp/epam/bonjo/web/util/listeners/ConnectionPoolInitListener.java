@@ -10,13 +10,11 @@ public class ConnectionPoolInitListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		ConnectionPool.connectionPoolInitialization();
-		
 	}
 
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
-		// TODO Auto-generated method stub
-		
+		ConnectionPool.connectionPoolDestroy();
 	}
 	
 

@@ -30,17 +30,17 @@ public class EditUsersCommand extends Command {
 			String phoneNumber = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_PHONENUMBER);
 			int role_id = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_ROLES_ID);
 			User user = new User(id, login, email, password, nickname, phoneNumber, role_id);
-			if (request.getParameter("Update") != null) {
+			if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
 				request.setAttribute("msg", "user updated.");
 				userService.update(user);
 				return CommandName.EDITUSERS;
-			} else if (request.getParameter("Delete") != null) {
-				request.setAttribute("msg", "user deleted.");
+			} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
+				request.setAttribute("msg_alert", "user deleted.");
 				userService.delete(user);
 				return CommandName.EDITUSERS;
 			}
 		}
-		return null;
+		return CommandName.EDITUSERS;
 	}
 //    @Override
 //    Action execute(HttpServletRequest req) throws Exception {

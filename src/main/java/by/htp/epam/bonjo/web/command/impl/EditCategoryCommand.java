@@ -39,9 +39,11 @@ public class EditCategoryCommand extends Command {
 			if (request.getParameter("Update") != null) {
 				request.setAttribute("msg", "category updated.");
 				categoryService.update(category);
+				return CommandName.EDITCATEGORY;
 			} else if (request.getParameter("Delete") != null) {
 				request.setAttribute("msg", "category deleted.");
 				categoryService.delete(category);
+				return CommandName.EDITCATEGORY;
 			}
 		}
 		return CommandName.EDITCATEGORY;

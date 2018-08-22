@@ -42,13 +42,13 @@
 		<br>
 		<div class="container">
 			<form class="form-horizontal"
-				action="edit_ad_action=${user_ad.ID}/edit" method=post>
+				action="bonjo?command=editad&adId=${user_ad.id}" method=post>
 				<fieldset>
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="Title">Title</label>
+						<label class="col-md-4 control-label" for="title">Title</label>
 						<div class="col-md-4">
-							<input id="Title" name="ad_title" type="text" placeholder=""
+							<input id="title" name="ad_title" type="text" placeholder=""
 								class="form-control input-md" required=""
 								value="${user_ad.title}">
 						</div>
@@ -59,10 +59,10 @@
 						<label class="col-md-4 control-label" for="category_ID">Category</label>
 						<div class="col-md-4">
 							<select id="name" name="ad_category_id" class="form-control">
-								<c:forEach items="${categories_list}" var="category">
-									<option value="${category.ID}" role=${category.ID
+								<c:forEach items="${categories}" var="category">
+									<option value="${category.id}" role=${category.id
 									}
-										${category.ID==user_ad.category_ID?"selected":""}>
+										${category.id==user_ad.category_ID?"selected":""}>
 										${category.name}</option>
 								</c:forEach>
 							</select>
@@ -71,10 +71,10 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="SmallDesc">Small
+						<label class="col-md-4 control-label" for="smallDesc">Small
 							Description</label>
 						<div class="col-md-4">
-							<input id="SmallDesc" name="ad_smalldesc" type="text"
+							<input id="smallDesc" name="ad_smalldesc" type="text"
 								placeholder="" class="form-control input-md" required=""
 								value="${user_ad.smallDesc}">
 						</div>
@@ -82,9 +82,9 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="Description">Description</label>
+						<label class="col-md-4 control-label" for="description">Description</label>
 						<div class="col-md-4">
-							<textarea id="Description" name="ad_description" type="text"
+							<textarea id="description" name="ad_description" type="text"
 								maxlength="100" placeholder="" class="form-control input-md"
 								required="">${user_ad.description}</textarea>
 						
@@ -94,9 +94,9 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="Price">Price $</label>
+						<label class="col-md-4 control-label" for="price">Price $</label>
 						<div class="col-md-2">
-							<input id="Price" name="ad_price" type="text" placeholder=""
+							<input id="price" name="ad_price" type="text" placeholder=""
 								class="form-control input-md" value="${user_ad.price}">
 						</div>
 					</div>

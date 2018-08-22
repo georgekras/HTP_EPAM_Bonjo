@@ -23,7 +23,7 @@
 								</c:forEach>
 							</div>
 							<div class="card-body">
-								<a href="/ad_project/edit_ad_action=<c:out value="${ad.id}"/>"
+								<a href="bonjo?command=editad&adId=<c:out value="${ad.id}"/>"
 									style="color: white;">
 									<h4 class="card-title">${ad.title}</h4>
 								</a>

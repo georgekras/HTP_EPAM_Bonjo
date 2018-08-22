@@ -2,6 +2,7 @@ package by.htp.epam.bonjo.web.command;
 
 import by.htp.epam.bonjo.web.command.impl.CreateAdCommand;
 import by.htp.epam.bonjo.web.command.impl.CreateCategoryCommand;
+import by.htp.epam.bonjo.web.command.impl.EditAdCommand;
 import by.htp.epam.bonjo.web.command.impl.EditCategoryCommand;
 import by.htp.epam.bonjo.web.command.impl.EditUsersCommand;
 import by.htp.epam.bonjo.web.command.impl.ErrorCommand;
@@ -62,6 +63,12 @@ public enum CommandName {
 		{
 			this.command = new ViewAdCommand();
 			this.jspPage = PagePathConstantDeclaration.PAGE_ADS_VIEW_AD;
+		}
+	},
+	EDITAD {
+		{
+			this.command = new EditAdCommand();
+			this.jspPage = PagePathConstantDeclaration.PAGE_ADS_EDIT_AD;
 		}
 	},
 	CREATEAD {

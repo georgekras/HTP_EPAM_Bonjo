@@ -149,10 +149,10 @@ public class AdDaoImpl implements AdDAO {
 	 *            the {@link by.htp.epam.bonjo.domain.Ad} entity.
 	 */
 	@Override
-	public void delete(Ad ad) {
+	public void delete(int id) {
 		Connection connection = ConnectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_AD_DELETE)) {
-			ps.setInt(1, ad.getId());
+			ps.setInt(1, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			logger.error("AdDAO can't delete ad", e);

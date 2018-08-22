@@ -10,11 +10,11 @@
 
     $(document).ready( function () {
 
-	maxLength = $("textarea#Description").attr("maxlength");
-        $("textarea#Description").after("<div><span id='remainingLengthTempId'>" 
+	maxLength = $("textarea#description").attr("maxlength");
+        $("textarea#description").after("<div><span id='remainingLengthTempId'>" 
                   + maxLength + "</span> symbols remaining.</div>");
 		
-        $("textarea#Description").bind("keyup change", function(){checkMaxLength(this.id,  maxLength); } )
+        $("textarea#description").bind("keyup change", function(){checkMaxLength(this.id,  maxLength); } )
 
     });
 

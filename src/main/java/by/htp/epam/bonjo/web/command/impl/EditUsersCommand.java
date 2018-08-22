@@ -36,7 +36,7 @@ public class EditUsersCommand extends Command {
 				return CommandName.EDITUSERS;
 			} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
 				request.setAttribute("msg_alert", "user deleted.");
-				userService.delete(user);
+				userService.delete(id);
 				return CommandName.EDITUSERS;
 			}
 		}

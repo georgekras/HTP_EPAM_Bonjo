@@ -27,8 +27,8 @@ public class AdServiceImpl implements AdService {
 	}
 
 	@Override
-	public void delete(Ad ad) {
-		adDao.delete(ad);
+	public void delete(int adId) {
+		adDao.delete(adId);
 	}
 
 	@Override

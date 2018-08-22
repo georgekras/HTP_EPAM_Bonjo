@@ -42,26 +42,10 @@ public class EditCategoryCommand extends Command {
 				return CommandName.EDITCATEGORY;
 			} else if (request.getParameter("Delete") != null) {
 				request.setAttribute("msg", "category deleted.");
-				categoryService.delete(category);
+				categoryService.delete(id);
 				return CommandName.EDITCATEGORY;
 			}
 		}
 		return CommandName.EDITCATEGORY;
 	}
-
-//    @Override
-//    Action execute(HttpServletRequest req) throws Exception {
-//        if (FormUtil.isPost(req)) {
-//            Category category = new Category(FormUtil.getInt(req, "ID"),
-//                    FormUtil.getString(req, "Name", ".+"));
-//            if (req.getParameter("Update") != null) {
-//                DAO.getDAO().categoryDAO.update(category);
-//            } else if (req.getParameter("Delete") != null) {
-//                DAO.getDAO().categoryDAO.delete(category);
-//            }
-//        }
-//        List<Category> categories = DAO.getDAO().categoryDAO.getAll("");
-//        req.setAttribute("categories", categories);
-//        return null;
-//    }
 }

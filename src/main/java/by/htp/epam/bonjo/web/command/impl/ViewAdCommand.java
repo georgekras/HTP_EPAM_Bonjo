@@ -27,10 +27,13 @@ public class ViewAdCommand extends Command{
 		int chosenAdId = Integer.parseInt(adId);
 		Ad chosenAd = adService.read(chosenAdId);
 		int userId = chosenAd.getUsers_ID();
+		int categoryId = chosenAd.getCategory_ID();
 		User userInfo = userService.read(userId);
+		Category category = categoryService.read(categoryId);
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_AD, chosenAd);
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_USER_NICKNAME, userInfo.getNickname());
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_USER_PHONENUMBER, userInfo.getPhoneNumber());
+		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORY, category);
 		return CommandName.VIEWAD;
 	}
 

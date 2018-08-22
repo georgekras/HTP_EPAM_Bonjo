@@ -8,10 +8,14 @@ public interface CategoryDAO {
 
 	void create(Category category);
 	
+	Category read(int id);
+	
 	List<Category> readAll();
 	
 	void update(Category category);
 	
-	void delete(Category category);
+	void delete(int id);
+	
+	
 	
 }

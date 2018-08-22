@@ -181,10 +181,10 @@ public class UserDaoImpl implements UserDAO {
 	 *            the {@link by.htp.epam.bonjo.domain.User} entity.
 	 */
 	@Override
-	public void delete(User user) {
+	public void delete(int id) {
 		Connection connection = ConnectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_DELETE)) {
-			ps.setInt(1, user.getId());
+			ps.setInt(1, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			logger.error("UserDao can't delete user", e);

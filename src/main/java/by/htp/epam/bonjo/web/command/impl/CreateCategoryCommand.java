@@ -12,8 +12,6 @@ import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.text.ParseException;
-import java.util.List;
 
 public class CreateCategoryCommand extends Command {
 

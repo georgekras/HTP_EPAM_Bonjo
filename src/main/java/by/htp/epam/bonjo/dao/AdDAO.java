@@ -14,7 +14,7 @@ public interface AdDAO {
 
 	void update(Ad ad);
 
-	void delete(Ad ad);
+	void delete(int id);
 	
 	List<Ad> readUserAds(int user_ID);
 	

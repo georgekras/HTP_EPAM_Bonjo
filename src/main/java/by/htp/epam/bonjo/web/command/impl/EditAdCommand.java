@@ -55,7 +55,7 @@ public class EditAdCommand extends Command {
 				return CommandName.EDITAD;
 			} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
 				request.setAttribute("msg_alert", "ad deleted.");
-				adService.delete(ad);
+				adService.delete(chosenAdId);
 				return CommandName.EDITAD;
 			}
 		}

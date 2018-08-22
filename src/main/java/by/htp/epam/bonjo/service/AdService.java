@@ -12,7 +12,7 @@ public interface AdService {
 	
 	void update(Ad ad);
 	
-	void delete(Ad ad);
+	void delete(int adId);
 	
 	List<Ad> getAllAds();
 	

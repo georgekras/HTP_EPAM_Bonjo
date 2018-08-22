@@ -25,6 +25,7 @@ public class CategoryDaoImpl implements CategoryDAO {
 	private static final Logger logger = LoggerFactory.getLogger(CategoryDaoImpl.class);
 
 	private static final String SQL_QUERY_CATEGORY_CREATE = "INSERT INTO `krasutski`.`category` (`Name`) VALUES(?);";
+	private static final String SQL_QUERY_CATEGORY_READ = "SELECT * FROM `krasutski`.`category` WHERE ID=?;";
 	private static final String SQL_QUERY_CATEGORY_READ_ALL = "SELECT * FROM `krasutski`.`category`";
 	private static final String SQL_QUERY_CATEGORY_UPDATE = "UPDATE `krasutski`.`category` SET `Name`=? WHERE `ID`=?;";
 	private static final String SQL_QUERY_CATEGORY_DELETE = "DELETE FROM `krasutski`.`category` WHERE `ID`=?;";
@@ -48,6 +49,31 @@ public class CategoryDaoImpl implements CategoryDAO {
 		}
 	}
 
+	@Override
+	public Category read(int id) {
+		ResultSet rs = null;
+		Category category = new Category();
+		Connection connection = ConnectionPool.getConnection();
+		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_CATEGORY_READ)) {
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			if (rs.next())
+				category.setId(rs.getInt("ID"));
+				category.setName(rs.getString("Name"));
+				return category;
+		} catch (SQLException e) {
+			logger.error("CategoryDao can't find category by id", e);
+		} finally {
+			ConnectionPool.putConnection(connection);
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				logger.error("Fail to close result set in categoryDao read method", e);
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * Retrieves a list of categories from the database.
 	 *
@@ -108,10 +134,10 @@ public class CategoryDaoImpl implements CategoryDAO {
 	 *            the {@link by.htp.epam.bonjo.domain.Category} entity.
 	 */
 	@Override
-	public void delete(Category category) {
+	public void delete(int id) {
 		Connection connection = ConnectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_CATEGORY_DELETE)) {
-			ps.setInt(1, category.getId());
+			ps.setInt(1, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			logger.error("CategoryDao can't delete category", e);
@@ -119,5 +145,4 @@ public class CategoryDaoImpl implements CategoryDAO {
 			ConnectionPool.putConnection(connection);
 		}
 	}
-
 }

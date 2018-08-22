@@ -31,7 +31,9 @@ public class UserDaoImpl implements UserDAO {
 	private static final String SQL_QUERY_USER_READ_ALL = "SELECT * FROM `krasutski`.`users`";
 	private static final String SQL_QUERY_USER_UPDATE = "UPDATE `krasutski`.`users` SET `Login`=?, `Password`=?, `Email`=?,"
 			+ " `NickName`=?, `PhoneNumber`=?, `roles_ID`=? WHERE `ID`=?;";
-	private static final String SQL_QUERY_USER_DELETE = "DELETE FROM `krasutski`.`users` WHERE `ID`=?;";
+	private static final String SQL_QUERY_USER_DELETE = "DELETE `krasutski`.`users`, `krasutski`.`ads` "
+			+ "FROM `krasutski`.`users` INNER JOIN `krasutski`.`ads` "
+			+ "ON `krasutski`.`ads`.`users_id` = `krasutski`.`users`.`ID`" + "WHERE `krasutski`.`users`.`ID`=?;";
 
 	/**
 	 * Creates a new user entry in the database.

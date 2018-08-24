@@ -55,10 +55,6 @@ public class ConnectionPool {
 	}
 
 	public static void putConnection(Connection connection) {
-		try {
-			connectionQueue.put(connection);
-		} catch (InterruptedException e) {
-			logger.error(e.getMessage() + " in putConnection method of ConnectionPool class", e);
-		}
+		connectionQueue.offer(connection);
 	}
 }

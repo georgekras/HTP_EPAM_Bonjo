@@ -5,18 +5,28 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import by.htp.epam.bonjo.web.util.exceptions.ValidateNullParamException;
+
 public class HttpRequestParamValidator {
 
 	private static Logger logger = LoggerFactory.getLogger(HttpRequestParamValidator.class);
 
-	public static boolean validateRequestParamNotNull(String... str) {
+	public static void validateRequestParamNotNull(String... str) {
 		for (String s : str) {
 			if (s == null) {
 				logger.error("Empty param recieved");
-				return false;
+				throw new ValidateNullParamException("Empty param recieved");
 			}
 		}
-		return true;
+	}
+
+	public static void validateRequestParamObjectNotNull(Object... objects) {
+		for (Object o : objects) {
+			if (o == null) {
+				logger.error("Empty param recieved");
+				throw new ValidateNullParamException("Empty parametr recieved");
+			}
+		}
 	}
 
 	public static boolean isPost(HttpServletRequest request) {

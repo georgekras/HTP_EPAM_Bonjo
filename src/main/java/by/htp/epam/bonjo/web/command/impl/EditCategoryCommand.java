@@ -23,9 +23,9 @@ public class EditCategoryCommand extends Command {
 	public CommandName execute(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER);
-		int role_id = (int) session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER_ROLE_ID);
+		Object role_id = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER_ROLE_ID);
 		User user;
-		if (obj != null && role_id == 1) {
+		if (obj != null && role_id != null && (int) role_id == 1) {
 			user = (User) obj;
 		} else {
 			return CommandName.LOGIN;

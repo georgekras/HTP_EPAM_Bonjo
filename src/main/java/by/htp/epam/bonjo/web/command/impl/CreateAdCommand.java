@@ -16,9 +16,11 @@ import by.htp.epam.bonjo.service.CategoryService;
 import by.htp.epam.bonjo.service.impl.AdServiceImpl;
 import by.htp.epam.bonjo.service.impl.CategoryServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
+import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
+import by.htp.epam.bonjo.web.util.UrlManager;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
 
 public class CreateAdCommand implements Command {
@@ -34,7 +36,8 @@ public class CreateAdCommand implements Command {
 		if (obj != null) {
 			user = (User) obj;
 		} else {
-			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_LOGIN).forward(request, response);
+			response.sendRedirect(
+					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_LOGIN_PAGE));
 			return;
 		}
 		List<Category> categories = categoryService.getAllCategories();

@@ -11,8 +11,10 @@ import by.htp.epam.bonjo.domain.User;
 import by.htp.epam.bonjo.service.UserService;
 import by.htp.epam.bonjo.service.impl.UserServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
+import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
+import by.htp.epam.bonjo.web.util.UrlManager;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
@@ -28,7 +30,8 @@ public class ProfileCommand implements Command {
 		if (o != null) {
 			user = (User) o;
 		} else {
-			response.sendRedirect(PagePathConstantDeclaration.PAGE_USER_LOGIN);
+			response.sendRedirect(
+					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_LOGIN_PAGE));
 			return;
 		}
 		if (HttpRequestParamValidator.isPost(request)) {

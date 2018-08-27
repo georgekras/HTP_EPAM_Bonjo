@@ -5,8 +5,10 @@ import by.htp.epam.bonjo.domain.User;
 import by.htp.epam.bonjo.service.CategoryService;
 import by.htp.epam.bonjo.service.impl.CategoryServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
+import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
+import by.htp.epam.bonjo.web.util.UrlManager;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
@@ -22,7 +24,7 @@ public class CreateCategoryCommand implements Command {
 	private CategoryService categoryService = new CategoryServiceImpl();
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER);
 		int role_id = (int) session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER_ROLE_ID);
@@ -30,7 +32,8 @@ public class CreateCategoryCommand implements Command {
 		if (obj != null && role_id == 1) {
 			user = (User) obj;
 		} else {
-			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_LOGIN).forward(request, response);
+			response.sendRedirect(
+					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_LOGIN_PAGE));
 			return;
 		}
 		if (HttpRequestParamValidator.isPost(request)) {
@@ -39,9 +42,11 @@ public class CreateCategoryCommand implements Command {
 			Category category = new Category(0, categoryName);
 			categoryService.create(category);
 			request.setAttribute("msg", "Category added.");
-			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_CREATE_CATEGORY).forward(request, response);
+			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_CREATE_CATEGORY).forward(request,
+					response);
 		} else {
-			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_CREATE_CATEGORY).forward(request, response);
+			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_CREATE_CATEGORY).forward(request,
+					response);
 		}
 	}
 }

@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import by.htp.epam.bonjo.dao.UserDAO;
 import by.htp.epam.bonjo.database.ConnectionPool;
+import by.htp.epam.bonjo.domain.Ad;
 import by.htp.epam.bonjo.domain.User;
 
 /**
@@ -31,9 +32,11 @@ public class UserDaoImpl implements UserDAO {
 	private static final String SQL_QUERY_USER_READ_ALL = "SELECT * FROM `krasutski`.`users`";
 	private static final String SQL_QUERY_USER_UPDATE = "UPDATE `krasutski`.`users` SET `Login`=?, `Password`=?, `Email`=?,"
 			+ " `NickName`=?, `PhoneNumber`=?, `roles_ID`=? WHERE `ID`=?;";
-	private static final String SQL_QUERY_USER_DELETE = "DELETE `krasutski`.`users`, `krasutski`.`ads` "
+	private static final String SQL_QUERY_USER_DELETE = "DELETE FROM `krasutski`.`users` WHERE `ID`=?;";
+	private static final String SQL_QUERY_USER_AND_ADS_DELETE = "DELETE `krasutski`.`users`, `krasutski`.`ads` "
 			+ "FROM `krasutski`.`users` INNER JOIN `krasutski`.`ads` "
 			+ "ON `krasutski`.`ads`.`users_id` = `krasutski`.`users`.`ID`" + "WHERE `krasutski`.`users`.`ID`=?;";
+	private static final String SQL_QUERY_AD_READ_BY_USER_ID = "SELECT * FROM `krasutski`.`ads` WHERE users_id=?;";
 
 	/**
 	 * Creates a new user entry in the database.
@@ -177,16 +180,44 @@ public class UserDaoImpl implements UserDAO {
 	/**
 	 * Deletes user entry in the database.
 	 *
-	 * @param user
+	 * @param id
 	 *            the {@link by.htp.epam.bonjo.domain.User} entity.
 	 */
 	@Override
 	public void delete(int id) {
-		//TODO delete user if list of ads is empty
+		List<Ad> ads = null;
+		ResultSet resultSet = null;
+		PreparedStatement userAds = null;
+		PreparedStatement deleteUser = null;
+		PreparedStatement deleteUserAndAds = null;
 		Connection connection = ConnectionPool.getConnection();
-		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_DELETE)) {
-			ps.setInt(1, id);
-			ps.executeUpdate();
+		try {
+			connection.setAutoCommit(false);
+			userAds = connection.prepareStatement(SQL_QUERY_AD_READ_BY_USER_ID);
+			deleteUser = connection.prepareStatement(SQL_QUERY_USER_DELETE);
+			deleteUserAndAds = connection.prepareStatement(SQL_QUERY_USER_AND_ADS_DELETE);
+			userAds.setInt(1, id);
+			resultSet = userAds.executeQuery();
+			ads = new ArrayList<>();
+			while (resultSet.next()) {
+				Ad ad = new Ad();
+				ad.setId(resultSet.getInt("ID"));
+				ad.setTitle(resultSet.getString("Title"));
+				ad.setSmallDesc(resultSet.getString("SmallDesc"));
+				ad.setDescription(resultSet.getString("Description"));
+				ad.setPrice(resultSet.getInt("Price"));
+				ad.setUsers_ID(resultSet.getInt("users_ID"));
+				ad.setCategory_ID(resultSet.getInt("category_ID"));
+				ads.add(ad);
+			}
+			if (ads.isEmpty()) {
+				deleteUser.setInt(1, id);
+				deleteUser.executeUpdate();
+			} else {
+				deleteUserAndAds.setInt(1, id);
+				deleteUserAndAds.executeUpdate();
+			}
+			connection.commit();
 		} catch (SQLException e) {
 			logger.error("UserDao can't delete user", e);
 		} finally {

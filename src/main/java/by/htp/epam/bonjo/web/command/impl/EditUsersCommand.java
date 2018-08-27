@@ -57,7 +57,8 @@ public class EditUsersCommand implements Command {
 				request.setAttribute("msg_alert", "user deleted.");
 				userService.delete(id);
 			}
-			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USERS).forward(request, response);
+			response.sendRedirect(
+					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_EDIT_USERS_PAGE));
 		} else {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USERS).forward(request, response);
 		}

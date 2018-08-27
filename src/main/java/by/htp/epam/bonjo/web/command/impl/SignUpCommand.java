@@ -10,10 +10,14 @@ import by.htp.epam.bonjo.domain.User;
 import by.htp.epam.bonjo.service.UserService;
 import by.htp.epam.bonjo.service.impl.UserServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
+import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
+import by.htp.epam.bonjo.web.util.UrlManager;
+import by.htp.epam.bonjo.web.util.exceptions.RegexValidateParamException;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
+import by.htp.epam.bonjo.web.util.validators.RegexParamValidator;
 
 public class SignUpCommand implements Command{
 
@@ -32,8 +36,15 @@ public class SignUpCommand implements Command{
             		RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_NICKNAME);
             String phoneNumber =
             		RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_PHONENUMBER);
+            try {
+            RegexParamValidator.userRegistrationValidation(login, password, email, nickName, phoneNumber);
             User user = new User(0,login, email, password, nickName, phoneNumber, 2);
             userService.create(user);
+			response.sendRedirect(UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_LOGIN_PAGE));
+            } catch(RegexValidateParamException e) {
+            	request.setAttribute("msg", "incorrect inputs.");
+				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_SIGNUP).forward(request, response);
+            }
 		} else {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_SIGNUP).forward(request, response);
 		}

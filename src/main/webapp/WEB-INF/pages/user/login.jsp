@@ -7,7 +7,8 @@
 			<h2>Welcome back!</h2>
 		</div>
 		<br>
-		<form class="form-horizontal" action="bonjo?command=login" method="post">
+		<form class="form-horizontal" action="bonjo?command=login"
+			method="post">
 			<fieldset>
 
 				<!-- Text input-->
@@ -15,8 +16,8 @@
 					<label class="col-md-4 control-label" for="login">Login</label>
 					<div class="col-md-4">
 						<input id="login" name="user_login" type="text"
-							placeholder="put your login here" class="form-control input-md"
-							required=""> <span class="help-block">Login (hint)</span>
+							placeholder="put your login here" class="form-control input-md">
+						<span class="help-block">Login (hint)</span>
 					</div>
 				</div>
 
@@ -26,8 +27,8 @@
 					<div class="col-md-4">
 						<input id="password" name="user_password" type="password"
 							placeholder="put your password here"
-							class="form-control input-md" required=""> <span
-							class="help-block">(min 5 symbols)</span>
+							class="form-control input-md"> <span class="help-block">(min
+							5 symbols)</span>
 					</div>
 				</div>
 

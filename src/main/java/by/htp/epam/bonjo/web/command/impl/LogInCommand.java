@@ -15,8 +15,9 @@ import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 import by.htp.epam.bonjo.web.util.UrlManager;
-import by.htp.epam.bonjo.web.util.exceptions.ValidateNullParamException;
+import by.htp.epam.bonjo.web.util.exceptions.RegexValidateParamException;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
+import by.htp.epam.bonjo.web.util.validators.RegexParamValidator;
 
 public class LogInCommand implements Command {
 
@@ -29,15 +30,15 @@ public class LogInCommand implements Command {
 			String login = request.getParameter(ParamNameConstantDeclaration.REQUEST_PARAM_USER_LOGIN);
 			String password = request.getParameter(ParamNameConstantDeclaration.REQUEST_PARAM_USER_PASSWORD);
 			try {
-				HttpRequestParamValidator.validateRequestParamNotNull(login, password);
+				RegexParamValidator.userLoginValidation(login, password);
 				User user = userService.loginRead(login, password);
 				HttpRequestParamValidator.validateRequestParamObjectNotNull(user);
 				session.setAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER, user);
 				session.setAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER_ROLE_ID,
 						user.getRoles_ID());
 				response.sendRedirect(UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_PROFILE_PAGE));
-			} catch (ValidateNullParamException e) {
-				session.setAttribute("msg", "Incorrect username or password");
+			} catch (RegexValidateParamException e) {
+				session.setAttribute("msg", "Incorrect login or password");
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_LOGIN).forward(request, response);
 			}
 		} else {

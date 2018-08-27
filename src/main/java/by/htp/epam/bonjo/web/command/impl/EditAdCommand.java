@@ -1,8 +1,11 @@
 package by.htp.epam.bonjo.web.command.impl;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import by.htp.epam.bonjo.domain.Ad;
@@ -13,25 +16,26 @@ import by.htp.epam.bonjo.service.CategoryService;
 import by.htp.epam.bonjo.service.impl.AdServiceImpl;
 import by.htp.epam.bonjo.service.impl.CategoryServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
-import by.htp.epam.bonjo.web.command.CommandName;
+import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
-public class EditAdCommand extends Command {
+public class EditAdCommand implements Command {
 
 	private AdService adService = new AdServiceImpl();
 	private CategoryService categoryService = new CategoryServiceImpl();
 
 	@Override
-	public CommandName execute(HttpServletRequest request) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER);
 		User user;
 		if (obj != null) {
 			user = (User) obj;
 		} else {
-			return CommandName.LOGIN;
+			response.sendRedirect(PagePathConstantDeclaration.PAGE_USER_LOGIN);
+			return;
 		}
 		String adId = request.getParameter("adId");
 		int chosenAdId = Integer.parseInt(adId);
@@ -52,14 +56,14 @@ public class EditAdCommand extends Command {
 			if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
 				request.setAttribute("msg", "ad updated.");
 				adService.update(ad);
-				return CommandName.EDITAD;
 			} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
 				request.setAttribute("msg_alert", "ad deleted.");
 				adService.delete(chosenAdId);
-				return CommandName.EDITAD;
 			}
+			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_EDIT_AD).forward(request, response);
+		} else {
+			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_EDIT_AD).forward(request, response);
 		}
-		return null;
 	}
 
 }

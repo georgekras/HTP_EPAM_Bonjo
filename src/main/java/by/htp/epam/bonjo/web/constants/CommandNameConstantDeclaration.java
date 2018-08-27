@@ -9,11 +9,11 @@ public class CommandNameConstantDeclaration {
 	public static final String COMMAND_NAME_VIEW_PROFILE_PAGE = "profile";
 
 	public static final String COMMAND_NAME_VIEW_CREATE_AD_PAGE = "createad";
-	public static final String COMMAND_NAME_VIEW_USER_ADS_PAGE = "user_ads";
+	public static final String COMMAND_NAME_VIEW_USER_ADS_PAGE = "userads";
 	public static final String COMMAND_NAME_VIEW_AD_PAGE = "ad";
-	public static final String COMMAND_NAME_VIEW_EDIT_AD_PAGE = "edit_ad";
+	public static final String COMMAND_NAME_VIEW_EDIT_AD_PAGE = "editad";
 
-	public static final String COMMAND_NAME_VIEW_CREATE_CATEGORY_PAGE = "create_category";
-	public static final String COMMAND_NAME_VIEW_EDIT_CATEGORY_PAGE = "edit_category";
-	public static final String COMMAND_NAME_VIEW_EDIT_USERS_PAGE = "edit_users";
+	public static final String COMMAND_NAME_VIEW_CREATE_CATEGORY_PAGE = "createcategory";
+	public static final String COMMAND_NAME_VIEW_EDIT_CATEGORY_PAGE = "editcategory";
+	public static final String COMMAND_NAME_VIEW_EDIT_USERS_PAGE = "editusers";
 }

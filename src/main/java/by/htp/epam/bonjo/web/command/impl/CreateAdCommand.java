@@ -1,8 +1,11 @@
 package by.htp.epam.bonjo.web.command.impl;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import by.htp.epam.bonjo.domain.Ad;
@@ -13,25 +16,26 @@ import by.htp.epam.bonjo.service.CategoryService;
 import by.htp.epam.bonjo.service.impl.AdServiceImpl;
 import by.htp.epam.bonjo.service.impl.CategoryServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
-import by.htp.epam.bonjo.web.command.CommandName;
+import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
 
-public class CreateAdCommand extends Command {
+public class CreateAdCommand implements Command {
 
 	private AdService adService = new AdServiceImpl();
 	private CategoryService categoryService = new CategoryServiceImpl();
 
 	@Override
-	public CommandName execute(HttpServletRequest request) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER);
 		User user;
 		if (obj != null) {
 			user = (User) obj;
 		} else {
-			return CommandName.LOGIN;
+			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_LOGIN).forward(request, response);
+			return;
 		}
 		List<Category> categories = categoryService.getAllCategories();
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, categories);
@@ -45,7 +49,9 @@ public class CreateAdCommand extends Command {
 			int category_Id = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_CATEGORY_ID);
 			Ad ad = new Ad(0, title, smallDesc, description, price, user.getId(), category_Id);
 			adService.create(ad);
+			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_CREATE_AD).forward(request, response);
+		} else {
+			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_CREATE_AD).forward(request, response);
 		}
-		return CommandName.CREATEAD;
 	}
 }

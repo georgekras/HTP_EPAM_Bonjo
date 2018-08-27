@@ -5,22 +5,25 @@ import by.htp.epam.bonjo.domain.User;
 import by.htp.epam.bonjo.service.CategoryService;
 import by.htp.epam.bonjo.service.impl.CategoryServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
-import by.htp.epam.bonjo.web.command.CommandName;
+import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.io.IOException;
 import java.util.List;
 
-public class EditCategoryCommand extends Command {
+public class EditCategoryCommand implements Command {
 
 	private CategoryService categoryService = new CategoryServiceImpl();
-	
+
 	@Override
-	public CommandName execute(HttpServletRequest request) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER);
 		Object role_id = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER_ROLE_ID);
@@ -28,7 +31,8 @@ public class EditCategoryCommand extends Command {
 		if (obj != null && role_id != null && (int) role_id == 1) {
 			user = (User) obj;
 		} else {
-			return CommandName.LOGIN;
+			response.sendRedirect(PagePathConstantDeclaration.PAGE_USER_LOGIN);
+			return;
 		}
 		List<Category> categories = categoryService.getAllCategories();
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, categories);
@@ -39,13 +43,15 @@ public class EditCategoryCommand extends Command {
 			if (request.getParameter("Update") != null) {
 				request.setAttribute("msg", "category updated.");
 				categoryService.update(category);
-				return CommandName.EDITCATEGORY;
 			} else if (request.getParameter("Delete") != null) {
 				request.setAttribute("msg", "category deleted.");
 				categoryService.delete(id);
-				return CommandName.EDITCATEGORY;
 			}
+			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_CATEGORY).forward(request,
+					response);
+		} else {
+			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_CATEGORY).forward(request,
+					response);
 		}
-		return CommandName.EDITCATEGORY;
 	}
 }

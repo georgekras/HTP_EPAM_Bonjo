@@ -182,6 +182,7 @@ public class UserDaoImpl implements UserDAO {
 	 */
 	@Override
 	public void delete(int id) {
+		//TODO delete user if list of ads is empty
 		Connection connection = ConnectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_DELETE)) {
 			ps.setInt(1, id);

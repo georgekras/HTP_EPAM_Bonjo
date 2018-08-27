@@ -8,32 +8,37 @@ import by.htp.epam.bonjo.service.CategoryService;
 import by.htp.epam.bonjo.service.impl.AdServiceImpl;
 import by.htp.epam.bonjo.service.impl.CategoryServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
-import by.htp.epam.bonjo.web.command.CommandName;
+import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.io.IOException;
 import java.util.List;
 
-public class UserAdsCommand extends Command {
+public class UserAdsCommand implements Command {
 
 	private AdService adService = new AdServiceImpl();
 	private CategoryService categoryService = new CategoryServiceImpl();
 
 	@Override
-	public CommandName execute(HttpServletRequest request) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER);
 		User user;
 		if (obj != null) {
 			user = (User) obj;
 		} else {
-			return CommandName.LOGIN;
+			response.sendRedirect(PagePathConstantDeclaration.PAGE_USER_LOGIN);
+			return;
 		}
 		List<Ad> userAds = adService.getUserAds(user.getId());
 		List<Category> categories = categoryService.getAllCategories();
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_ADS_LIST, userAds);
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, categories);
-		return CommandName.USERADS;
+		request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_USER_ADS).forward(request, response);
 	}
 }

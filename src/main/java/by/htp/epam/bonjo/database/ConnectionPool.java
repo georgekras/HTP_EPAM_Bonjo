@@ -36,12 +36,18 @@ public class ConnectionPool {
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			logger.error(e.getMessage() + " in initialization method of ConnectionPool class.", e);
-			System.exit(0);
+			System.exit(1);
 		}
 	}
 
 	public static void connectionPoolDestroy() {
-		connectionQueue.removeAll(connectionQueue);
+		for (int i = 0; i < POOL_SIZE; i++) {
+			try {
+				getConnection().close();
+			} catch (SQLException e) {
+				logger.error(e.getMessage() + " in destroy method of ConnectionPool class.", e);
+			}
+		}
 	}
 
 	public static Connection getConnection() {

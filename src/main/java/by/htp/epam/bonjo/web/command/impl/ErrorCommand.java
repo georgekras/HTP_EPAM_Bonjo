@@ -1,15 +1,14 @@
 package by.htp.epam.bonjo.web.command.impl;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import by.htp.epam.bonjo.web.command.Command;
-import by.htp.epam.bonjo.web.command.CommandName;
 
-public class ErrorCommand extends Command{
+public class ErrorCommand implements Command{
 
 	@Override
-	public CommandName execute(HttpServletRequest request) {
-		return CommandName.ERROR;
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
 	}
 
 }

@@ -4,21 +4,35 @@ import by.htp.epam.bonjo.domain.User;
 import by.htp.epam.bonjo.service.UserService;
 import by.htp.epam.bonjo.service.impl.UserServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
-import by.htp.epam.bonjo.web.command.CommandName;
+import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-public class EditUsersCommand extends Command {
+public class EditUsersCommand implements Command {
 	
 	private UserService userService = new UserServiceImpl();
 	
 	@Override
-	public CommandName execute(HttpServletRequest request) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER);
+		Object role_id = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER_ROLE_ID);
+		User userobj;
+		if (obj != null && role_id != null && (int) role_id == 1) {
+			userobj = (User) obj;
+		} else {
+			response.sendRedirect(PagePathConstantDeclaration.PAGE_USER_LOGIN);
+			return;
+		}
 		List<User> users = userService.getAllUsers();
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_USER_LIST, users);
 		if (HttpRequestParamValidator.isPost(request)) {
@@ -28,41 +42,18 @@ public class EditUsersCommand extends Command {
 			String password = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_PASSWORD);
 			String nickname = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_NICKNAME);
 			String phoneNumber = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_PHONENUMBER);
-			int role_id = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_ROLES_ID);
-			User user = new User(id, login, email, password, nickname, phoneNumber, role_id);
+			int roleId = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_ROLES_ID);
+			User user = new User(id, login, email, password, nickname, phoneNumber, roleId);
 			if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
 				request.setAttribute("msg", "user updated.");
 				userService.update(user);
-				return CommandName.EDITUSERS;
 			} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
 				request.setAttribute("msg_alert", "user deleted.");
 				userService.delete(id);
-				return CommandName.EDITUSERS;
 			}
+			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USERS).forward(request, response);
+		} else {
+			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USERS).forward(request, response);	
 		}
-		return CommandName.EDITUSERS;
 	}
-//    @Override
-//    Action execute(HttpServletRequest req) throws Exception {
-//
-//        if (FormUtil.isPost(req)) {
-//            int id = FormUtil.getInt(req, "ID");
-//            String login = FormUtil.getString(req, "Login", Patterns.LOGIN);
-//            String email = FormUtil.getString(req, "Email", Patterns.EMAIL);
-//            String password = FormUtil.getString(req, "Password", Patterns.PASSWORD);
-//            String nickname = FormUtil.getString(req, "Nickname", Patterns.NICKNAME);
-//            String phonenumber = FormUtil.getString(req, "PhoneNumber", Patterns.PHONENUMBER);
-//            int roles_ID = FormUtil.getInt(req, "roles_ID");
-//            User user = new User(id, login, email, password, nickname, phonenumber, roles_ID);
-//            if (req.getParameter("Update") != null) {
-//                DAO.getDAO().userDAO.update(user);
-//            } else if (req.getParameter("Delete") != null) {
-//                DAO.getDAO().userDAO.delete(user);
-//            }
-//        }
-//        List<User> users = DAO.getDAO().userDAO.getAll("");
-//        List<Role> roles = DAO.getDAO().roleDAO.getAll("");
-//        req.setAttribute("users", users);
-//        req.setAttribute("roles", roles);
-//        return null;
 }

@@ -12,33 +12,31 @@ import org.slf4j.LoggerFactory;
 
 import by.htp.epam.bonjo.web.command.CommandManager;
 import by.htp.epam.bonjo.web.command.CommandName;
+import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 
-public class Controller extends HttpServlet{
+public class Controller extends HttpServlet {
 
 	private static final long serialVersionUID = 8792644078442521860L;
 	private static Logger logger = LoggerFactory.getLogger(Controller.class);
-	
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		processRequest(request, response);
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		processRequest(request, response);
 	}
-	
+
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
-		CommandName currentCommand = CommandManager.defineCommand(request);
-		CommandName nextCommand = null;
 		try {
-			nextCommand = currentCommand.command.execute(request);
-			if (nextCommand == null || nextCommand == currentCommand) {
-				request.getRequestDispatcher(currentCommand.jspPage).forward(request, response);
-			} else
-				response.sendRedirect("bonjo?command=" + nextCommand.toString().toLowerCase());
-		} catch (ServletException | IOException e) {
+			String commandName = request.getParameter(ParamNameConstantDeclaration.REQUEST_PARAM_COMMAND);
+			CommandName command = CommandManager.defineCommand(commandName);
+			command.command.execute(request, response);
+		} catch (NullPointerException | ServletException | IOException e) {
 			logger.error(e.getMessage() + " in Controller class", e);
 		}
 	}

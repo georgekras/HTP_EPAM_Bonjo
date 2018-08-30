@@ -21,7 +21,9 @@ import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 import by.htp.epam.bonjo.web.util.UrlManager;
+import by.htp.epam.bonjo.web.util.exceptions.RegexValidateParamException;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
+import by.htp.epam.bonjo.web.util.validators.RegexParamValidator;
 
 public class CreateAdCommand implements Command {
 
@@ -43,6 +45,7 @@ public class CreateAdCommand implements Command {
 		List<Category> categories = categoryService.getAllCategories();
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, categories);
 		if (HttpRequestParamValidator.isPost(request)) {
+			try {
 			String title = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_TITLE);
 			String smallDesc = RequestParamUtil.getString(request,
 					ParamNameConstantDeclaration.REQUEST_PARAM_AD_SMALLDESC);
@@ -50,9 +53,14 @@ public class CreateAdCommand implements Command {
 					ParamNameConstantDeclaration.REQUEST_PARAM_AD_DESCRIPTION);
 			int price = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_PRICE);
 			int category_Id = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_CATEGORY_ID);
+			RegexParamValidator.userCreateAdValidation(title, smallDesc, description, price, category_Id);
 			Ad ad = new Ad(0, title, smallDesc, description, price, user.getId(), category_Id);
 			adService.create(ad);
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_CREATE_AD).forward(request, response);
+			} catch(RegexValidateParamException e) {
+				request.setAttribute("msg", "Incorrect inputs");
+				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_CREATE_AD).forward(request, response);
+			}
 		} else {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_CREATE_AD).forward(request, response);
 		}

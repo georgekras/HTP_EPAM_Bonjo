@@ -9,7 +9,9 @@ import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 import by.htp.epam.bonjo.web.util.UrlManager;
+import by.htp.epam.bonjo.web.util.exceptions.RegexValidateParamException;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
+import by.htp.epam.bonjo.web.util.validators.RegexParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
 import javax.servlet.ServletException;
@@ -40,18 +42,25 @@ public class EditCategoryCommand implements Command {
 		List<Category> categories = categoryService.getAllCategories();
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, categories);
 		if (HttpRequestParamValidator.isPost(request)) {
-			int id = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORY_ID);
-			String name = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORY_NAME);
-			Category category = new Category(id, name);
-			if (request.getParameter("Update") != null) {
-				request.setAttribute("msg", "category updated.");
-				categoryService.update(category);
-			} else if (request.getParameter("Delete") != null) {
-				request.setAttribute("msg", "category deleted.");
-				categoryService.delete(id);
+			try {
+				int id = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORY_ID);
+				String name = RequestParamUtil.getString(request,
+						ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORY_NAME);
+				HttpRequestParamValidator.validateRequestParamObjectNotNull(id);
+				RegexParamValidator.adminCategoryValidation(name);
+				Category category = new Category(id, name);
+				if (request.getParameter("Update") != null) {
+					request.setAttribute("msg", "category updated.");
+					categoryService.update(category);
+				} else if (request.getParameter("Delete") != null) {
+					request.setAttribute("msg", "category deleted.");
+					categoryService.delete(id);
+				}
+				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_CATEGORY).forward(request,
+						response);
+			} catch (RegexValidateParamException e) {
+				request.setAttribute("msg", "can't update category.");
 			}
-			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_CATEGORY).forward(request,
-					response);
 		} else {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_CATEGORY).forward(request,
 					response);

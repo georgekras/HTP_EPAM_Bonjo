@@ -87,4 +87,11 @@ public class RegexParamValidator {
 			throw new RegexValidateParamException();
 		}
 	}
+	
+	public static void adminCategoryValidation(String categoryName) {
+		if (!categoryName.matches(RegExPatterns.CATEGORY_NAME)) {
+			logger.error("Incorrect category name recieved.");
+			throw new RegexValidateParamException();
+		}
+	}
 }

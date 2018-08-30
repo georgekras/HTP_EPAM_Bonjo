@@ -9,7 +9,9 @@ import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 import by.htp.epam.bonjo.web.util.UrlManager;
+import by.htp.epam.bonjo.web.util.exceptions.RegexValidateParamException;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
+import by.htp.epam.bonjo.web.util.validators.RegexParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
 import java.io.IOException;
@@ -37,13 +39,18 @@ public class CreateCategoryCommand implements Command {
 			return;
 		}
 		if (HttpRequestParamValidator.isPost(request)) {
-			String categoryName = RequestParamUtil.getString(request,
-					ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORY_NAME);
-			Category category = new Category(0, categoryName);
-			categoryService.create(category);
-			request.setAttribute("msg", "Category added.");
-			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_CREATE_CATEGORY).forward(request,
-					response);
+			try {
+				String categoryName = RequestParamUtil.getString(request,
+						ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORY_NAME);
+				RegexParamValidator.adminCategoryValidation(categoryName);
+				Category category = new Category(0, categoryName);
+				categoryService.create(category);
+				request.setAttribute("msg", "Category added.");
+				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_CREATE_CATEGORY).forward(request,
+						response);
+			} catch (RegexValidateParamException e) {
+				request.setAttribute("msg", "Check inputs.");
+			}
 		} else {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_CREATE_CATEGORY).forward(request,
 					response);

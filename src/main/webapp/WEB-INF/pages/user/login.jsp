@@ -1,4 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<script src="assets/js/jquery-1.8.3.js"></script>
+<script src="assets/js/jquery.validate.min.js"></script>
+<script src="assets/js/login.validation.js"></script>
 <%@ include file="/include/begin-html.jsp"%>
 <div align="center">
 	<br>
@@ -7,8 +10,8 @@
 			<h2>Welcome back!</h2>
 		</div>
 		<br>
-		<form class="form-horizontal" action="bonjo?command=login"
-			method="post">
+		<form id="loginForm" class="form-horizontal"
+			action="bonjo?command=login" method="post">
 			<fieldset>
 
 				<!-- Text input-->
@@ -17,7 +20,6 @@
 					<div class="col-md-4">
 						<input id="login" name="user_login" type="text"
 							placeholder="put your login here" class="form-control input-md">
-						<span class="help-block">Login (hint)</span>
 					</div>
 				</div>
 
@@ -27,16 +29,14 @@
 					<div class="col-md-4">
 						<input id="password" name="user_password" type="password"
 							placeholder="put your password here"
-							class="form-control input-md"> <span class="help-block">(min
-							5 symbols)</span>
+							class="form-control input-md">
 					</div>
 				</div>
 
-				<!-- Button -->
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="singlebutton"></label>
 					<div class="col-md-4">
-						<button id="singlebutton" name="singlebutton"
+						<button id="singlebutton" name="singlebutton" type="submit"
 							class="btn btn-outline-primary">Login</button>
 					</div>
 				</div>

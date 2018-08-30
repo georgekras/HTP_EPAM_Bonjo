@@ -66,7 +66,9 @@ public class EditAdCommand implements Command {
 				} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
 					request.setAttribute("msg_alert", "ad deleted.");
 					adService.delete(chosenAdId);
+					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_USER_ADS_PAGE);
 				}
+				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_EDIT_AD).forward(request, response);
 			} catch (RegexValidateParamException e) {
 				request.setAttribute("msg_alert", "Check inputs.");
 			}

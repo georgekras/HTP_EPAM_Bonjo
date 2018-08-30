@@ -8,7 +8,9 @@ import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 import by.htp.epam.bonjo.web.util.UrlManager;
+import by.htp.epam.bonjo.web.util.exceptions.RegexValidateParamException;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
+import by.htp.epam.bonjo.web.util.validators.RegexParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
 import java.io.IOException;
@@ -39,26 +41,34 @@ public class EditUsersCommand implements Command {
 		List<User> users = userService.getAllUsers();
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_USER_LIST, users);
 		if (HttpRequestParamValidator.isPost(request)) {
-			int id = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_ID);
-			String login = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_LOGIN);
-			String email = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_EMAIL);
-			String password = RequestParamUtil.getString(request,
-					ParamNameConstantDeclaration.REQUEST_PARAM_USER_PASSWORD);
-			String nickname = RequestParamUtil.getString(request,
-					ParamNameConstantDeclaration.REQUEST_PARAM_USER_NICKNAME);
-			String phoneNumber = RequestParamUtil.getString(request,
-					ParamNameConstantDeclaration.REQUEST_PARAM_USER_PHONENUMBER);
-			int roleId = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_ROLES_ID);
-			User user = new User(id, login, email, password, nickname, phoneNumber, roleId);
-			if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
-				request.setAttribute("msg", "user updated.");
-				userService.update(user);
-			} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
-				request.setAttribute("msg_alert", "user deleted.");
-				userService.delete(id);
+			try {
+				int id = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_ID);
+				String login = RequestParamUtil.getString(request,
+						ParamNameConstantDeclaration.REQUEST_PARAM_USER_LOGIN);
+				String email = RequestParamUtil.getString(request,
+						ParamNameConstantDeclaration.REQUEST_PARAM_USER_EMAIL);
+				String password = RequestParamUtil.getString(request,
+						ParamNameConstantDeclaration.REQUEST_PARAM_USER_PASSWORD);
+				String nickname = RequestParamUtil.getString(request,
+						ParamNameConstantDeclaration.REQUEST_PARAM_USER_NICKNAME);
+				String phoneNumber = RequestParamUtil.getString(request,
+						ParamNameConstantDeclaration.REQUEST_PARAM_USER_PHONENUMBER);
+				int roleId = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_ROLES_ID);
+				HttpRequestParamValidator.validateRequestParamObjectNotNull(id, roleId);
+				RegexParamValidator.userRegistrationValidation(login, password, email, nickname, phoneNumber);
+				User user = new User(id, login, email, password, nickname, phoneNumber, roleId);
+				if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
+					request.setAttribute("msg", "user updated.");
+					userService.update(user);
+				} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
+					request.setAttribute("msg_alert", "user deleted.");
+					userService.delete(id);
+				}
+				response.sendRedirect(UrlManager
+						.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_EDIT_USERS_PAGE));
+			} catch (RegexValidateParamException e) {
+				request.setAttribute("msg_alert", "can't update user.");
 			}
-			response.sendRedirect(
-					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_EDIT_USERS_PAGE));
 		} else {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USERS).forward(request, response);
 		}

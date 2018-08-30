@@ -20,7 +20,9 @@ import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 import by.htp.epam.bonjo.web.util.UrlManager;
+import by.htp.epam.bonjo.web.util.exceptions.RegexValidateParamException;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
+import by.htp.epam.bonjo.web.util.validators.RegexParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
 public class EditAdCommand implements Command {
@@ -47,23 +49,27 @@ public class EditAdCommand implements Command {
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_USER_AD, chosenUserAd);
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, categories);
 		if (HttpRequestParamValidator.isPost(request)) {
-			String title = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_TITLE);
-			String smallDesc = RequestParamUtil.getString(request,
-					ParamNameConstantDeclaration.REQUEST_PARAM_AD_SMALLDESC);
-			String description = RequestParamUtil.getString(request,
-					ParamNameConstantDeclaration.REQUEST_PARAM_AD_DESCRIPTION);
-			int price = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_PRICE);
-			int category_Id = RequestParamUtil.getInt(request,
-					ParamNameConstantDeclaration.REQUEST_PARAM_AD_CATEGORY_ID);
-			Ad ad = new Ad(chosenAdId, title, smallDesc, description, price, user.getId(), category_Id);
-			if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
-				request.setAttribute("msg", "ad updated.");
-				adService.update(ad);
-			} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
-				request.setAttribute("msg_alert", "ad deleted.");
-				adService.delete(chosenAdId);
+			try {
+				String title = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_TITLE);
+				String smallDesc = RequestParamUtil.getString(request,
+						ParamNameConstantDeclaration.REQUEST_PARAM_AD_SMALLDESC);
+				String description = RequestParamUtil.getString(request,
+						ParamNameConstantDeclaration.REQUEST_PARAM_AD_DESCRIPTION);
+				int price = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_PRICE);
+				int category_Id = RequestParamUtil.getInt(request,
+						ParamNameConstantDeclaration.REQUEST_PARAM_AD_CATEGORY_ID);
+				Ad ad = new Ad(chosenAdId, title, smallDesc, description, price, user.getId(), category_Id);
+				RegexParamValidator.userEditAdValidation(title, smallDesc, description, price, category_Id);
+				if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
+					request.setAttribute("msg", "ad updated.");
+					adService.update(ad);
+				} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
+					request.setAttribute("msg_alert", "ad deleted.");
+					adService.delete(chosenAdId);
+				}
+			} catch (RegexValidateParamException e) {
+				request.setAttribute("msg_alert", "Check inputs.");
 			}
-			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_EDIT_AD).forward(request, response);
 		} else {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_EDIT_AD).forward(request, response);
 		}

@@ -68,4 +68,23 @@ public class RegexParamValidator {
 			throw new RegexValidateParamException();
 		}
 	}
+	
+	public static void userEditAdValidation(String title, String smallDesc, String description, int price, int category_ID) {
+		if (!title.matches(RegExPatterns.AD_TITLE)) {
+			logger.error("Incorrect title recieved on create ad page.");
+			throw new RegexValidateParamException();
+		} else if (!smallDesc.matches(RegExPatterns.AD_SMALLDESC)) {
+			logger.error("Incorrect small description recieved on create ad page.");
+			throw new RegexValidateParamException();
+		} else if (!description.matches(RegExPatterns.AD_DESCRIPTION)) {
+			logger.error("Incorrect description recieved on create ad page.");
+			throw new RegexValidateParamException();
+		} else if (price < 0) {
+			logger.error("Incorrect price recieved on create ad page.");
+			throw new RegexValidateParamException();
+		} else if (category_ID < 0) {
+			logger.error("Incorrect category recieved on create ad page.");
+			throw new RegexValidateParamException();
+		}
+	}
 }

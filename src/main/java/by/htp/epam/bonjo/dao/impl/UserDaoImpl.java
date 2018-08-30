@@ -178,14 +178,13 @@ public class UserDaoImpl implements UserDAO {
 	}
 
 	/**
-	 * Deletes user entry in the database.
+	 * Deletes user entry and his ads in the database.
 	 *
 	 * @param id
 	 *            the {@link by.htp.epam.bonjo.domain.User} entity.
 	 */
 	@Override
 	public void delete(int id) {
-		List<Ad> ads = null;
 		ResultSet resultSet = null;
 		PreparedStatement userAds = null;
 		PreparedStatement deleteUser = null;
@@ -198,19 +197,7 @@ public class UserDaoImpl implements UserDAO {
 			deleteUserAndAds = connection.prepareStatement(SQL_QUERY_USER_AND_ADS_DELETE);
 			userAds.setInt(1, id);
 			resultSet = userAds.executeQuery();
-			ads = new ArrayList<>();
-			while (resultSet.next()) {
-				Ad ad = new Ad();
-				ad.setId(resultSet.getInt("ID"));
-				ad.setTitle(resultSet.getString("Title"));
-				ad.setSmallDesc(resultSet.getString("SmallDesc"));
-				ad.setDescription(resultSet.getString("Description"));
-				ad.setPrice(resultSet.getInt("Price"));
-				ad.setUsers_ID(resultSet.getInt("users_ID"));
-				ad.setCategory_ID(resultSet.getInt("category_ID"));
-				ads.add(ad);
-			}
-			if (ads.isEmpty()) {
+			if (!resultSet.next()) {
 				deleteUser.setInt(1, id);
 				deleteUser.executeUpdate();
 			} else {

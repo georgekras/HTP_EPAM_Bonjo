@@ -15,6 +15,7 @@ import by.htp.epam.bonjo.service.impl.AdServiceImpl;
 import by.htp.epam.bonjo.service.impl.CategoryServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
+import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 
 public class MainPageCommand implements Command {
 
@@ -25,8 +26,8 @@ public class MainPageCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Ad> ads = adService.getAllAds();
 		List<Category> categories = categoryService.getAllCategories();
-		request.setAttribute("ads", ads);
-		request.setAttribute("categories", categories);
+		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_ADS_LIST, ads);
+		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, categories);
 		request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_HOME).forward(request, response);
 	}
 

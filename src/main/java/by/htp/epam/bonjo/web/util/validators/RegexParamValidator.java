@@ -58,4 +58,14 @@ public class RegexParamValidator {
 			throw new RegexValidateParamException();
 		}
 	}
+	
+	public static void userEditProfileValidation(String password, String phoneNumber) {
+		if (!password.matches(RegExPatterns.USER_PASSWORD)) {
+			logger.error("Incorrect password recieved on profile page.");
+			throw new RegexValidateParamException();
+		} else if (!phoneNumber.matches(RegExPatterns.USER_PHONENUMBER)) {
+			logger.error("Incorrect phone number recieved on profile page.");
+			throw new RegexValidateParamException();
+		}
+	}
 }

@@ -15,7 +15,9 @@ import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 import by.htp.epam.bonjo.web.util.UrlManager;
+import by.htp.epam.bonjo.web.util.exceptions.RegexValidateParamException;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
+import by.htp.epam.bonjo.web.util.validators.RegexParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
 public class ProfileCommand implements Command {
@@ -35,14 +37,20 @@ public class ProfileCommand implements Command {
 			return;
 		}
 		if (HttpRequestParamValidator.isPost(request)) {
+			try {
 			String password = RequestParamUtil.getString(request,
 					ParamNameConstantDeclaration.REQUEST_PARAM_USER_PASSWORD);
 			String phoneNumber = RequestParamUtil.getString(request,
 					ParamNameConstantDeclaration.REQUEST_PARAM_USER_PHONENUMBER);
+			RegexParamValidator.userEditProfileValidation(password, phoneNumber);
 			user.setPassword(password);
 			user.setPhoneNumber(phoneNumber);
 			userService.update(user);
 			request.setAttribute("msg_success", "Your profile was updated.");
+			} catch(RegexValidateParamException e) {
+				request.setAttribute("msg_alert", "Check inputs.");
+				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_PROFILE).forward(request, response);
+			}
 		} else {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_PROFILE).forward(request, response);
 		}

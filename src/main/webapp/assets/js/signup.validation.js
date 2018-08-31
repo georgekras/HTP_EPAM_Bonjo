@@ -1,0 +1,72 @@
+$(document).ready(function() {
+	$(function() {
+
+		$.validator.addMethod("regex", function(value, element, regexpr) {
+			return regexpr.test(value);
+		});
+
+		$("#signupForm").validate({
+			rules : {
+				user_login : {
+					required : true,
+					minlength : 5,
+					maxlength : 20,
+					regex : /[a-zA-Z0-9]$/,
+				},
+				user_password : {
+					required : true,
+					minlength : 5,
+					maxlength : 20,
+					regex : /[a-zA-Z0-9]$/,
+				},
+				user_email : {
+					required : true,
+					regex : /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.]+.[a-zA-Z]{2,6}$/,
+					maxlength : 50,
+				},
+				user_nickname : {
+					required : true,
+					minlength : 5,
+					maxlength : 20,
+					regex : /[a-zA-Z0-9]$/,
+				},
+				user_phone : {
+					required : true,
+					regex : /[+]+[0-9]{12}/,
+					maxlength : 13,
+				}
+			},
+			messages : {
+				user_login : {
+					required : "This field is required",
+					minlength : "Login must be 5-20 characters long",
+					maxlength : "Login must be 5-20 characters long",
+					regex : "Login contains only eng letters and numbers"
+				},
+				user_password : {
+					required : "This field is required",
+					minlength : "Password must be 5-20 characters long",
+					maxlength : "Password must be 5-20 characters long",
+					regex : "Password contains only eng letters and numbers"
+				},
+				user_email : {
+					required : "This field is required",
+					regex : "Enter valid email",
+					maxlength : "Email can't be over 50 chars",
+				},				
+				user_nickname : {
+					required : "This field is required",
+					minlength : "Nickname must be 5-20 characters long",
+					maxlength : "Nickname must be 5-20 characters long",
+					regex : "Nickname contains only eng letters and numbers"
+				},
+				user_phone : {
+					required : "This field is required",
+					regex : "Enter valid phone number",
+					maxlength : "Enter valid phone number",
+				}
+			},
+		});
+		$("#signupForm").valid();
+	});
+});

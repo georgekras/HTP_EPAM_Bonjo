@@ -1,7 +1,4 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<script src="assets/js/jquery-1.8.3.js"></script>
-<script src="assets/js/jquery.validate.min.js"></script>
-<script src="assets/js/login.validation.js"></script>
 <%@ include file="/include/begin-html.jsp"%>
 <div align="center">
 	<br>
@@ -51,4 +48,8 @@
 		</c:if>
 	</div>
 </div>
+<script src="assets/js/jquery-1.9.1.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.validate.js"></script>
+<script src="assets/js/login.validation.js"></script>
 <%@ include file="/include/end-html.jsp"%>

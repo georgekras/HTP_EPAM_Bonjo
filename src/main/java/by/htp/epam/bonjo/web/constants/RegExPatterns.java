@@ -3,7 +3,7 @@ package by.htp.epam.bonjo.web.constants;
 public class RegExPatterns {
 
 	public static final String USER_LOGIN = "[a-zA-Z0-9]{5,20}";
-	public static final String USER_EMAIL = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,6}$";
+	public static final String USER_EMAIL = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
 	public static final String USER_PASSWORD = "[a-zA-Z0-9]{5,20}";
 	public static final String USER_NICKNAME = "[a-zA-Z0-9]{5,20}";
 	public static final String USER_PHONENUMBER = "[\\+]+[0-9]{12}";

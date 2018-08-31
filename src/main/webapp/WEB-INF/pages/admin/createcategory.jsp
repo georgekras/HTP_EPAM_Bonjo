@@ -7,7 +7,7 @@
 			<h2>Create Category</h2>
 		</div>
 		<br>
-		<form class="form-horizontal" action="bonjo?command=createcategory"
+		<form id="createcategoryForm" class="form-horizontal" action="bonjo?command=createcategory"
 			method="post">
 			<fieldset>
 
@@ -40,4 +40,8 @@
 		</c:if>
 	</div>
 </div>
+<script src="assets/js/jquery-1.9.1.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.validate.js"></script>
+<script src="assets/js/createcategory.validation.js"></script>
 <%@ include file="/include/end-html.jsp"%>

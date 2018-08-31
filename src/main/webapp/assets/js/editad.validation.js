@@ -5,7 +5,7 @@ $(document).ready(function() {
 			return regexpr.test(value);
 		});
 
-		$("#createadForm").validate({
+		$("#editadForm").validate({
 			rules : {
 				ad_title : {
 					required : true,
@@ -59,6 +59,6 @@ $(document).ready(function() {
 				}
 			},
 		});
-		$("#createadForm").valid();
+		$("#editadForm").valid();
 	});
 });

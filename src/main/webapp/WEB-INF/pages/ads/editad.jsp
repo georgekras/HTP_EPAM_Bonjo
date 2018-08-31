@@ -1,37 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/include/begin-html.jsp"%>
-
-<script type="text/javascript" 
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
-</script>
-
-<script type="text/javascript">
-
-    $(document).ready( function () {
-
-	maxLength = $("textarea#description").attr("maxlength");
-        $("textarea#description").after("<div><span id='remainingLengthTempId'>" 
-                  + maxLength + "</span> symbols remaining.</div>");
-		
-        $("textarea#description").bind("keyup change", function(){checkMaxLength(this.id,  maxLength); } )
-
-    });
-
-    function checkMaxLength(textareaID, maxLength){
-	
-        currentLengthInTextarea = $("#"+textareaID).val().length;
-        $(remainingLengthTempId).text(parseInt(maxLength) - parseInt(currentLengthInTextarea));
-        
-		if (currentLengthInTextarea > (maxLength)) { 
-			
-			$("textarea#Description").val($("textarea#Description").val().slice(0, maxLength));
-			$(remainingLengthTempId).text(0);
-			
-		}
-    }
-</script>
-
 <div align="center">
 	<br>
 	<div class="container">
@@ -41,7 +10,7 @@
 
 		<br>
 		<div class="container">
-			<form class="form-horizontal"
+			<form id="editadForm" class="form-horizontal"
 				action="bonjo?command=editad&adId=${user_ad.id}" method=post>
 				<fieldset>
 					<!-- Text input-->
@@ -49,7 +18,7 @@
 						<label class="col-md-4 control-label" for="title">Title</label>
 						<div class="col-md-4">
 							<input id="title" name="ad_title" type="text" placeholder=""
-								class="form-control input-md" required=""
+								class="form-control input-md"
 								value="${user_ad.title}">
 						</div>
 					</div>
@@ -75,7 +44,7 @@
 							Description</label>
 						<div class="col-md-4">
 							<input id="smallDesc" name="ad_smalldesc" type="text"
-								placeholder="" class="form-control input-md" required=""
+								placeholder="" class="form-control input-md"
 								value="${user_ad.smallDesc}">
 						</div>
 					</div>
@@ -85,9 +54,7 @@
 						<label class="col-md-4 control-label" for="description">Description</label>
 						<div class="col-md-4">
 							<textarea id="description" name="ad_description" type="text"
-								maxlength="100" placeholder="" class="form-control input-md"
-								required="">${user_ad.description}</textarea>
-						
+								placeholder="" class="form-control input-md">${user_ad.description}</textarea>
 						</div>
 					</div>
 
@@ -132,5 +99,8 @@
 		</div>
 	</div>
 </div>
-
+<script src="assets/js/jquery-1.9.1.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.validate.js"></script>
+<script src="assets/js/editad.validation.js"></script>
 <%@ include file="/include/end-html.jsp"%>

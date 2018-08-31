@@ -1,41 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/include/begin-html.jsp"%>
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
-	
-</script>
-
-<script type="text/javascript">
-	$(document).ready(
-			function() {
-
-				maxLength = $("textarea#Description").attr("maxlength");
-				$("textarea#Description").after(
-						"<div><span id='remainingLengthTempId'>" + maxLength
-								+ "</span> symbols remaining.</div>");
-
-				$("textarea#Description").bind("keyup change", function() {
-					checkMaxLength(this.id, maxLength);
-				})
-
-			});
-
-	function checkMaxLength(textareaID, maxLength) {
-
-		currentLengthInTextarea = $("#" + textareaID).val().length;
-		$(remainingLengthTempId).text(
-				parseInt(maxLength) - parseInt(currentLengthInTextarea));
-
-		if (currentLengthInTextarea > (maxLength)) {
-
-			$("textarea#Description").val(
-					$("textarea#Description").val().slice(0, maxLength));
-			$(remainingLengthTempId).text(0);
-
-		}
-	}
-</script>
-
 <div align="center">
 	<br>
 	<div class="container">
@@ -43,8 +7,8 @@
 			<h2>Create Ad</h2>
 		</div>
 		<br>
-		<form id="createadForm" class="form-horizontal" action="bonjo?command=createad"
-			method="post">
+		<form id="createadForm" class="form-horizontal"
+			action="bonjo?command=createad" method="post">
 			<fieldset>
 				<!-- Text input-->
 				<div class="form-group">
@@ -85,7 +49,7 @@
 					<label class="col-md-4 control-label" for="description">Description</label>
 					<div class="col-md-4">
 						<textarea id="description" name="ad_description" type="text"
-							maxlength="200" placeholder="" class="form-control input-md">test</textarea>
+							placeholder="" class="form-control input-md">test</textarea>
 					</div>
 				</div>
 

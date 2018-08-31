@@ -68,6 +68,7 @@ public class EditUsersCommand implements Command {
 						.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_EDIT_USERS_PAGE));
 			} catch (RegexValidateParamException e) {
 				request.setAttribute("msg_alert", "can't update user.");
+				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USERS).forward(request, response);
 			}
 		} else {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USERS).forward(request, response);

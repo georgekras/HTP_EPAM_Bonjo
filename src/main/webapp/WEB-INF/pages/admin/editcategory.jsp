@@ -13,7 +13,7 @@
 
 	<div class="container">
 		<c:forEach items="${categories}" var="category">
-			<form class="form-horizontal" action="bonjo?command=editcategory"
+			<form id="editcategoryForm" class="form-horizontal" action="bonjo?command=editcategory"
 				method=post>
 				<div class="row">
 					<div class=col-md-2>
@@ -39,4 +39,8 @@
 		</c:forEach>
 	</div>
 </div>
+<script src="assets/js/jquery-1.9.1.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.validate.js"></script>
+<script src="assets/js/editcategory.validation.js"></script>
 <%@ include file="/include/end-html.jsp"%>

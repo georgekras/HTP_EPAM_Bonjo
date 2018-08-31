@@ -15,7 +15,7 @@
 	<br>
 	<div class="container">
 		<c:forEach items="${users}" var="user">
-			<form class="form-horizontal" action="bonjo?command=editusers" method=post>
+			<form id="editusersForm" class="form-horizontal" action="bonjo?command=editusers" method=post>
 				<div class="row">
 					<input id="login" class="form-control input-md" name="user_id"
 						type="hidden" value="${user.id}" />

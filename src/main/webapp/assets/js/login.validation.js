@@ -11,13 +11,13 @@ $(document).ready(function() {
 					required : true,
 					minlength : 5,
 					maxlength : 20,
-					regex : /[a-zA-Z0-9]$/,
+					regex : /^[a-zA-Z0-9]{5,20}$/,
 				},
 				user_password : {
 					required : true,
 					minlength : 5,
 					maxlength : 20,
-					regex : /[a-zA-Z0-9]$/,
+					regex : /^[a-zA-Z0-9]{5,20}$/,
 				}
 			},
 			messages : {

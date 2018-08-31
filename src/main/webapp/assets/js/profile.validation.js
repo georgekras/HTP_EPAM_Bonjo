@@ -11,11 +11,11 @@ $(document).ready(function() {
 					required : true,
 					minlength : 5,
 					maxlength : 20,
-					regex : /[a-zA-Z0-9]$/,
+					regex : /^[a-zA-Z0-9]{5,20}$/,
 				},
 				user_phone : {
 					required : true,
-					regex : /[+]+[0-9]{12}/,
+					regex : /^[+]+[0-9]{12}$/,
 					maxlength : 13,
 				}
 			},

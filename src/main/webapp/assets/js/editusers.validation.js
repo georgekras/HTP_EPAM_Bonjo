@@ -5,7 +5,7 @@ $(document).ready(function() {
 			return regexpr.test(value);
 		});
 
-		$("#signupForm").validate({
+		$("#editusersForm").validate({
 			rules : {
 				user_login : {
 					required : true,
@@ -67,6 +67,6 @@ $(document).ready(function() {
 				}
 			},
 		});
-		$("#signupForm").valid();
+		$("#editusersForm").valid();
 	});
 });

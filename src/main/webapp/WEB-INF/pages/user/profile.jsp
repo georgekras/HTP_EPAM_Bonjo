@@ -14,7 +14,7 @@
 			<div class="col-md-6">${currentUser.password}</div>
 		</div>
 		<br>
-		<form class="form-horizontal" action="bonjo?command=profile" method="post">
+		<form id="profileForm" class="form-horizontal" action="bonjo?command=profile" method="post">
 			<fieldset>
 
 				<!-- Form Name -->
@@ -38,8 +38,7 @@
 					<div class="col-md-4">
 						<input id="password" name="user_password" type="password"
 							placeholder="" class="form-control input-md" required=""
-							value="${currentUser.password}"> <span class="help-block">(min
-							5 symbols)</span>
+							value="${currentUser.password}">
 					</div>
 				</div>
 
@@ -60,5 +59,8 @@
 		</c:if>
 	</div>
 </div>
-
+<script src="assets/js/jquery-1.9.1.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.validate.js"></script>
+<script src="assets/js/profile.validation.js"></script>
 <%@ include file="/include/end-html.jsp"%>

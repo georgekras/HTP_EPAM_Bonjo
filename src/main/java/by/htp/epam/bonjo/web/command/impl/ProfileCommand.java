@@ -47,6 +47,7 @@ public class ProfileCommand implements Command {
 			user.setPhoneNumber(phoneNumber);
 			userService.update(user);
 			request.setAttribute("msg_success", "Your profile was updated.");
+			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_PROFILE).forward(request, response);
 			} catch(RegexValidateParamException e) {
 				request.setAttribute("msg_alert", "Check inputs.");
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_PROFILE).forward(request, response);

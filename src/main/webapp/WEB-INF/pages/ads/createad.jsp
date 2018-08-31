@@ -1,33 +1,39 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/include/begin-html.jsp"%>
-<script type="text/javascript" 
+<script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+	
 </script>
 
 <script type="text/javascript">
+	$(document).ready(
+			function() {
 
-    $(document).ready( function () {
+				maxLength = $("textarea#Description").attr("maxlength");
+				$("textarea#Description").after(
+						"<div><span id='remainingLengthTempId'>" + maxLength
+								+ "</span> symbols remaining.</div>");
 
-	maxLength = $("textarea#Description").attr("maxlength");
-        $("textarea#Description").after("<div><span id='remainingLengthTempId'>" 
-                  + maxLength + "</span> symbols remaining.</div>");
-		
-        $("textarea#Description").bind("keyup change", function(){checkMaxLength(this.id,  maxLength); } )
+				$("textarea#Description").bind("keyup change", function() {
+					checkMaxLength(this.id, maxLength);
+				})
 
-    });
+			});
 
-    function checkMaxLength(textareaID, maxLength){
-	
-        currentLengthInTextarea = $("#"+textareaID).val().length;
-        $(remainingLengthTempId).text(parseInt(maxLength) - parseInt(currentLengthInTextarea));
-        
-		if (currentLengthInTextarea > (maxLength)) { 
-			
-			$("textarea#Description").val($("textarea#Description").val().slice(0, maxLength));
+	function checkMaxLength(textareaID, maxLength) {
+
+		currentLengthInTextarea = $("#" + textareaID).val().length;
+		$(remainingLengthTempId).text(
+				parseInt(maxLength) - parseInt(currentLengthInTextarea));
+
+		if (currentLengthInTextarea > (maxLength)) {
+
+			$("textarea#Description").val(
+					$("textarea#Description").val().slice(0, maxLength));
 			$(remainingLengthTempId).text(0);
-			
+
 		}
-    }
+	}
 </script>
 
 <div align="center">
@@ -37,14 +43,15 @@
 			<h2>Create Ad</h2>
 		</div>
 		<br>
-		<form class="form-horizontal" action="bonjo?command=createad" method="post">
+		<form id="createadForm" class="form-horizontal" action="bonjo?command=createad"
+			method="post">
 			<fieldset>
 				<!-- Text input-->
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="title">Title</label>
 					<div class="col-md-4">
 						<input id="title" name="ad_title" type="text" placeholder=""
-							class="form-control input-md" required="" value="test">
+							class="form-control input-md" value="test">
 					</div>
 				</div>
 
@@ -69,8 +76,7 @@
 						Description</label>
 					<div class="col-md-4">
 						<input id="smallDesc" name="ad_smalldesc" type="text"
-							placeholder="" class="form-control input-md" required=""
-							value="test">
+							placeholder="" class="form-control input-md" value="test">
 					</div>
 				</div>
 
@@ -79,8 +85,7 @@
 					<label class="col-md-4 control-label" for="description">Description</label>
 					<div class="col-md-4">
 						<textarea id="description" name="ad_description" type="text"
-							maxlength="100" placeholder="" class="form-control input-md"
-							required="">test</textarea>
+							maxlength="200" placeholder="" class="form-control input-md">test</textarea>
 					</div>
 				</div>
 
@@ -113,4 +118,8 @@
 		</c:if>
 	</div>
 </div>
+<script src="assets/js/jquery-1.9.1.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.validate.js"></script>
+<script src="assets/js/createad.validation.js"></script>
 <%@ include file="/include/end-html.jsp"%>

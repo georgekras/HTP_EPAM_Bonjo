@@ -9,8 +9,8 @@ public class RegExPatterns {
 	public static final String USER_PHONENUMBER = "[\\+]+[0-9]{12}";
 
 	public static final String AD_TITLE = "[a-zA-Z0-9]{5,45}";
-	public static final String AD_SMALLDESC = "[a-zA-Z0-9]{0,100}";
-	public static final String AD_DESCRIPTION = "[a-zA-Z0-9]{0,200}";
+	public static final String AD_SMALLDESC = "[a-zA-Z0-9,.-_%()]{0,100}";
+	public static final String AD_DESCRIPTION = "[a-zA-Z0-9,.-_%()]{0,200}";
 	public static final String AD_PRICE = "[0-9]{1,10}";
 	
 	public static final String CATEGORY_NAME = "[a-zA-Z] {3,40}";

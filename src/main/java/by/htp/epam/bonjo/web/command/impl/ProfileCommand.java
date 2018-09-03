@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import by.htp.epam.bonjo.domain.User;
 import by.htp.epam.bonjo.service.UserService;
@@ -38,10 +39,16 @@ public class ProfileCommand implements Command {
 				String phoneNumber = RequestParamUtil.getString(request,
 						ParamNameConstantDeclaration.REQUEST_PARAM_USER_PHONENUMBER);
 				RegexParamValidator.userEditProfileValidation(password, phoneNumber);
-				user.setPassword(password);
-				user.setPhoneNumber(phoneNumber);
+//				 user.setPassword(password);
+//				 user.setPhoneNumber(phoneNumber);
+				user = User.newBuilder().setPassword(password).setPhoneNumber(phoneNumber).setEmail(user.getEmail())
+						.setId(user.getId()).setLogin(user.getLogin()).setNickname(user.getNickname())
+						.setRolesId(user.getRoles_ID()).build();
 				userService.update(user);
-				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_SUCCESS, "Your profile was updated.");
+				HttpSession session = request.getSession();
+				session.setAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER, user);
+				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_SUCCESS,
+						"Your profile was updated.");
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_PROFILE).forward(request, response);
 			} catch (RegexValidateParamException e) {
 				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_ALERT, "Check inputs.");

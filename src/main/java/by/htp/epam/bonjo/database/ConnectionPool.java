@@ -63,6 +63,6 @@ public class ConnectionPool implements CP {
 
 	@Override
 	public void putConnection(Connection connection) {
-		connectionQueue.offer(connection);
+		connectionQueue.add(connection);
 	}
 }

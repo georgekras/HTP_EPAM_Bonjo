@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/include/begin-html.jsp"%>
+<link rel="stylesheet" href="assets/css/mystyle.css">
 <div align="center">
 	<br>
 	<div class="container">

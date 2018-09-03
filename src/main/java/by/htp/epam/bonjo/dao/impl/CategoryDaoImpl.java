@@ -60,9 +60,12 @@ public class CategoryDaoImpl implements CategoryDAO {
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_CATEGORY_READ)) {
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
-			if (rs.next())
-				category = Category.newBuilder().setId(rs.getInt("ID")).setName(rs.getString("Name")).build();
-			return category;
+			if (rs.next()) {
+				category = new Category();
+				category.setId(rs.getInt("ID"));
+				category.setName(rs.getString("Name"));
+				return category;
+			}
 		} catch (SQLException e) {
 			logger.error("CategoryDao can't find category by id", e);
 		} finally {
@@ -91,7 +94,9 @@ public class CategoryDaoImpl implements CategoryDAO {
 			categories = new ArrayList<>();
 			Category category;
 			while (rs.next()) {
-				category = Category.newBuilder().setId(rs.getInt("ID")).setName(rs.getString("Name")).build();
+				category = new Category();
+				category.setId(rs.getInt("ID"));
+				category.setName(rs.getString("Name"));
 				categories.add(category);
 			}
 		} catch (SQLException e) {

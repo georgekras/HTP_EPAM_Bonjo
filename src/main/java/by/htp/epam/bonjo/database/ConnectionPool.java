@@ -10,7 +10,7 @@ import java.util.concurrent.BlockingQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ConnectionPool {
+public class ConnectionPool implements CP {
 
 	private static Logger logger = LoggerFactory.getLogger(ConnectionPool.class);
 
@@ -24,7 +24,7 @@ public class ConnectionPool {
 	
 	private static BlockingQueue<Connection> connectionQueue = new ArrayBlockingQueue<>(POOL_SIZE, true);
 
-	private ConnectionPool() {
+	public ConnectionPool() {
 
 	}
 
@@ -40,7 +40,7 @@ public class ConnectionPool {
 		}
 	}
 
-	public static void connectionPoolDestroy() {
+	public void connectionPoolDestroy() {
 		for (int i = 0; i < POOL_SIZE; i++) {
 			try {
 				getConnection().close();
@@ -50,7 +50,8 @@ public class ConnectionPool {
 		}
 	}
 
-	public static Connection getConnection() {
+	@Override
+	public Connection getConnection() {
 		Connection connection = null;
 		try {
 			connection = connectionQueue.take();
@@ -60,7 +61,8 @@ public class ConnectionPool {
 		return connection;
 	}
 
-	public static void putConnection(Connection connection) {
+	@Override
+	public void putConnection(Connection connection) {
 		connectionQueue.offer(connection);
 	}
 }

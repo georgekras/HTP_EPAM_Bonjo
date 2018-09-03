@@ -20,7 +20,8 @@
 		<javax_servlet_api.version>3.1.0</javax_servlet_api.version>
 		<jstl.version>1.2</jstl.version>
 		<jquery-validation.version>1.17.0</jquery-validation.version>
-
+		<mockito.version>1.6.4</mockito.version>
+		<junit.version>4.12</junit.version>
 	</properties>
 
 	<build>
@@ -91,6 +92,27 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>jquery-validation</artifactId>
 			<version>${jquery-validation.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import by.htp.epam.bonjo.dao.AdDAO;
+import by.htp.epam.bonjo.database.CP;
 import by.htp.epam.bonjo.database.ConnectionPool;
 import by.htp.epam.bonjo.domain.Ad;
 
@@ -24,6 +25,8 @@ public class AdDaoImpl implements AdDAO {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdDaoImpl.class);
 
+	CP connectionPool = new ConnectionPool();
+	
 	private static final String SQL_QUERY_AD_CREATE = "INSERT INTO `krasutski`.`ads` (`Title`, `SmallDesc`, `Description`,"
 			+ " `Price`, `users_ID`, `category_ID`) VALUES(?,?,?,?,?,?);";
 	private static final String SQL_QUERY_AD_READ = "SELECT * FROM `krasutski`.`ads` WHERE ID=?;";
@@ -41,7 +44,7 @@ public class AdDaoImpl implements AdDAO {
 	 */
 	@Override
 	public void create(Ad ad) {
-		Connection connection = ConnectionPool.getConnection();
+		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_AD_CREATE)) {
 			ps.setString(1, ad.getTitle());
 			ps.setString(2, ad.getSmallDesc());
@@ -53,7 +56,7 @@ public class AdDaoImpl implements AdDAO {
 		} catch (SQLException e) {
 			logger.error("AdDAO can't create ad", e);
 		} finally {
-			ConnectionPool.putConnection(connection);
+			connectionPool.putConnection(connection);
 		}
 
 	}
@@ -67,7 +70,7 @@ public class AdDaoImpl implements AdDAO {
 	@Override
 	public Ad read(int id) {
 		ResultSet rs = null;
-		Connection connection = ConnectionPool.getConnection();
+		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_AD_READ)) {
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
@@ -77,7 +80,7 @@ public class AdDaoImpl implements AdDAO {
 			logger.error("AdDAO can't find ad by id", e);
 			e.printStackTrace();
 		} finally {
-			ConnectionPool.putConnection(connection);
+			connectionPool.putConnection(connection);
 			try {
 				rs.close();
 			} catch (SQLException e) {
@@ -96,7 +99,7 @@ public class AdDaoImpl implements AdDAO {
 	public List<Ad> readAll() {
 		List<Ad> ads = null;
 		ResultSet rs = null;
-		Connection connection = ConnectionPool.getConnection();
+		Connection connection = connectionPool.getConnection();
 		try (Statement ps = connection.createStatement()) {
 			rs = ps.executeQuery(SQL_QUERY_AD_READ_ALL);
 			ads = new ArrayList<>();
@@ -106,7 +109,7 @@ public class AdDaoImpl implements AdDAO {
 		} catch (SQLException e) {
 			logger.error("AdDAO can't get list of ads", e);
 		} finally {
-			ConnectionPool.putConnection(connection);
+			connectionPool.putConnection(connection);
 			try {
 				rs.close();
 			} catch (SQLException e) {
@@ -124,7 +127,7 @@ public class AdDaoImpl implements AdDAO {
 	 */
 	@Override
 	public void update(Ad ad) {
-		Connection connection = ConnectionPool.getConnection();
+		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_AD_UPDATE)) {
 			ps.setString(1, ad.getTitle());
 			ps.setString(2, ad.getSmallDesc());
@@ -137,7 +140,7 @@ public class AdDaoImpl implements AdDAO {
 		} catch (SQLException e) {
 			logger.error("AdDAO can't update ad", e);
 		} finally {
-			ConnectionPool.putConnection(connection);
+			connectionPool.putConnection(connection);
 		}
 
 	}
@@ -150,14 +153,14 @@ public class AdDaoImpl implements AdDAO {
 	 */
 	@Override
 	public void delete(int id) {
-		Connection connection = ConnectionPool.getConnection();
+		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_AD_DELETE)) {
 			ps.setInt(1, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			logger.error("AdDAO can't delete ad", e);
 		} finally {
-			ConnectionPool.putConnection(connection);
+			connectionPool.putConnection(connection);
 		}
 
 	}
@@ -173,7 +176,7 @@ public class AdDaoImpl implements AdDAO {
 	public List<Ad> readUserAds(int user_ID) {
 		List<Ad> ads = null;
 		ResultSet rs = null;
-		Connection connection = ConnectionPool.getConnection();
+		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_AD_READ_BY_USER_ID)) {
 			ps.setInt(1, user_ID);
 			rs = ps.executeQuery();
@@ -184,7 +187,7 @@ public class AdDaoImpl implements AdDAO {
 		} catch (SQLException e) {
 			logger.error("AdDAO can't get list of ads by user id", e);
 		} finally {
-			ConnectionPool.putConnection(connection);
+			connectionPool.putConnection(connection);
 			try {
 				rs.close();
 			} catch (SQLException e) {

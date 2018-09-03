@@ -36,34 +36,35 @@
 			</c:forEach>
 		</div>
 	</div>
-	<div id="pagination">
+	<div class="pagination">
+		<ul class="pagination">
+			<c:if test="${currentPage > 1}">
+				<li class="page-item"><a class="page-link"
+					href="bonjo?command=home&currentPage=${currentPage-1}">Previous</a>
+				</li>
+			</c:if>
 
-		<c:url value="/bonjo?command=home" var="prev">
-			<c:param name="page" value="${page-1}" />
-		</c:url>
-		<c:if test="${page > 1}">
-			<a href="<c:out value="${prev}" />" class="pn prev">Prev</a>
-		</c:if>
+			<c:forEach begin="1" end="${countPages}" var="i">
+				<c:choose>
+					<c:when test="${currentPage eq i}">
+						<li class="page-item active"><a class="page-link"> ${i} <span
+								class="sr-only">(current)</span>
+						</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link"
+							href="bonjo?command=home&currentPage=${i}">${i}</a>
+						</li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
 
-		<c:forEach begin="1" end="${maxPages}" step="1" varStatus="i">
-			<c:choose>
-				<c:when test="${page == i.index}">
-					<span>${i.index}</span>
-				</c:when>
-				<c:otherwise>
-					<c:url value="/main_action" var="url">
-						<c:param name="page" value="${i.index}" />
-					</c:url>
-					<a href='<c:out value="${url}" />'>${i.index}</a>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-		<c:url value="/bonjo?command=home" var="next">
-			<c:param name="page" value="${page + 1}" />
-		</c:url>
-		<c:if test="${page + 1 <= maxPages}">
-			<a href='<c:out value="${next}" />' class="pn next">Next</a>
-		</c:if>
+			<c:if test="${currentPage < countPages}">
+				<li class="page-item"><a class="page-link"
+					href="bonjo?command=home&currentPage=${currentPage+1}">Next</a>
+				</li>
+			</c:if>
+		</ul>
 	</div>
 </div>
 <%@ include file="/include/end-html.jsp"%>

@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import by.htp.epam.bonjo.dao.CategoryDAO;
+import by.htp.epam.bonjo.database.CP;
 import by.htp.epam.bonjo.database.ConnectionPool;
 import by.htp.epam.bonjo.domain.Category;
 
@@ -24,6 +25,8 @@ public class CategoryDaoImpl implements CategoryDAO {
 
 	private static final Logger logger = LoggerFactory.getLogger(CategoryDaoImpl.class);
 
+	CP connectionPool = new ConnectionPool();
+	
 	private static final String SQL_QUERY_CATEGORY_CREATE = "INSERT INTO `krasutski`.`category` (`Name`) VALUES(?);";
 	private static final String SQL_QUERY_CATEGORY_READ = "SELECT * FROM `krasutski`.`category` WHERE ID=?;";
 	private static final String SQL_QUERY_CATEGORY_READ_ALL = "SELECT * FROM `krasutski`.`category`";
@@ -38,33 +41,32 @@ public class CategoryDaoImpl implements CategoryDAO {
 	 */
 	@Override
 	public void create(Category category) {
-		Connection connection = ConnectionPool.getConnection();
+		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_CATEGORY_CREATE)) {
 			ps.setString(1, category.getName());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			logger.error("CategoryDao can't create category", e);
 		} finally {
-			ConnectionPool.putConnection(connection);
+			connectionPool.putConnection(connection);
 		}
 	}
 
 	@Override
 	public Category read(int id) {
 		ResultSet rs = null;
-		Category category = new Category();
-		Connection connection = ConnectionPool.getConnection();
+		Category category = null;
+		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_CATEGORY_READ)) {
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
 			if (rs.next())
-				category.setId(rs.getInt("ID"));
-				category.setName(rs.getString("Name"));
-				return category;
+				category = Category.newBuilder().setId(rs.getInt("ID")).setName(rs.getString("Name")).build();
+			return category;
 		} catch (SQLException e) {
 			logger.error("CategoryDao can't find category by id", e);
 		} finally {
-			ConnectionPool.putConnection(connection);
+			connectionPool.putConnection(connection);
 			try {
 				rs.close();
 			} catch (SQLException e) {
@@ -73,7 +75,7 @@ public class CategoryDaoImpl implements CategoryDAO {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Retrieves a list of categories from the database.
 	 *
@@ -83,21 +85,19 @@ public class CategoryDaoImpl implements CategoryDAO {
 	public List<Category> readAll() {
 		List<Category> categories = null;
 		ResultSet rs = null;
-		Connection connection = ConnectionPool.getConnection();
+		Connection connection = connectionPool.getConnection();
 		try (Statement ps = connection.createStatement()) {
 			rs = ps.executeQuery(SQL_QUERY_CATEGORY_READ_ALL);
 			categories = new ArrayList<>();
 			Category category;
 			while (rs.next()) {
-				category = new Category();
-				category.setId(rs.getInt("ID"));
-				category.setName(rs.getString("Name"));
+				category = Category.newBuilder().setId(rs.getInt("ID")).setName(rs.getString("Name")).build();
 				categories.add(category);
 			}
 		} catch (SQLException e) {
 			logger.error("CategoryDao can't get categories list", e);
 		} finally {
-			ConnectionPool.putConnection(connection);
+			connectionPool.putConnection(connection);
 			try {
 				rs.close();
 			} catch (SQLException e) {
@@ -115,7 +115,7 @@ public class CategoryDaoImpl implements CategoryDAO {
 	 */
 	@Override
 	public void update(Category category) {
-		Connection connection = ConnectionPool.getConnection();
+		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_CATEGORY_UPDATE)) {
 			ps.setString(1, category.getName());
 			ps.setInt(2, category.getId());
@@ -123,7 +123,7 @@ public class CategoryDaoImpl implements CategoryDAO {
 		} catch (SQLException e) {
 			logger.error("CategoryDao can't update category", e);
 		} finally {
-			ConnectionPool.putConnection(connection);
+			connectionPool.putConnection(connection);
 		}
 	}
 
@@ -135,14 +135,14 @@ public class CategoryDaoImpl implements CategoryDAO {
 	 */
 	@Override
 	public void delete(int id) {
-		Connection connection = ConnectionPool.getConnection();
+		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_CATEGORY_DELETE)) {
 			ps.setInt(1, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			logger.error("CategoryDao can't delete category", e);
 		} finally {
-			ConnectionPool.putConnection(connection);
+			connectionPool.putConnection(connection);
 		}
 	}
 }

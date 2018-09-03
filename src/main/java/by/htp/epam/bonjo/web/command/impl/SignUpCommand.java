@@ -32,13 +32,15 @@ public class SignUpCommand implements Command{
             		RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_EMAIL);
             String password =
             		RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_PASSWORD);
-            String nickName =
+            String nickname =
             		RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_NICKNAME);
             String phoneNumber =
             		RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_PHONENUMBER);
             try {
-            RegexParamValidator.userRegistrationValidation(login, password, email, nickName, phoneNumber);
-            User user = new User(0,login, email, password, nickName, phoneNumber, 2);
+            RegexParamValidator.userRegistrationValidation(login, password, email, nickname, phoneNumber);
+			User user = User.newBuilder().setId(0).setLogin(login).setEmail(email)
+					.setPassword(password).setNickname(nickname).setPhoneNumber(phoneNumber)
+					.setRolesId(2).build();
             userService.create(user);
 			response.sendRedirect(UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_LOGIN_PAGE));
             } catch(RegexValidateParamException e) {

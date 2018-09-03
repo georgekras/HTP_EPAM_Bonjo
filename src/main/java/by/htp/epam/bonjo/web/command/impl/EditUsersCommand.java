@@ -49,7 +49,9 @@ public class EditUsersCommand implements Command {
 				int roleId = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_ROLES_ID);
 				HttpRequestParamValidator.validateRequestParamObjectNotNull(id, roleId);
 				RegexParamValidator.userRegistrationValidation(login, password, email, nickname, phoneNumber);
-				User user = new User(id, login, email, password, nickname, phoneNumber, roleId);
+				User user = User.newBuilder().setId(id).setLogin(login).setEmail(email)
+						.setPassword(password).setNickname(nickname).setPhoneNumber(phoneNumber)
+						.setRolesId(roleId).build();
 				if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
 					request.setAttribute("msg", "user updated.");
 					userService.update(user);

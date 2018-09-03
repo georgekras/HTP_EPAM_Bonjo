@@ -33,17 +33,17 @@ public class ProfileCommand implements Command {
 		}
 		if (HttpRequestParamValidator.isPost(request)) {
 			try {
-			String password = RequestParamUtil.getString(request,
-					ParamNameConstantDeclaration.REQUEST_PARAM_USER_PASSWORD);
-			String phoneNumber = RequestParamUtil.getString(request,
-					ParamNameConstantDeclaration.REQUEST_PARAM_USER_PHONENUMBER);
-			RegexParamValidator.userEditProfileValidation(password, phoneNumber);
-			user.setPassword(password);
-			user.setPhoneNumber(phoneNumber);
-			userService.update(user);
-			request.setAttribute("msg_success", "Your profile was updated.");
-			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_PROFILE).forward(request, response);
-			} catch(RegexValidateParamException e) {
+				String password = RequestParamUtil.getString(request,
+						ParamNameConstantDeclaration.REQUEST_PARAM_USER_PASSWORD);
+				String phoneNumber = RequestParamUtil.getString(request,
+						ParamNameConstantDeclaration.REQUEST_PARAM_USER_PHONENUMBER);
+				RegexParamValidator.userEditProfileValidation(password, phoneNumber);
+				user.setPassword(password);
+				user.setPhoneNumber(phoneNumber);
+				userService.update(user);
+				request.setAttribute("msg_success", "Your profile was updated.");
+				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_PROFILE).forward(request, response);
+			} catch (RegexValidateParamException e) {
 				request.setAttribute("msg_alert", "Check inputs.");
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_PROFILE).forward(request, response);
 			}

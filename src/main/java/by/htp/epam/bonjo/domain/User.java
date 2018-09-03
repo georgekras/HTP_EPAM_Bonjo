@@ -11,74 +11,43 @@ public class User implements Serializable {
 	private int roles_ID;
 
 	public User() {
-	}
 
-	public User(int id, String login, String email, String password, String nickname, String phoneNumber,
-			int roles_ID) {
-		super();
-		this.id = id;
-		this.login = login;
-		this.email = email;
-		this.password = password;
-		this.nickname = nickname;
-		this.phoneNumber = phoneNumber;
-		this.roles_ID = roles_ID;
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getLogin() {
 		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getPassword() {
 		return password;
 	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	
+	public String setPassword(String password) {
+		return this.password = password;
 	}
 
 	public String getNickname() {
 		return nickname;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	
+	public String setPhoneNumber(String phoneNumber) {
+		return this.phoneNumber = phoneNumber;
 	}
 
 	public int getRoles_ID() {
 		return roles_ID;
-	}
-
-	public void setRoles_ID(int roles_ID) {
-		this.roles_ID = roles_ID;
 	}
 
 	@Override
@@ -141,6 +110,55 @@ public class User implements Serializable {
 		return "User{" + "ID=" + id + ", Login='" + login + '\'' + ", Email='" + email + '\'' + ", Password='"
 				+ password + '\'' + ", Nickname='" + nickname + '\'' + ", PhoneNumber='" + phoneNumber + '\''
 				+ ", roles_ID=" + roles_ID + '}';
+	}
+
+	public static Builder newBuilder() {
+		return new User().new Builder();
+	}
+
+	public class Builder {
+
+		private Builder() {
+		}
+
+		public Builder setId(int id) {
+			User.this.id = id;
+			return this;
+		}
+
+		public Builder setLogin(String login) {
+			User.this.login = login;
+			return this;
+		}
+
+		public Builder setEmail(String email) {
+			User.this.email = email;
+			return this;
+		}
+
+		public Builder setPassword(String password) {
+			User.this.password = password;
+			return this;
+		}
+
+		public Builder setNickname(String nickname) {
+			User.this.nickname = nickname;
+			return this;
+		}
+
+		public Builder setPhoneNumber(String phoneNumber) {
+			User.this.phoneNumber = phoneNumber;
+			return this;
+		}
+
+		public Builder setRolesId(int roles_ID) {
+			User.this.roles_ID = roles_ID;
+			return this;
+		}
+
+		public User build() {
+			return User.this;
+		}
 	}
 
 }

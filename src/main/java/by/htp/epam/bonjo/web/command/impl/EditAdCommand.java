@@ -59,16 +59,16 @@ public class EditAdCommand implements Command {
 				Ad ad = new Ad(chosenAdId, title, smallDesc, description, price, user.getId(), category_Id);
 				RegexParamValidator.userEditAdValidation(title, smallDesc, description, price, category_Id);
 				if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
-					request.setAttribute("msg", "ad updated.");
+					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE, "ad updated.");
 					adService.update(ad);
 				} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
-					request.setAttribute("msg_alert", "ad deleted.");
+					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_ALERT, "ad deleted.");
 					adService.delete(chosenAdId);
 					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_USER_ADS_PAGE);
 				}
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_EDIT_AD).forward(request, response);
 			} catch (RegexValidateParamException e) {
-				request.setAttribute("msg_alert", "Check inputs.");
+				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_ALERT, "Check inputs.");
 			}
 		} else {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_EDIT_AD).forward(request, response);

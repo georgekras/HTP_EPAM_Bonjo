@@ -44,17 +44,19 @@ public class EditCategoryCommand implements Command {
 				HttpRequestParamValidator.validateRequestParamObjectNotNull(id);
 				RegexParamValidator.adminCategoryValidation(name);
 				Category category = new Category(id, name);
-				if (request.getParameter("Update") != null) {
-					request.setAttribute("msg", "category updated.");
+				if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
+					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE, "category updated.");
 					categoryService.update(category);
-				} else if (request.getParameter("Delete") != null) {
-					request.setAttribute("msg", "category deleted.");
+				} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
+					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE, "category deleted.");
 					categoryService.delete(id);
 				}
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_CATEGORY).forward(request,
 						response);
 			} catch (RegexValidateParamException e) {
-				request.setAttribute("msg", "can't update category.");
+				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE, "can't update category.");
+				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_CATEGORY).forward(request,
+						response);
 			}
 		} else {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_CATEGORY).forward(request,

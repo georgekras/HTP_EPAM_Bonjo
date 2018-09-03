@@ -53,16 +53,14 @@ public class EditUsersCommand implements Command {
 						.setPassword(password).setNickname(nickname).setPhoneNumber(phoneNumber)
 						.setRolesId(roleId).build();
 				if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
-					request.setAttribute("msg", "user updated.");
 					userService.update(user);
 				} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
-					request.setAttribute("msg_alert", "user deleted.");
 					userService.delete(id);
 				}
 				response.sendRedirect(UrlManager
 						.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_EDIT_USERS_PAGE));
 			} catch (RegexValidateParamException e) {
-				request.setAttribute("msg_alert", "can't update user.");
+				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_ALERT, "can't update user.");
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USERS).forward(request, response);
 			}
 		} else {

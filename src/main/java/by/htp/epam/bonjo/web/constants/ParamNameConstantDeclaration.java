@@ -36,5 +36,9 @@ public class ParamNameConstantDeclaration {
 	public static final String REQUEST_PARAM_CATEGORY_ID = "category_id";
 	public static final String REQUEST_PARAM_CATEGORY_NAME = "category_name";
 	public static final String REQUEST_PARAM_CATEGORIES_LIST = "categories";
-
+	
+	public static final String REQUEST_PARAM_MESSAGE = "msg";
+	public static final String REQUEST_PARAM_MESSAGE_SUCCESS = "msg_success";
+	public static final String REQUEST_PARAM_MESSAGE_ALERT = "msg_alert";
+	
 }

@@ -40,11 +40,13 @@ public class CreateCategoryCommand implements Command {
 				RegexParamValidator.adminCategoryValidation(categoryName);
 				Category category = new Category(0, categoryName);
 				categoryService.create(category);
-				request.setAttribute("msg", "Category added.");
+				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE, "Category added.");
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_CREATE_CATEGORY).forward(request,
 						response);
 			} catch (RegexValidateParamException e) {
-				request.setAttribute("msg", "Check inputs.");
+				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE, "Check inputs.");
+				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_CREATE_CATEGORY).forward(request,
+						response);
 			}
 		} else {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_CREATE_CATEGORY).forward(request,

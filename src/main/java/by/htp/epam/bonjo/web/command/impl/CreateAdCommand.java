@@ -56,7 +56,7 @@ public class CreateAdCommand implements Command {
 			adService.create(ad);
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_USER_ADS).forward(request, response);
 			} catch(RegexValidateParamException e) {
-				request.setAttribute("msg", "Incorrect inputs");
+				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE, "Incorrect inputs");
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_CREATE_AD).forward(request, response);
 			}
 		} else {

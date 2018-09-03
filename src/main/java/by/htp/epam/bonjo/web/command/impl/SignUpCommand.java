@@ -44,7 +44,7 @@ public class SignUpCommand implements Command{
             userService.create(user);
 			response.sendRedirect(UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_LOGIN_PAGE));
             } catch(RegexValidateParamException e) {
-            	request.setAttribute("msg", "incorrect inputs.");
+            	request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE, "incorrect inputs.");
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_SIGNUP).forward(request, response);
             }
 		} else {

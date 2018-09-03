@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import by.htp.epam.bonjo.domain.User;
 import by.htp.epam.bonjo.service.UserService;
@@ -26,12 +25,8 @@ public class ProfileCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Object o = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER);
-		User user;
-		if (o != null) {
-			user = (User) o;
-		} else {
+		User user = userService.isUserInSession(request);
+		if (user == null) {
 			response.sendRedirect(
 					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_LOGIN_PAGE));
 			return;

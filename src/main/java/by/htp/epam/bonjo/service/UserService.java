@@ -2,6 +2,8 @@ package by.htp.epam.bonjo.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import by.htp.epam.bonjo.domain.User;
 
 
@@ -18,5 +20,9 @@ public interface UserService {
 	void delete(int userId);
 	
 	List<User> getAllUsers();
+	
+	boolean isUserAdmin(HttpServletRequest request);
+	
+	User isUserInSession(HttpServletRequest request);
 
 }

@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import by.htp.epam.bonjo.dao.UserDAO;
 import by.htp.epam.bonjo.database.ConnectionPool;
-import by.htp.epam.bonjo.domain.Ad;
 import by.htp.epam.bonjo.domain.User;
 
 /**
@@ -208,6 +207,11 @@ public class UserDaoImpl implements UserDAO {
 		} catch (SQLException e) {
 			logger.error("UserDao can't delete user", e);
 		} finally {
+			try {
+				resultSet.close();
+			} catch (SQLException e) {
+				logger.error("Fail to close result set in UserDao delete method", e);
+			}
 			ConnectionPool.putConnection(connection);
 		}
 

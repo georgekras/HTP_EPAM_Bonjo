@@ -19,7 +19,6 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class EditUsersCommand implements Command {
 
@@ -27,15 +26,9 @@ public class EditUsersCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Object obj = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER);
-		Object role_id = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER_ROLE_ID);
-		User userobj;
-		if (obj != null && role_id != null && (int) role_id == 1) {
-			userobj = (User) obj;
-		} else {
+		if (!userService.isUserAdmin(request)) {
 			response.sendRedirect(
-					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_LOGIN_PAGE));
+					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_HOME_PAGE));
 			return;
 		}
 		List<User> users = userService.getAllUsers();

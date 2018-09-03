@@ -1,9 +1,10 @@
 package by.htp.epam.bonjo.web.command.impl;
 
 import by.htp.epam.bonjo.domain.Category;
-import by.htp.epam.bonjo.domain.User;
 import by.htp.epam.bonjo.service.CategoryService;
+import by.htp.epam.bonjo.service.UserService;
 import by.htp.epam.bonjo.service.impl.CategoryServiceImpl;
+import by.htp.epam.bonjo.service.impl.UserServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
 import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
@@ -19,23 +20,17 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class CreateCategoryCommand implements Command {
 
 	private CategoryService categoryService = new CategoryServiceImpl();
+	private UserService userService = new UserServiceImpl();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Object obj = session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER);
-		int role_id = (int) session.getAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER_ROLE_ID);
-		User user;
-		if (obj != null && role_id == 1) {
-			user = (User) obj;
-		} else {
+		if (!userService.isUserAdmin(request)) {
 			response.sendRedirect(
-					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_LOGIN_PAGE));
+					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_HOME_PAGE));
 			return;
 		}
 		if (HttpRequestParamValidator.isPost(request)) {

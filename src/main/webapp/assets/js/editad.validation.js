@@ -1,6 +1,10 @@
 $(document).ready(function() {
 	$(function() {
 
+		$.validator.setDefaults({
+			errorClass: 'error',
+		});
+		
 		$.validator.addMethod("regex", function(value, element, regexpr) {
 			return regexpr.test(value);
 		});

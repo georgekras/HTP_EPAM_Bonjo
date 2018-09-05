@@ -11,6 +11,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/mystyle.css">
 </head>
 <body>
 	<div class="container">
@@ -61,4 +62,3 @@
 			</div>
 		</nav>
 	</div>
-	<div align="center">

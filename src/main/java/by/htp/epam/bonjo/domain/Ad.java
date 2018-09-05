@@ -17,71 +17,33 @@ public class Ad implements Serializable {
 	public Ad() {
 		
 	}
-	
-	public Ad(int id, String title, String smallDesc, String description, int price, int users_ID, int category_ID) {
-		this.id = id;
-		this.title = title;
-		this.smallDesc = smallDesc;
-		this.description = description;
-		this.price = price;
-		this.users_ID = users_ID;
-		this.category_ID = category_ID;
-	}
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	public String getSmallDesc() {
 		return smallDesc;
-	}
-
-	public void setSmallDesc(String smallDesc) {
-		this.smallDesc = smallDesc;
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public int getPrice() {
 		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
 	}
 
 	public int getUsers_ID() {
 		return users_ID;
 	}
 
-	public void setUsers_ID(int users_ID) {
-		this.users_ID = users_ID;
-	}
-
 	public int getCategory_ID() {
 		return category_ID;
-	}
-
-	public void setCategory_ID(int category_ID) {
-		this.category_ID = category_ID;
 	}
 
 	@Override
@@ -138,6 +100,55 @@ public class Ad implements Serializable {
 		return "Ad{" + "ID=" + id + ", Title='" + title + '\'' + ", SmallDesc='" + smallDesc + '\'' + ", Description='"
 				+ description + '\'' + ", Price=" + price + ", users_ID=" + users_ID + ", category_ID=" + category_ID
 				+ '}';
+	}
+	
+	public static Builder adBuilder() {
+		return new Ad().new Builder();
+	}
+
+	public class Builder {
+
+		private Builder() {
+		}
+
+		public Builder setId(int id) {
+			Ad.this.id = id;
+			return this;
+		}
+
+		public Builder setTitle(String title) {
+			Ad.this.title = title;
+			return this;
+		}
+
+		public Builder setSmallDesc(String smallDesc) {
+			Ad.this.smallDesc = smallDesc;
+			return this;
+		}
+
+		public Builder setDescription(String description) {
+			Ad.this.description = description;
+			return this;
+		}
+
+		public Builder setPrice(int price) {
+			Ad.this.price = price;
+			return this;
+		}
+
+		public Builder setUsersId(int users_ID) {
+			Ad.this.users_ID = users_ID;
+			return this;
+		}
+
+		public Builder setCategoryId(int category_ID) {
+			Ad.this.category_ID = category_ID;
+			return this;
+		}
+
+		public Ad build() {
+			return Ad.this;
+		}
 	}
 
 }

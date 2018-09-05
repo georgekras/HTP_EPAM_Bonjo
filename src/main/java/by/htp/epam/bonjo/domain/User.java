@@ -30,20 +30,12 @@ public class User implements Serializable {
 		return password;
 	}
 	
-	public String setPassword(String password) {
-		return this.password = password;
-	}
-
 	public String getNickname() {
 		return nickname;
 	}
 
 	public String getPhoneNumber() {
 		return phoneNumber;
-	}
-	
-	public String setPhoneNumber(String phoneNumber) {
-		return this.phoneNumber = phoneNumber;
 	}
 
 	public int getRoles_ID() {
@@ -112,7 +104,7 @@ public class User implements Serializable {
 				+ ", roles_ID=" + roles_ID + '}';
 	}
 
-	public static Builder newBuilder() {
+	public static Builder userBuilder() {
 		return new User().new Builder();
 	}
 

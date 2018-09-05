@@ -44,18 +44,20 @@ public class CreateAdCommand implements Command {
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, categories);
 		if (HttpRequestParamValidator.isPost(request)) {
 			try {
-			String title = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_TITLE);
-			String smallDesc = RequestParamUtil.getString(request,
-					ParamNameConstantDeclaration.REQUEST_PARAM_AD_SMALLDESC);
-			String description = RequestParamUtil.getString(request,
-					ParamNameConstantDeclaration.REQUEST_PARAM_AD_DESCRIPTION);
-			int price = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_PRICE);
-			int category_Id = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_CATEGORY_ID);
-			RegexParamValidator.userCreateAdValidation(title, smallDesc, description, price, category_Id);
-			Ad ad = new Ad(0, title, smallDesc, description, price, user.getId(), category_Id);
-			adService.create(ad);
-			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_USER_ADS).forward(request, response);
-			} catch(RegexValidateParamException e) {
+				String title = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_TITLE);
+				String smallDesc = RequestParamUtil.getString(request,
+						ParamNameConstantDeclaration.REQUEST_PARAM_AD_SMALLDESC);
+				String description = RequestParamUtil.getString(request,
+						ParamNameConstantDeclaration.REQUEST_PARAM_AD_DESCRIPTION);
+				int price = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_PRICE);
+				int category_Id = RequestParamUtil.getInt(request,
+						ParamNameConstantDeclaration.REQUEST_PARAM_AD_CATEGORY_ID);
+				RegexParamValidator.userCreateAdValidation(title, smallDesc, description, price, category_Id);
+				Ad ad = Ad.adBuilder().setId(0).setTitle(title).setSmallDesc(smallDesc).setDescription(description)
+						.setPrice(price).setUsersId(user.getId()).setCategoryId(category_Id).build();
+				adService.create(ad);
+				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_USER_ADS).forward(request, response);
+			} catch (RegexValidateParamException e) {
 				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE, "Incorrect inputs");
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_CREATE_AD).forward(request, response);
 			}

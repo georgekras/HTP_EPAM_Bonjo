@@ -1,42 +1,42 @@
-package by.htp.epam.bonjo;
-
-import static org.mockito.Mockito.times;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.reflect.Whitebox;
-
-import by.htp.epam.bonjo.dao.CategoryDAO;
-import by.htp.epam.bonjo.dao.impl.CategoryDaoImpl;
-import by.htp.epam.bonjo.database.ConnectionPool;
-import by.htp.epam.bonjo.domain.Category;
-import by.htp.epam.bonjo.domain.Category.Builder;
-
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ Category.class, CategoryDaoImpl.class })
-@PowerMockIgnore("javax.management.*")
-public class TestCategoryDaoImpl {
-
-	private CategoryDaoImpl categoryDaoImpl;
-	private Category category;
-	private Connection connection;
-	private ConnectionPool connectionPool;
-	private PreparedStatement preparedStatement;
-	private ResultSet resultSet;
-	private Statement statement;
-	private Builder categoryBuilder;
+//package by.htp.epam.bonjo;
+//
+//import static org.mockito.Mockito.times;
+//
+//import java.sql.Connection;
+//import java.sql.PreparedStatement;
+//import java.sql.ResultSet;
+//import java.sql.SQLException;
+//import java.sql.Statement;
+//
+//import org.junit.Before;
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//import org.mockito.Mockito;
+//import org.powermock.api.mockito.PowerMockito;
+//import org.powermock.core.classloader.annotations.PowerMockIgnore;
+//import org.powermock.core.classloader.annotations.PrepareForTest;
+//import org.powermock.modules.junit4.PowerMockRunner;
+//import org.powermock.reflect.Whitebox;
+//
+//import by.htp.epam.bonjo.dao.CategoryDAO;
+//import by.htp.epam.bonjo.dao.impl.CategoryDaoImpl;
+//import by.htp.epam.bonjo.database.ConnectionPool;
+//import by.htp.epam.bonjo.domain.Category;
+//import by.htp.epam.bonjo.domain.Category.Builder;
+//
+//@RunWith(PowerMockRunner.class)
+//@PrepareForTest({ Category.class, CategoryDaoImpl.class })
+//@PowerMockIgnore("javax.management.*")
+//public class TestCategoryDaoImpl {
+//
+//	private CategoryDaoImpl categoryDaoImpl;
+//	private Category category;
+//	private Connection connection;
+//	private ConnectionPool connectionPool;
+//	private PreparedStatement preparedStatement;
+//	private ResultSet resultSet;
+//	private Statement statement;
+//	private Builder categoryBuilder;
 	
 //	@Before
 //	public void init() throws SQLException {
@@ -179,4 +179,4 @@ public class TestCategoryDaoImpl {
 
 
 	
-}
+//}

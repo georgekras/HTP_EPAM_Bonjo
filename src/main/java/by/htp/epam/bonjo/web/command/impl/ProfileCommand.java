@@ -39,9 +39,7 @@ public class ProfileCommand implements Command {
 				String phoneNumber = RequestParamUtil.getString(request,
 						ParamNameConstantDeclaration.REQUEST_PARAM_USER_PHONENUMBER);
 				RegexParamValidator.userEditProfileValidation(password, phoneNumber);
-//				 user.setPassword(password);
-//				 user.setPhoneNumber(phoneNumber);
-				user = User.newBuilder().setPassword(password).setPhoneNumber(phoneNumber).setEmail(user.getEmail())
+				user = User.userBuilder().setPassword(password).setPhoneNumber(phoneNumber).setEmail(user.getEmail())
 						.setId(user.getId()).setLogin(user.getLogin()).setNickname(user.getNickname())
 						.setRolesId(user.getRoles_ID()).build();
 				userService.update(user);

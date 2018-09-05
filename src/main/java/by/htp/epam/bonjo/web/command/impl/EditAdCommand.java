@@ -56,7 +56,8 @@ public class EditAdCommand implements Command {
 				int price = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_PRICE);
 				int category_Id = RequestParamUtil.getInt(request,
 						ParamNameConstantDeclaration.REQUEST_PARAM_AD_CATEGORY_ID);
-				Ad ad = new Ad(chosenAdId, title, smallDesc, description, price, user.getId(), category_Id);
+				Ad ad = Ad.adBuilder().setId(chosenAdId).setTitle(title).setSmallDesc(smallDesc).setDescription(description)
+						.setPrice(price).setUsersId(user.getId()).setCategoryId(category_Id).build();
 				RegexParamValidator.userEditAdValidation(title, smallDesc, description, price, category_Id);
 				if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
 					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE, "ad updated.");

@@ -26,7 +26,7 @@ public class AdDaoImpl implements AdDAO {
 	private static final Logger logger = LoggerFactory.getLogger(AdDaoImpl.class);
 
 	CP connectionPool = new ConnectionPool();
-	
+
 	private static final String SQL_QUERY_AD_CREATE = "INSERT INTO `krasutski`.`ads` (`Title`, `SmallDesc`, `Description`,"
 			+ " `Price`, `users_ID`, `category_ID`) VALUES(?,?,?,?,?,?);";
 	private static final String SQL_QUERY_AD_READ = "SELECT * FROM `krasutski`.`ads` WHERE ID=?;";
@@ -205,14 +205,10 @@ public class AdDaoImpl implements AdDAO {
 	 * @return ad the {@link by.academy.it.entity.Ad} entity.
 	 */
 	private Ad buildAd(ResultSet rs) throws SQLException {
-		Ad ad = new Ad();
-		ad.setId(rs.getInt("ID"));
-		ad.setTitle(rs.getString("Title"));
-		ad.setSmallDesc(rs.getString("SmallDesc"));
-		ad.setDescription(rs.getString("Description"));
-		ad.setPrice(rs.getInt("Price"));
-		ad.setUsers_ID(rs.getInt("users_ID"));
-		ad.setCategory_ID(rs.getInt("category_ID"));
+		Ad ad = Ad.adBuilder().setId(rs.getInt("ID")).setTitle(rs.getString("Title"))
+				.setSmallDesc(rs.getString("SmallDesc")).setDescription(rs.getString("Description"))
+				.setPrice(rs.getInt("Price")).setUsersId(rs.getInt("users_ID")).setCategoryId(rs.getInt("category_ID"))
+				.build();
 		return ad;
 	}
 

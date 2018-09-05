@@ -228,7 +228,7 @@ public class UserDaoImpl implements UserDAO {
 	 * @return user the {@link by.academy.it.entity.User} entity.
 	 */
 	private User buildUser(ResultSet rs) throws SQLException {
-		User user = User.newBuilder().setId(rs.getInt("ID")).setLogin(rs.getString("Login"))
+		User user = User.userBuilder().setId(rs.getInt("ID")).setLogin(rs.getString("Login"))
 				.setEmail(rs.getString("Email")).setPassword(rs.getString("Password"))
 				.setNickname(rs.getString("NickName")).setPhoneNumber(rs.getString("PhoneNumber"))
 				.setRolesId(rs.getInt("roles_ID")).build();

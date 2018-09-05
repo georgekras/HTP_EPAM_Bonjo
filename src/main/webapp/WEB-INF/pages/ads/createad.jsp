@@ -48,7 +48,7 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="description">Description</label>
 					<div class="col-md-4">
-						<textarea id="description" name="ad_description" type="text"
+						<textarea id="description" name="ad_description" type="text" 
 							placeholder="" class="form-control input-md">test</textarea>
 					</div>
 				</div>

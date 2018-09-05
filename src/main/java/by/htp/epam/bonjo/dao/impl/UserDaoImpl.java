@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import by.htp.epam.bonjo.dao.UserDAO;
-import by.htp.epam.bonjo.database.CP;
 import by.htp.epam.bonjo.database.ConnectionPool;
 import by.htp.epam.bonjo.domain.User;
 
@@ -25,8 +24,6 @@ public class UserDaoImpl implements UserDAO {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
-	CP connectionPool = new ConnectionPool();
-	
 	private static final String SQL_QUERY_USER_CREATE = "INSERT INTO `krasutski`.`users` (`Login`, `Password`, `Email`,"
 			+ " `Nickname`, `PhoneNumber`, `roles_ID`) VALUES(?,?,?,?,?,?);";
 	private static final String SQL_QUERY_USER_READ = "SELECT * FROM `krasutski`.`users` WHERE ID=?;";
@@ -48,7 +45,7 @@ public class UserDaoImpl implements UserDAO {
 	 */
 	@Override
 	public void create(User user) {
-		Connection connection = connectionPool.getConnection();
+		Connection connection = ConnectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_CREATE)) {
 			ps.setString(1, user.getLogin());
 			ps.setString(2, user.getPassword());
@@ -60,7 +57,7 @@ public class UserDaoImpl implements UserDAO {
 		} catch (SQLException e) {
 			logger.error("UserDao can't create user", e);
 		} finally {
-			connectionPool.putConnection(connection);
+			ConnectionPool.putConnection(connection);
 		}
 
 	}
@@ -74,7 +71,7 @@ public class UserDaoImpl implements UserDAO {
 	@Override
 	public User read(int id) {
 		ResultSet rs = null;
-		Connection connection = connectionPool.getConnection();
+		Connection connection = ConnectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_READ)) {
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
@@ -83,7 +80,7 @@ public class UserDaoImpl implements UserDAO {
 		} catch (SQLException e) {
 			logger.error("UserDao can't find user by id", e);
 		} finally {
-			connectionPool.putConnection(connection);
+			ConnectionPool.putConnection(connection);
 			try {
 				rs.close();
 			} catch (SQLException e) {
@@ -104,7 +101,7 @@ public class UserDaoImpl implements UserDAO {
 	@Override
 	public User loginRead(String login, String password) {
 		ResultSet rs = null;
-		Connection con = connectionPool.getConnection();
+		Connection con = ConnectionPool.getConnection();
 		try (PreparedStatement ps = con.prepareStatement(SQL_QUERY_USER_READ_BY_LOGIN_AND_PASSWORD)) {
 			ps.setString(1, login);
 			ps.setString(2, password);
@@ -114,7 +111,7 @@ public class UserDaoImpl implements UserDAO {
 		} catch (SQLException e) {
 			logger.error("SQLException in read(String login, String password) method of UserDaoImpl class", e);
 		} finally {
-			connectionPool.putConnection(con);
+			ConnectionPool.putConnection(con);
 			try {
 				rs.close();
 			} catch (SQLException e) {
@@ -133,7 +130,7 @@ public class UserDaoImpl implements UserDAO {
 	public List<User> readAll() {
 		List<User> users = null;
 		ResultSet rs = null;
-		Connection connection = connectionPool.getConnection();
+		Connection connection = ConnectionPool.getConnection();
 		try (Statement ps = connection.createStatement()) {
 			rs = ps.executeQuery(SQL_QUERY_USER_READ_ALL);
 			users = new ArrayList<>();
@@ -143,7 +140,7 @@ public class UserDaoImpl implements UserDAO {
 		} catch (SQLException e) {
 			logger.error("UserDao can't get users list", e);
 		} finally {
-			connectionPool.putConnection(connection);
+			ConnectionPool.putConnection(connection);
 			try {
 				rs.close();
 			} catch (SQLException e) {
@@ -161,7 +158,7 @@ public class UserDaoImpl implements UserDAO {
 	 */
 	@Override
 	public void update(User user) {
-		Connection connection = connectionPool.getConnection();
+		Connection connection = ConnectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_UPDATE)) {
 			ps.setString(1, user.getLogin());
 			ps.setString(2, user.getPassword());
@@ -174,7 +171,7 @@ public class UserDaoImpl implements UserDAO {
 		} catch (SQLException e) {
 			logger.error("UserDao can't update user", e);
 		} finally {
-			connectionPool.putConnection(connection);
+			ConnectionPool.putConnection(connection);
 		}
 
 	}
@@ -191,7 +188,7 @@ public class UserDaoImpl implements UserDAO {
 		PreparedStatement userAds = null;
 		PreparedStatement deleteUser = null;
 		PreparedStatement deleteUserAndAds = null;
-		Connection connection = connectionPool.getConnection();
+		Connection connection = ConnectionPool.getConnection();
 		try {
 			connection.setAutoCommit(false);
 			userAds = connection.prepareStatement(SQL_QUERY_AD_READ_BY_USER_ID);
@@ -215,7 +212,7 @@ public class UserDaoImpl implements UserDAO {
 			} catch (SQLException e) {
 				logger.error("Fail to close result set in UserDao delete method", e);
 			}
-			connectionPool.putConnection(connection);
+			ConnectionPool.putConnection(connection);
 		}
 
 	}

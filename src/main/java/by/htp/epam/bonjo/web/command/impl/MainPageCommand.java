@@ -11,16 +11,15 @@ import by.htp.epam.bonjo.domain.Ad;
 import by.htp.epam.bonjo.domain.Category;
 import by.htp.epam.bonjo.service.AdService;
 import by.htp.epam.bonjo.service.CategoryService;
-import by.htp.epam.bonjo.service.impl.AdServiceImpl;
-import by.htp.epam.bonjo.service.impl.CategoryServiceImpl;
+import by.htp.epam.bonjo.service.ServiceFactory;
 import by.htp.epam.bonjo.web.command.Command;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 
 public class MainPageCommand implements Command {
 
-	private AdService adService = new AdServiceImpl();
-	private CategoryService categoryService = new CategoryServiceImpl();
+	private AdService adService = ServiceFactory.getServiceInstance().getAdService();
+	private CategoryService categoryService = ServiceFactory.getServiceInstance().getCategoryService();
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

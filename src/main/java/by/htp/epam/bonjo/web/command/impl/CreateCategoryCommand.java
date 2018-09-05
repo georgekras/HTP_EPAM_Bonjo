@@ -2,9 +2,8 @@ package by.htp.epam.bonjo.web.command.impl;
 
 import by.htp.epam.bonjo.domain.Category;
 import by.htp.epam.bonjo.service.CategoryService;
+import by.htp.epam.bonjo.service.ServiceFactory;
 import by.htp.epam.bonjo.service.UserService;
-import by.htp.epam.bonjo.service.impl.CategoryServiceImpl;
-import by.htp.epam.bonjo.service.impl.UserServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
 import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
@@ -23,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CreateCategoryCommand implements Command {
 
-	private CategoryService categoryService = new CategoryServiceImpl();
-	private UserService userService = new UserServiceImpl();
+	private CategoryService categoryService = ServiceFactory.getServiceInstance().getCategoryService();
+	private UserService userService = ServiceFactory.getServiceInstance().getUserService();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

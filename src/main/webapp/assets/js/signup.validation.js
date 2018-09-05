@@ -25,7 +25,7 @@ $(document).ready(function() {
 				},
 				user_email : {
 					required : true,
-					regex : /^[a-zA-Z0-9._+-]{3,24}+@[a-zA-Z0-9.]{3,20}+.[a-zA-Z]{2,6}$/,
+					regex : /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9]+.[a-zA-Z]{2,6}$/,
 					maxlength : 50,
 				},
 				user_nickname : {

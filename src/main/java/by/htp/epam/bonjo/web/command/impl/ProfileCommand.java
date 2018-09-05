@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import by.htp.epam.bonjo.domain.User;
+import by.htp.epam.bonjo.service.ServiceFactory;
 import by.htp.epam.bonjo.service.UserService;
-import by.htp.epam.bonjo.service.impl.UserServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
 import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
@@ -22,7 +22,7 @@ import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
 public class ProfileCommand implements Command {
 
-	private UserService userService = new UserServiceImpl();
+	private UserService userService = ServiceFactory.getServiceInstance().getUserService();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

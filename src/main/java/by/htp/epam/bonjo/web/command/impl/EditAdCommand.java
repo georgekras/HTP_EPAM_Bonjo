@@ -12,10 +12,8 @@ import by.htp.epam.bonjo.domain.Category;
 import by.htp.epam.bonjo.domain.User;
 import by.htp.epam.bonjo.service.AdService;
 import by.htp.epam.bonjo.service.CategoryService;
+import by.htp.epam.bonjo.service.ServiceFactory;
 import by.htp.epam.bonjo.service.UserService;
-import by.htp.epam.bonjo.service.impl.AdServiceImpl;
-import by.htp.epam.bonjo.service.impl.CategoryServiceImpl;
-import by.htp.epam.bonjo.service.impl.UserServiceImpl;
 import by.htp.epam.bonjo.web.command.Command;
 import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
@@ -28,9 +26,9 @@ import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
 public class EditAdCommand implements Command {
 
-	private AdService adService = new AdServiceImpl();
-	private CategoryService categoryService = new CategoryServiceImpl();
-	private UserService userService = new UserServiceImpl();
+	private AdService adService = ServiceFactory.getServiceInstance().getAdService();
+	private CategoryService categoryService = ServiceFactory.getServiceInstance().getCategoryService();
+	private UserService userService = ServiceFactory.getServiceInstance().getUserService();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

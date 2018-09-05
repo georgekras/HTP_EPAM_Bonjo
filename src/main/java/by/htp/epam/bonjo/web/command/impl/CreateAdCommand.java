@@ -54,7 +54,8 @@ public class CreateAdCommand implements Command {
 				Ad ad = Ad.adBuilder().setId(0).setTitle(title).setSmallDesc(smallDesc).setDescription(description)
 						.setPrice(price).setUsersId(user.getId()).setCategoryId(category_Id).build();
 				adService.create(ad);
-				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_USER_ADS).forward(request, response);
+				response.sendRedirect(UrlManager
+						.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_USER_ADS_PAGE));
 			} catch (RegexValidateParamException e) {
 				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE, "Incorrect inputs");
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_CREATE_AD).forward(request, response);

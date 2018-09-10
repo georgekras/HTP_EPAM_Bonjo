@@ -11,6 +11,8 @@ public interface AdDAO {
 	Ad read(int id);
 
 	List<Ad> readAll();
+	
+	List<Ad> readAllWithPage(int start, int end);
 
 	void update(Ad ad);
 

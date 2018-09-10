@@ -28,6 +28,7 @@ public class AdDaoImpl implements AdDAO {
 			+ " `Price`, `users_ID`, `category_ID`) VALUES(?,?,?,?,?,?);";
 	private static final String SQL_QUERY_AD_READ = "SELECT * FROM `krasutski`.`ads` WHERE ID=?;";
 	private static final String SQL_QUERY_AD_READ_ALL = "SELECT * FROM `krasutski`.`ads`";
+	private static final String SQL_QUERY_AD_READ_ALL_WITH_PAGE = "SELECT * FROM `krasutski`.`ads` LIMIT ?,?";
 	private static final String SQL_QUERY_AD_UPDATE = "UPDATE `krasutski`.`ads` SET `Title`=?, `SmallDesc`=?, `Description`=?,"
 			+ " `Price`=?, `users_ID`=?, `category_ID`=? WHERE `ID`=?;";
 	private static final String SQL_QUERY_AD_DELETE = "DELETE FROM `krasutski`.`ads` WHERE `ID`=?;";
@@ -97,8 +98,39 @@ public class AdDaoImpl implements AdDAO {
 		List<Ad> ads = null;
 		ResultSet rs = null;
 		Connection connection = ConnectionPool.getConnection();
-		try (Statement ps = connection.createStatement()) {
-			rs = ps.executeQuery(SQL_QUERY_AD_READ_ALL);
+		try (Statement statement = connection.createStatement()) {
+			rs = statement.executeQuery(SQL_QUERY_AD_READ_ALL);
+			ads = new ArrayList<>();
+			while (rs.next()) {
+				ads.add(buildAd(rs));
+			}
+		} catch (SQLException e) {
+			logger.error("AdDAO can't get list of ads", e);
+		} finally {
+			ConnectionPool.putConnection(connection);
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				logger.error("Fail to close result set in AdDao readAll method", e);
+			}
+		}
+		return ads;
+	}
+	
+	/**
+	 * Retrieves a list of ads from the database.
+	 *
+	 * @return {@code List<Ad>} - the list of ads.
+	 */
+	@Override
+	public List<Ad> readAllWithPage(int start, int end) {
+		List<Ad> ads = null;
+		ResultSet rs = null;
+		Connection connection = ConnectionPool.getConnection();
+		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_AD_READ_ALL_WITH_PAGE)) {
+			ps.setInt(1, start);
+			ps.setInt(2, end);
+			rs = ps.executeQuery();
 			ads = new ArrayList<>();
 			while (rs.next()) {
 				ads.add(buildAd(rs));

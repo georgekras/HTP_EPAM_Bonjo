@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="mytag" tagdir="/WEB-INF/tags/" %>
 <%@ include file="/include/begin-html.jsp"%>
 <div align="center">
 	<br>
@@ -36,35 +37,8 @@
 			</c:forEach>
 		</div>
 	</div>
-	<div class="pagination">
-		<ul class="pagination">
-			<c:if test="${currentPage > 1}">
-				<li class="page-item"><a class="page-link"
-					href="bonjo?command=home&currentPage=${currentPage-1}">Previous</a>
-				</li>
-			</c:if>
-
-			<c:forEach begin="1" end="${countPages}" var="i">
-				<c:choose>
-					<c:when test="${currentPage eq i}">
-						<li class="page-item active"><a class="page-link"> ${i} <span
-								class="sr-only">(current)</span>
-						</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link"
-							href="bonjo?command=home&currentPage=${i}">${i}</a>
-						</li>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-
-			<c:if test="${currentPage < countPages}">
-				<li class="page-item"><a class="page-link"
-					href="bonjo?command=home&currentPage=${currentPage+1}">Next</a>
-				</li>
-			</c:if>
-		</ul>
+	<div class="row col-md-2">
+		<mytag:paginator count="${adsSize}" step="9" urlprefix="?ads=" />
 	</div>
 </div>
 <%@ include file="/include/end-html.jsp"%>

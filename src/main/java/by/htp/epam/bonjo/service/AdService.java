@@ -20,4 +20,6 @@ public interface AdService {
 	
 	List<Ad> getUserAds(int user_ID);
 
+	List<Ad> getUserAdsWithPage(int user_ID, int start, int end);
+
 }

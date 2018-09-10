@@ -45,4 +45,9 @@ public class AdServiceImpl implements AdService {
 	public List<Ad> getUserAds(int user_ID) {
 		return adDao.readUserAds(user_ID);
 	}
+	
+	@Override
+	public List<Ad> getUserAdsWithPage(int user_ID, int start, int end) {
+		return adDao.readUserAdsWithPage(user_ID, start, end);
+	}
 }

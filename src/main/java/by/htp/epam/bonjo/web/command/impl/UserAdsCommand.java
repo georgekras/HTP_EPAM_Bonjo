@@ -36,6 +36,13 @@ public class UserAdsCommand implements Command {
 		}
 		List<Ad> userAds = adService.getUserAds(user.getId());
 		List<Category> categories = categoryService.getAllCategories();
+		request.setAttribute("adsSize", userAds.size());
+		String strStart = request.getParameter(ParamNameConstantDeclaration.REQUEST_PARAM_ADS_LIST);
+		int startAd = 0;
+		if (strStart != null) {
+			startAd = Integer.parseInt(strStart);
+		}
+		userAds = adService.getUserAdsWithPage(user.getId(), startAd, startAd + 9);
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_ADS_LIST, userAds);
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, categories);
 		request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_USER_ADS).forward(request, response);

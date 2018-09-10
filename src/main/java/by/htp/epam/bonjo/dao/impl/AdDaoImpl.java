@@ -33,6 +33,7 @@ public class AdDaoImpl implements AdDAO {
 			+ " `Price`=?, `users_ID`=?, `category_ID`=? WHERE `ID`=?;";
 	private static final String SQL_QUERY_AD_DELETE = "DELETE FROM `krasutski`.`ads` WHERE `ID`=?;";
 	private static final String SQL_QUERY_AD_READ_BY_USER_ID = "SELECT * FROM `krasutski`.`ads` WHERE users_id=?;";
+	private static final String SQL_QUERY_AD_READ_BY_USER_ID_WITH_PAGE = "SELECT * FROM `krasutski`.`ads` WHERE users_id=? LIMIT ?,?";
 
 	/**
 	 * Creates a new ad entry in the database.
@@ -208,6 +209,40 @@ public class AdDaoImpl implements AdDAO {
 		Connection connection = ConnectionPool.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_AD_READ_BY_USER_ID)) {
 			ps.setInt(1, user_ID);
+			rs = ps.executeQuery();
+			ads = new ArrayList<>();
+			while (rs.next()) {
+				ads.add(buildAd(rs));
+			}
+		} catch (SQLException e) {
+			logger.error("AdDAO can't get list of ads by user id", e);
+		} finally {
+			ConnectionPool.putConnection(connection);
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				logger.error("Fail to close result set in AdDao readUserAds method", e);
+			}
+		}
+		return ads;
+	}
+	
+	/**
+	 * Retrieves a list of ads by user id from the database.
+	 *
+	 * @param user_ID
+	 *            is the user id
+	 * @return {@code List<Ad>} - the list of ads by user id.
+	 */
+	@Override
+	public List<Ad> readUserAdsWithPage(int user_ID, int start, int end) {
+		List<Ad> ads = null;
+		ResultSet rs = null;
+		Connection connection = ConnectionPool.getConnection();
+		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_AD_READ_BY_USER_ID_WITH_PAGE)) {
+			ps.setInt(1, user_ID);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 			rs = ps.executeQuery();
 			ads = new ArrayList<>();
 			while (rs.next()) {

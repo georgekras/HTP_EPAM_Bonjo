@@ -38,7 +38,7 @@
 		</div>
 	</div>
 	<div class="row col-md-2">
-		<mytag:paginator count="${adsSize}" step="9" urlprefix="?ads=" />
+		<mytag:paginator count="${adsSize}" step="9" urlprefix="?command=home&ads=" />
 	</div>
 </div>
 <%@ include file="/include/end-html.jsp"%>

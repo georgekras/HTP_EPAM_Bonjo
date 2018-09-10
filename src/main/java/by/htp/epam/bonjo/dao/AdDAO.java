@@ -20,4 +20,6 @@ public interface AdDAO {
 	
 	List<Ad> readUserAds(int user_ID);
 	
+	List<Ad> readUserAdsWithPage(int user_ID, int start, int end);
+	
 }

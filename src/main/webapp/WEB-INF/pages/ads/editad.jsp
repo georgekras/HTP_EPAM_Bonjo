@@ -66,23 +66,19 @@
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row col-md-3">
 					<!-- Button -->
 					<div class="form-group">
 						<label class="col-md-6 control-label" for="Update"></label>
-						<div class="col-md-6">
 							<button id="Update" value="Update" name="Update"
 								class="btn btn-success">Update</button>
-						</div>
 					</div>
 
 					<!-- Button -->
 					<div class="form-group">
 						<label class="col-md-6 control-label" for="Delete"></label>
-						<div class="col-md-6">
 							<button id="Delete" value="Delete" name="Delete"
 								class="btn btn-danger">Delete</button>
-						</div>
 					</div>
 				</div>
 			</fieldset>

@@ -29,6 +29,7 @@ public class UserDaoImpl implements UserDAO {
 	private static final String SQL_QUERY_USER_READ = "SELECT * FROM `krasutski`.`users` WHERE ID=?;";
 	private static final String SQL_QUERY_USER_READ_BY_LOGIN_AND_PASSWORD = "SELECT * FROM `krasutski`.`users` WHERE `login`=? AND `password`=?;";
 	private static final String SQL_QUERY_USER_READ_ALL = "SELECT * FROM `krasutski`.`users`";
+	private static final String SQL_QUERY_USER_READ_ALL_WITH_PAGE = "SELECT * FROM `krasutski`.`users` LIMIT ?,?";
 	private static final String SQL_QUERY_USER_UPDATE = "UPDATE `krasutski`.`users` SET `Login`=?, `Password`=?, `Email`=?,"
 			+ " `NickName`=?, `PhoneNumber`=?, `roles_ID`=? WHERE `ID`=?;";
 	private static final String SQL_QUERY_USER_DELETE = "DELETE FROM `krasutski`.`users` WHERE `ID`=?;";
@@ -133,6 +134,37 @@ public class UserDaoImpl implements UserDAO {
 		Connection connection = ConnectionPool.getConnection();
 		try (Statement ps = connection.createStatement()) {
 			rs = ps.executeQuery(SQL_QUERY_USER_READ_ALL);
+			users = new ArrayList<>();
+			while (rs.next()) {
+				users.add(buildUser(rs));
+			}
+		} catch (SQLException e) {
+			logger.error("UserDao can't get users list", e);
+		} finally {
+			ConnectionPool.putConnection(connection);
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				logger.error("Fail to close result set in UserDao readAll method", e);
+			}
+		}
+		return users;
+	}
+	
+	/**
+	 * Retrieves a list of users from the database.
+	 *
+	 * @return {@code List<User>} - the list of users.
+	 */
+	@Override
+	public List<User> readAllWithPage(int start, int end) {
+		List<User> users = null;
+		ResultSet rs = null;
+		Connection connection = ConnectionPool.getConnection();
+		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_READ_ALL_WITH_PAGE)) {
+			ps.setInt(1, start);
+			ps.setInt(2, end);
+			rs = ps.executeQuery();
 			users = new ArrayList<>();
 			while (rs.next()) {
 				users.add(buildUser(rs));

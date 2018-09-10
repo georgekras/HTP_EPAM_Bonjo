@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="mytag" tagdir="/WEB-INF/tags/"%>
 <%@ include file="/include/begin-html.jsp"%>
 <div align="center">
 	<br>
@@ -15,7 +16,8 @@
 	<br>
 	<div class="container">
 		<c:forEach items="${users}" var="user">
-			<form id="editusersForm" class="form-horizontal" action="bonjo?command=editusers" method=post>
+			<form id="editusersForm" class="form-horizontal"
+				action="bonjo?command=editusers" method=post>
 				<div class="row">
 					<input id="login" class="form-control input-md" name="user_id"
 						type="hidden" value="${user.id}" />
@@ -41,7 +43,7 @@
 					</div>
 					<input id="login" class="form-control input-md"
 						name="user_roles_id" type="hidden" value="${user.roles_ID}" />
-						
+
 					<div class=col-md-1>
 						<button id="Update" value="Update" name="Update"
 							class="btn btn-success">Update</button>
@@ -65,6 +67,10 @@
 				<c:out value="${msg_alert}"></c:out>
 			</div>
 		</c:if>
+	</div>
+	<div class="row col-md-2">
+		<mytag:paginator count="${usersSize}" step="9"
+			urlprefix="?command=editusers&users=" />
 	</div>
 </div>
 <%@ include file="/include/end-html.jsp"%>

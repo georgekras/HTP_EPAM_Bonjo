@@ -32,6 +32,13 @@ public class EditUsersCommand implements Command {
 			return;
 		}
 		List<User> users = userService.getAllUsers();
+		request.setAttribute("usersSize", users.size());
+		String strStart = request.getParameter(ParamNameConstantDeclaration.REQUEST_PARAM_USER_LIST);
+		int startUser = 0;
+		if (strStart != null) {
+			startUser = Integer.parseInt(strStart);
+		}
+		users = userService.getAllUsersWithPage(startUser, startUser + 9);
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_USER_LIST, users);
 		if (HttpRequestParamValidator.isPost(request)) {
 			try {

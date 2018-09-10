@@ -40,6 +40,11 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAllUsers() {
 		return userDao.readAll();
 	}
+	
+	@Override
+	public List<User> getAllUsersWithPage(int start, int end) {
+		return userDao.readAllWithPage(start, end);
+	}
 
 	@Override
 	public User loginRead(String login, String password) {

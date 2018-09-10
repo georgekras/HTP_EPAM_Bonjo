@@ -21,6 +21,8 @@ public interface UserService {
 	
 	List<User> getAllUsers();
 	
+	List<User> getAllUsersWithPage(int start, int end);
+	
 	boolean isUserAdmin(HttpServletRequest request);
 	
 	User isUserInSession(HttpServletRequest request);

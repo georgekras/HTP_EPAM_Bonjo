@@ -13,6 +13,8 @@ public interface UserDAO {
 	User loginRead(String login, String password);
 
 	List<User> readAll();
+	
+	List<User> readAllWithPage(int start, int end);
 
 	void update(User user);
 

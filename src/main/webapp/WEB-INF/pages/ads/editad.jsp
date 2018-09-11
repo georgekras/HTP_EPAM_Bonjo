@@ -1,11 +1,22 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/include/begin-html.jsp"%>
+<fmt:setLocale value="${currentLocale}" />
+<fmt:bundle basename="localization.msg" prefix="msg.jsp.editAd.">
+	<fmt:message key="header" var="headerLoc" />
+	<fmt:message key="adTitle" var="titleLoc" />
+	<fmt:message key="adCategory" var="categoryLoc" />
+	<fmt:message key="adSmallDesc" var="smallDescLoc" />
+	<fmt:message key="adDescription" var="descriptionLoc" />
+	<fmt:message key="adPrice" var="priceLoc" />
+	<fmt:message key="updateAdButton" var="updateAdButtonLoc" />
+	<fmt:message key="deleteAdButton" var="deleteAdButtonLoc" />
+</fmt:bundle>
 <div align="center">
 	<br>
 	<div class="container">
 		<div class="page-header">
-			<h2>Edit ad ${user_ad.title}</h2>
+			<h2>${headerLoc} ${user_ad.title}</h2>
 		</div>
 
 		<br>
@@ -14,7 +25,7 @@
 			<fieldset>
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="title">Title</label>
+					<label class="col-md-4 control-label" for="title">${titleLoc}</label>
 					<div class="col-md-4">
 						<input id="title" name="ad_title" type="text" placeholder=""
 							class="form-control input-md" value="${user_ad.title}">
@@ -23,7 +34,7 @@
 
 				<!-- Select Basic -->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="category_ID">Category</label>
+					<label class="col-md-4 control-label" for="category_ID">${categoryLoc}</label>
 					<div class="col-md-4">
 						<select id="name" name="ad_category_id" class="form-control">
 							<c:forEach items="${categories}" var="category">
@@ -38,8 +49,7 @@
 
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="smallDesc">Small
-						Description</label>
+					<label class="col-md-4 control-label" for="smallDesc">${smallDescLoc}</label>
 					<div class="col-md-4">
 						<input id="smallDesc" name="ad_smalldesc" type="text"
 							placeholder="" class="form-control input-md"
@@ -49,17 +59,17 @@
 
 				<!-- Text area-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="description">Description</label>
+					<label class="col-md-4 control-label" for="description">${descriptionLoc}</label>
 					<div class="col-md-4">
 						<textarea id="description" name="ad_description" type="text"
 							placeholder="" class="form-control input-md">${user_ad.description}</textarea>
 					</div>
 				</div>
 
-
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="price">Price $</label>
+					<label class="col-md-4 control-label" for="price">${priceLoc}
+						$</label>
 					<div class="col-md-2">
 						<input id="price" name="ad_price" type="text" placeholder=""
 							class="form-control input-md" value="${user_ad.price}">
@@ -70,15 +80,15 @@
 					<!-- Button -->
 					<div class="form-group">
 						<label class="col-md-6 control-label" for="Update"></label>
-							<button id="Update" value="Update" name="Update"
-								class="btn btn-success">Update</button>
+						<button id="Update" value="Update" name="Update"
+							class="btn btn-success">${updateAdButtonLoc}</button>
 					</div>
 
 					<!-- Button -->
 					<div class="form-group">
 						<label class="col-md-6 control-label" for="Delete"></label>
-							<button id="Delete" value="Delete" name="Delete"
-								class="btn btn-danger">Delete</button>
+						<button id="Delete" value="Delete" name="Delete"
+							class="btn btn-danger">${deleteAdButtonLoc}</button>
 					</div>
 				</div>
 			</fieldset>

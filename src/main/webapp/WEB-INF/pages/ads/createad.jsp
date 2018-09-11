@@ -1,10 +1,20 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/include/begin-html.jsp"%>
+<fmt:setLocale value="${currentLocale}" />
+<fmt:bundle basename="localization.msg" prefix="msg.jsp.createAd.">
+	<fmt:message key="header" var="headerLoc" />
+	<fmt:message key="adTitle" var="titleLoc" />
+	<fmt:message key="adCategory" var="categoryLoc" />
+	<fmt:message key="adSmallDesc" var="smallDescLoc" />
+	<fmt:message key="adDescription" var="descriptionLoc" />
+	<fmt:message key="adPrice" var="priceLoc" />
+	<fmt:message key="createAdButton" var="createAdButtonLoc" />
+</fmt:bundle>
 <div align="center">
 	<br>
 	<div class="container">
 		<div class="page-header">
-			<h2>Create Ad</h2>
+			<h2>${headerLoc}</h2>
 		</div>
 		<br>
 		<form id="createadForm" class="form-horizontal"
@@ -12,7 +22,7 @@
 			<fieldset>
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="title">Title</label>
+					<label class="col-md-4 control-label" for="title">${titleLoc}</label>
 					<div class="col-md-4">
 						<input id="title" name="ad_title" type="text" placeholder=""
 							class="form-control input-md" value="test">
@@ -21,7 +31,7 @@
 
 				<!-- Select Basic -->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="category_ID">Category</label>
+					<label class="col-md-4 control-label" for="category_ID">${categoryLoc}</label>
 					<div class="col-md-4">
 						<select id="name" name="ad_category_id" class="form-control">
 							<c:forEach items="${categories}" var="category">
@@ -36,8 +46,7 @@
 
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="smallDesc">Small
-						Description</label>
+					<label class="col-md-4 control-label" for="smallDesc">${smallDescLoc}</label>
 					<div class="col-md-4">
 						<input id="smallDesc" name="ad_smalldesc" type="text"
 							placeholder="" class="form-control input-md" value="test">
@@ -46,9 +55,9 @@
 
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="description">Description</label>
+					<label class="col-md-4 control-label" for="description">${descriptionLoc}</label>
 					<div class="col-md-4">
-						<textarea id="description" name="ad_description" type="text" 
+						<textarea id="description" name="ad_description" type="text"
 							placeholder="" class="form-control input-md">test</textarea>
 					</div>
 				</div>
@@ -56,7 +65,7 @@
 
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="price">Price</label>
+					<label class="col-md-4 control-label" for="price">${priceLoc}</label>
 					<div class="col-md-2">
 						<input id="price" name="ad_price" type="text" placeholder=""
 							class="form-control input-md" value="333">
@@ -68,7 +77,7 @@
 					<label class="col-md-4 control-label" for="singlebutton"></label>
 					<div class="col-md-4">
 						<button id="singlebutton" name="singlebutton"
-							class="btn btn-outline-primary">Submit</button>
+							class="btn btn-outline-primary">${createAdButtonLoc}</button>
 					</div>
 				</div>
 

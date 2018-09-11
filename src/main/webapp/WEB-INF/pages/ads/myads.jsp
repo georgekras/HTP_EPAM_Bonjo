@@ -1,11 +1,15 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib prefix="mytag" tagdir="/WEB-INF/tags/" %>
+<%@ taglib prefix="mytag" tagdir="/WEB-INF/tags/"%>
 <%@ include file="/include/begin-html.jsp"%>
+<fmt:setLocale value="${currentLocale}" />
+<fmt:bundle basename="localization.msg" prefix="msg.jsp.userAds.">
+	<fmt:message key="header" var="headerLoc" />
+</fmt:bundle>
 <div align="center">
 	<br>
 	<div class="container">
 		<div class="page-header">
-			<h2>My ads</h2>
+			<h2>${headerLoc}</h2>
 		</div>
 
 		<br>
@@ -39,8 +43,9 @@
 
 		<br>
 	</div>
-		<div class="row col-md-2">
-		<mytag:paginator count="${adsSize}" step="9" urlprefix="?command=userads&ads=" />
+	<div class="row col-md-2">
+		<mytag:paginator count="${adsSize}" step="9"
+			urlprefix="?command=userads&ads=" />
 	</div>
 </div>
 <%@ include file="/include/end-html.jsp"%>

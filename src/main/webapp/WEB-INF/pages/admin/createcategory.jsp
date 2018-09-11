@@ -1,10 +1,16 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/include/begin-html.jsp"%>
+<fmt:setLocale value="${currentLocale}" />
+<fmt:bundle basename="localization.msg" prefix="msg.jsp.createCategory.">
+	<fmt:message key="header" var="headerLoc" />
+	<fmt:message key="categoryName" var="categoryNameLoc" />
+	<fmt:message key="createCategoryButton" var="createCategoryButtonLoc" />
+</fmt:bundle>
 <div align="center">
 	<br>
 	<div class="container">
 		<div class="page-header">
-			<h2>Create Category</h2>
+			<h2>${headerLoc}</h2>
 		</div>
 		<br>
 		<form id="createcategoryForm" class="form-horizontal" action="bonjo?command=createcategory"
@@ -13,8 +19,7 @@
 
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="name">Category
-						Name</label>
+					<label class="col-md-4 control-label" for="name">${categoryNameLoc}</label>
 					<div class="col-md-4">
 						<input id="name" name="category_name" type="text" placeholder=""
 							class="form-control input-md">
@@ -26,7 +31,7 @@
 					<label class="col-md-4 control-label" for="singlebutton"></label>
 					<div class="col-md-4">
 						<button id="singlebutton" name="singlebutton"
-							class="btn btn-outline-primary">Submit</button>
+							class="btn btn-outline-primary">${createCategoryButtonLoc}</button>
 					</div>
 				</div>
 

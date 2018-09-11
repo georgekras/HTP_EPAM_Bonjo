@@ -19,7 +19,7 @@
 	<fmt:bundle basename="localization.msg" prefix="msg.jsp.header.">
 		<fmt:message key="home" var="homeLoc" />
 		<fmt:message key="editUsers" var="editUsersLoc" />
-		<fmt:message key="createCategory" var="creaateCategoryLoc" />
+		<fmt:message key="createCategory" var="createCategoryLoc" />
 		<fmt:message key="editCategory" var="editCategoryLoc" />
 		<fmt:message key="createAd" var="createAdLoc" />
 		<fmt:message key="usersAds" var="usersAdsLoc" />

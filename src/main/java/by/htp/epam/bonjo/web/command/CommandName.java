@@ -1,5 +1,6 @@
 package by.htp.epam.bonjo.web.command;
 
+import by.htp.epam.bonjo.web.command.impl.ChangeLocaleCommand;
 import by.htp.epam.bonjo.web.command.impl.CreateAdCommand;
 import by.htp.epam.bonjo.web.command.impl.CreateCategoryCommand;
 import by.htp.epam.bonjo.web.command.impl.EditAdCommand;
@@ -87,6 +88,11 @@ public enum CommandName {
 		{
 			this.command = new CreateCategoryCommand();
 			this.jspPage = PagePathConstantDeclaration.PAGE_ADMIN_CREATE_CATEGORY;
+		}
+	},
+	CHANGELOCALE {
+		{
+			this.command = new ChangeLocaleCommand();
 		}
 	},
 	EDITCATEGORY {

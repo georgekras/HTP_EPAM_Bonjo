@@ -26,18 +26,17 @@
 						Number</label>
 					<div class="col-md-4">
 						<input id="phoneNumber" name="user_phone" type="text"
-							placeholder="" class="form-control input-md" required=""
+							placeholder="" class="form-control input-md" 
 							value="${currentUser.phoneNumber}">
 					</div>
 				</div>
 
 				<!-- Password input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="password">Password
-						Input</label>
+					<label class="col-md-4 control-label" for="password">Password</label>
 					<div class="col-md-4">
 						<input id="password" name="user_password" type="password"
-							placeholder="" class="form-control input-md" required=""
+							placeholder="" class="form-control input-md"
 							value="${currentUser.password}">
 					</div>
 				</div>

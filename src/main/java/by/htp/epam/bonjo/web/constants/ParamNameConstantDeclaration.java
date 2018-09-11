@@ -5,11 +5,13 @@ public class ParamNameConstantDeclaration {
 	public static final String SESSION_PARAM_CURRENT_USER = "currentUser";
 	public static final String SESSION_PARAM_CURRENT_USER_ROLE_ID = "user_role_id";
 	public static final String SESSION_PARAM_ERROR_MESSAGE = "errorMessage";
+	public static final String SESSION_PARAM_CURRENT_LOCALE = "currentLocale";
 	
 	public static final String BUTTON_PARAM_UPDATE = "Update";
 	public static final String BUTTON_PARAM_DELETE = "Delete";
 	
 	public static final String REQUEST_PARAM_COMMAND = "command";
+	public static final String REQUEST_PARAM_LOCALE = "locale";
 
 	public static final String REQUEST_PARAM_USER = "user";
 	public static final String REQUEST_PARAM_USER_ID = "user_id";

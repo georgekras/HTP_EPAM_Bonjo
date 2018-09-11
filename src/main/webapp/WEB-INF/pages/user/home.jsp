@@ -3,10 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="mytag" tagdir="/WEB-INF/tags/" %>
 <%@ include file="/include/begin-html.jsp"%>
+	<fmt:setLocale value="${currentLocale}" />
+	<fmt:bundle basename="localization.msg" prefix="msg.jsp.home.">
+		<fmt:message key="header" var="headerLoc" />
+	</fmt:bundle>
 <div align="center">
 	<br>
 	<div class="page-header">
-		<h2>All ads</h2>
+		<h2>${headerLoc}</h2>
 	</div>
 
 	<br>

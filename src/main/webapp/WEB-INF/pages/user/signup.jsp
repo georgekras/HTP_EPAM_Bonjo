@@ -1,20 +1,30 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/include/begin-html.jsp"%>
+<fmt:setLocale value="${currentLocale}" />
+<fmt:bundle basename="localization.msg" prefix="msg.jsp.signup.">
+	<fmt:message key="header" var="headerLoc" />
+	<fmt:message key="login" var="loginLoc" />
+	<fmt:message key="email" var="emailLoc" />
+	<fmt:message key="password" var="passwordLoc" />
+	<fmt:message key="nickname" var="nicknameLoc" />
+	<fmt:message key="phoneNumber" var="phoneNumberLoc" />
+	<fmt:message key="signupButton" var="signupButtonLoc" />
+</fmt:bundle>
 <div align="center">
 	<br>
 	<div align="center">
 		<div class="container">
 			<div class="page-header">
-				<h2>Hello new Bonjo user!</h2>
+				<h2>${headerLoc}</h2>
 			</div>
 			<br>
-			<form id="signupForm" class="form-horizontal" action="bonjo?command=signup"
-				method="post">
+			<form id="signupForm" class="form-horizontal"
+				action="bonjo?command=signup" method="post">
 				<fieldset>
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="login">Login</label>
+						<label class="col-md-4 control-label" for="login">${loginLoc}</label>
 						<div class="col-md-4">
 							<input id="login" name="user_login" type="text"
 								title="login must be 5-15 characters" placeholder="ExampleLogin"
@@ -24,7 +34,7 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="email">Email</label>
+						<label class="col-md-4 control-label" for="email">${emailLoc}</label>
 						<div class="col-md-4">
 							<input id="email" name="user_email" type="text"
 								placeholder="example@google.com" class="form-control input-md">
@@ -33,7 +43,7 @@
 
 					<!-- Password input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="password">Password</label>
+						<label class="col-md-4 control-label" for="password">${passwordLoc}</label>
 						<div class="col-md-4">
 							<input id="password" name="user_password" type="password"
 								title="password must be 5-15 characters"
@@ -43,7 +53,7 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="nickname">Nickname</label>
+						<label class="col-md-4 control-label" for="nickname">${nicknameLoc}</label>
 						<div class="col-md-4">
 							<input id="nickname" name="user_nickname" type="text"
 								placeholder="example" class="form-control input-md">
@@ -52,8 +62,7 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="phoneNumber">Phone
-							Number</label>
+						<label class="col-md-4 control-label" for="phoneNumber">${phoneNumberLoc}</label>
 						<div class="col-md-4">
 							<input id="phoneNumber" name="user_phone" type="text"
 								placeholder="+375297777777" class="form-control input-md">
@@ -65,7 +74,7 @@
 						<label class="col-md-4 control-label" for="singlebutton"></label>
 						<div class="col-md-4">
 							<button id="singlebutton" name="singlebutton"
-								class="btn btn-outline-primary">Sign Up</button>
+								class="btn btn-outline-primary">${signupButtonLoc}</button>
 						</div>
 					</div>
 

@@ -1,10 +1,17 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/include/begin-html.jsp"%>
+	<fmt:setLocale value="${currentLocale}" />
+	<fmt:bundle basename="localization.msg" prefix="msg.jsp.login.">
+		<fmt:message key="header" var="headerLoc" />
+		<fmt:message key="login" var="loginLoc" />
+		<fmt:message key="password" var="passwordLoc" />
+		<fmt:message key="buttonLogin" var="buttonLoginLoc" />
+	</fmt:bundle>
 <div align="center">
 	<br>
 	<div class="container">
 		<div class="page-header">
-			<h2>Welcome back!</h2>
+			<h2>${headerLoc}</h2>
 		</div>
 		<br>
 		<form id="loginForm" class="form-horizontal"
@@ -13,7 +20,7 @@
 
 				<!-- Text input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="login">Login</label>
+					<label class="col-md-4 control-label" for="login">${loginLoc}</label>
 					<div class="col-md-4">
 						<input id="login" name="user_login" type="text"
 							placeholder="put your login here" class="form-control input-md">
@@ -22,7 +29,7 @@
 
 				<!-- Password input-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="password">Password</label>
+					<label class="col-md-4 control-label" for="password">${passwordLoc}</label>
 					<div class="col-md-4">
 						<input id="password" name="user_password" type="password"
 							placeholder="put your password here"
@@ -34,7 +41,7 @@
 					<label class="col-md-4 control-label" for="singlebutton"></label>
 					<div class="col-md-4">
 						<button id="singlebutton" name="singlebutton" type="submit"
-							class="btn btn-outline-primary">Login</button>
+							class="btn btn-outline-primary">${buttonLoginLoc}</button>
 					</div>
 				</div>
 

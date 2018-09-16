@@ -3,7 +3,7 @@ package by.htp.epam.bonjo.web.util.listeners;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import by.htp.epam.bonjo.database.ConnectionPool;
+import by.htp.epam.bonjo.database.impl.ConnectionPool;
 
 public class ConnectionPoolInitListener implements ServletContextListener {
 
@@ -14,7 +14,7 @@ public class ConnectionPoolInitListener implements ServletContextListener {
 
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
-		ConnectionPool.connectionPoolDestroy();
+		ConnectionPool.destroyConnectionPool();
 	}
 
 }

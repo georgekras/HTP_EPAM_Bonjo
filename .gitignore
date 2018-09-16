@@ -9,3 +9,4 @@ target/*
 *.DS_Store
 ${sys:catalina.home}/logs/bonjo_log.log
 doc/*
+.DS_Store

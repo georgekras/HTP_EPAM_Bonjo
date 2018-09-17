@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  <display-name>bonjo</display-name>
-  <welcome-file-list>
-    <welcome-file>/WEB-INF/index.jsp</welcome-file>
-  </welcome-file-list>
-  
-  <servlet>
-    <servlet-name>Controller</servlet-name>
-    <servlet-class>by.htp.epam.bonjo.web.controller.Controller</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Controller</servlet-name>
-    <url-pattern>/bonjo</url-pattern>
-  </servlet-mapping>
-  
-  <listener>
-    <listener-class>by.htp.epam.bonjo.web.util.listeners.ConnectionPoolInitListener</listener-class>
-  </listener>
-  
-  	<filter>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>bonjo</display-name>
+	<welcome-file-list>
+		<welcome-file>/WEB-INF/index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>Controller</servlet-name>
+		<servlet-class>by.htp.epam.bonjo.web.controller.Controller</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Controller</servlet-name>
+		<url-pattern>/bonjo</url-pattern>
+	</servlet-mapping>
+
+	<listener>
+		<listener-class>by.htp.epam.bonjo.web.util.listeners.ConnectionPoolInitListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>by.htp.epam.bonjo.web.util.listeners.LocaleListener</listener-class>
+	</listener>
+
+	<filter>
 		<filter-name>EncodingFilter</filter-name>
 		<filter-class>by.htp.epam.bonjo.web.util.filters.EncodingFilter</filter-class>
 		<init-param>

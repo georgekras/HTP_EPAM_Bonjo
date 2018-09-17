@@ -15,13 +15,15 @@ import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
 
 public class ChangeLocaleCommand implements Command {
 
+	private static final String LOCALE_MESSAGES = "localization.msg";
+	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String locale = request.getParameter(ParamNameConstantDeclaration.REQUEST_PARAM_LOCALE);
 		try {
 			HttpRequestParamValidator.validateRequestParamLocaleNotNull(locale);
 			String[] localArr = locale.split("_");
-			ResourceBundle.getBundle("localization.msg", new Locale(localArr[0], localArr[1]));
+			ResourceBundle.getBundle(LOCALE_MESSAGES, new Locale(localArr[0], localArr[1]));
 			request.getSession().setAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_LOCALE, locale);
 			response.sendRedirect(request.getHeader("Referer"));
 		} catch (ValidateNullParamException e) {

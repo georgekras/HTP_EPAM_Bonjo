@@ -12,11 +12,16 @@
 	<fmt:message key="updateAdButton" var="updateAdButtonLoc" />
 	<fmt:message key="deleteAdButton" var="deleteAdButtonLoc" />
 </fmt:bundle>
+<fmt:bundle basename="localization.msg" prefix="msg.message.editAd.">
+	<fmt:message key="editAdUpdate" var="editAdUpdateLoc" />
+	<fmt:message key="editAdDelete" var="editAdDeleteLoc" />
+	<fmt:message key="editAdError" var="editAdErrorLoc" />
+</fmt:bundle>
 <div align="center">
 	<br>
 	<div class="container">
 		<div class="page-header">
-			<h2>${headerLoc} ${user_ad.title}</h2>
+			<h2>${headerLoc}${user_ad.title}</h2>
 		</div>
 
 		<br>
@@ -94,12 +99,21 @@
 			</fieldset>
 		</form>
 
-		<c:if test="${msg!=null}">
+		<c:if test="${not empty requestScope.editAdUpdate}">
 			<div class="alert alert-danger" role="alert">
-				<c:out value="${msg}"></c:out>
+				<c:out value="${editAdUpdateLoc}"></c:out>
 			</div>
 		</c:if>
-		<br>
+		<c:if test="${not empty requestScope.editAdDelete}">
+			<div class="alert alert-danger" role="alert">
+				<c:out value="${editAdDeleteLoc}"></c:out>
+			</div>
+		</c:if>
+		<c:if test="${not empty requestScope.editAdError}">
+			<div class="alert alert-danger" role="alert">
+				<c:out value="${editAdErrorLoc}"></c:out>
+			</div>
+		</c:if>
 	</div>
 </div>
 <script src="assets/js/jquery-1.9.1.js"></script>

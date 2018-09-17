@@ -54,20 +54,24 @@ public class EditAdCommand implements Command {
 				int price = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_PRICE);
 				int category_Id = RequestParamUtil.getInt(request,
 						ParamNameConstantDeclaration.REQUEST_PARAM_AD_CATEGORY_ID);
-				Ad ad = Ad.adBuilder().setId(chosenAdId).setTitle(title).setSmallDesc(smallDesc).setDescription(description)
-						.setPrice(price).setUsersId(user.getId()).setCategoryId(category_Id).build();
+				Ad ad = Ad.adBuilder().setId(chosenAdId).setTitle(title).setSmallDesc(smallDesc)
+						.setDescription(description).setPrice(price).setUsersId(user.getId()).setCategoryId(category_Id)
+						.build();
 				RegexParamValidator.userEditAdValidation(title, smallDesc, description, price, category_Id);
 				if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
-					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE, "ad updated.");
+					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_AD_UPDATE,
+							ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_AD_UPDATE);
 					adService.update(ad);
 				} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
-					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_ALERT, "ad deleted.");
+					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_AD_DELETE,
+							ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_AD_DELETE);
 					adService.delete(chosenAdId);
 					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_USER_ADS_PAGE);
 				}
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_EDIT_AD).forward(request, response);
 			} catch (RegexValidateParamException e) {
-				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_ALERT, "Check inputs.");
+				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_AD_ERROR,
+						ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_AD_ERROR);
 			}
 		} else {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_EDIT_AD).forward(request, response);

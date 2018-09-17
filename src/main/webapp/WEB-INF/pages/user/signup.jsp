@@ -10,6 +10,11 @@
 	<fmt:message key="phoneNumber" var="phoneNumberLoc" />
 	<fmt:message key="signupButton" var="signupButtonLoc" />
 </fmt:bundle>
+<fmt:bundle basename="localization.msg" prefix="msg.message.signup.">
+	<fmt:message key="signupError" var="signupErrorLoc" />
+	<fmt:message key="signupLoginTaken" var="signupLoginTakenLoc" />
+	<fmt:message key="signupEmailTaken" var="signupEmailTakenLoc" />
+</fmt:bundle>
 <div align="center">
 	<br>
 	<div align="center">
@@ -80,10 +85,19 @@
 
 				</fieldset>
 			</form>
-
-			<c:if test="${msg!=null}">
+			<c:if test="${not empty requestScope.signupEmailTaken}">
 				<div class="alert alert-danger" role="alert">
-					<c:out value="${msg}"></c:out>
+					<c:out value="${signupEmailTakenLoc}"></c:out>
+				</div>
+			</c:if>
+			<c:if test="${not empty requestScope.signupLoginTaken}">
+				<div class="alert alert-danger" role="alert">
+					<c:out value="${signupLoginTakenLoc}"></c:out>
+				</div>
+			</c:if>
+			<c:if test="${not empty requestScope.signupError}">
+				<div class="alert alert-danger" role="alert">
+					<c:out value="${signupErrorLoc}"></c:out>
 				</div>
 			</c:if>
 		</div>

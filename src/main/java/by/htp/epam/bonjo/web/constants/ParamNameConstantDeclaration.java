@@ -4,7 +4,6 @@ public class ParamNameConstantDeclaration {
 
 	public static final String SESSION_PARAM_CURRENT_USER = "currentUser";
 	public static final String SESSION_PARAM_CURRENT_USER_ROLE_ID = "user_role_id";
-	public static final String SESSION_PARAM_ERROR_MESSAGE = "errorMessage";
 	public static final String SESSION_PARAM_CURRENT_LOCALE = "currentLocale";
 	
 	public static final String BUTTON_PARAM_UPDATE = "Update";
@@ -42,5 +41,21 @@ public class ParamNameConstantDeclaration {
 	public static final String REQUEST_PARAM_MESSAGE = "msg";
 	public static final String REQUEST_PARAM_MESSAGE_SUCCESS = "msg_success";
 	public static final String REQUEST_PARAM_MESSAGE_ALERT = "msg_alert";
+	public static final String REQUEST_PARAM_MESSAGE_PROFILE_UPDATE = "profileUpdate";
+	public static final String REQUEST_PARAM_MESSAGE_CREATE_AD_ERROR = "createAdError";
+	public static final String REQUEST_PARAM_MESSAGE_CREATE_CATEGORY_SUCCESS = "createCategorySuccess";
+	public static final String REQUEST_PARAM_MESSAGE_CREATE_CATEGORY_ERROR = "createCategoryError";
+	public static final String REQUEST_PARAM_MESSAGE_EDIT_AD_UPDATE = "editAdUpdate";
+	public static final String REQUEST_PARAM_MESSAGE_EDIT_AD_DELETE = "editAdDelete";
+	public static final String REQUEST_PARAM_MESSAGE_EDIT_AD_ERROR = "editAdError";
+	public static final String REQUEST_PARAM_MESSAGE_EDIT_CATEGORY_UPDATE = "editCategoryUpdate";
+	public static final String REQUEST_PARAM_MESSAGE_EDIT_CATEGORY_DELETE = "editCategoryDelete";
+	public static final String REQUEST_PARAM_MESSAGE_EDIT_CATEGORY_ERROR = "editCategoryError";
+	public static final String REQUEST_PARAM_MESSAGE_EDIT_USER_ERROR = "editUserError";
+	public static final String REQUEST_PARAM_MESSAGE_LOGIN_ERROR = "loginError";
+	public static final String REQUEST_PARAM_MESSAGE_LOGIN_DUPLICATION = "loginDuplication";
+	public static final String REQUEST_PARAM_MESSAGE_SIGNUP_ERROR = "signupError";
+	public static final String REQUEST_PARAM_MESSAGE_SIGNUP_LOGIN_TAKEN = "signupLoginTaken";
+	public static final String REQUEST_PARAM_MESSAGE_SIGNUP_EMAIL_TAKEN = "signupEmailTaken";
 	
 }

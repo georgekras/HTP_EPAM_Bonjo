@@ -36,9 +36,11 @@ public class LogInCommand implements Command {
 				session.setAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER, user);
 				session.setAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER_ROLE_ID,
 						user.getRoles_ID());
-				response.sendRedirect(UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_PROFILE_PAGE));
+				response.sendRedirect(UrlManager
+						.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_PROFILE_PAGE));
 			} catch (RegexValidateParamException e) {
-				session.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE, "Incorrect login or password");
+				session.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_LOGIN_ERROR,
+						ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_LOGIN_ERROR);
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_LOGIN).forward(request, response);
 			}
 		} else {

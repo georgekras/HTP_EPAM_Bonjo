@@ -9,6 +9,9 @@
 	<fmt:message key="userPassword" var="userPasswordLoc" />
 	<fmt:message key="saveButton" var="saveButtonLoc" />
 </fmt:bundle>
+<fmt:bundle basename="localization.msg" prefix="msg.message.profile.">
+	<fmt:message key="profileUpdate" var="profileUpdateLoc" />
+</fmt:bundle>
 <div align="center">
 	<br>
 	<div class="container">
@@ -60,9 +63,9 @@
 			</fieldset>
 		</form>
 
-		<c:if test="${msg_success!=null}">
+		<c:if test="${not empty requestScope.profileUpdate}">
 			<div class="alert alert-success" role="alert">
-				<c:out value="${msg_success}"></c:out>
+				<c:out value="${profileUpdateLoc}"></c:out>
 			</div>
 		</c:if>
 	</div>

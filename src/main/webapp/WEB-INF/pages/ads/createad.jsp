@@ -10,6 +10,9 @@
 	<fmt:message key="adPrice" var="priceLoc" />
 	<fmt:message key="createAdButton" var="createAdButtonLoc" />
 </fmt:bundle>
+<fmt:bundle basename="localization.msg" prefix="msg.message.createAd.">
+	<fmt:message key="createAdError" var="createAdErrorLoc" />
+</fmt:bundle>
 <div align="center">
 	<br>
 	<div class="container">
@@ -84,9 +87,9 @@
 			</fieldset>
 		</form>
 
-		<c:if test="${msg!=null}">
+		<c:if test="${not empty requestScope.createAdError}">
 			<div class="alert alert-danger" role="alert">
-				<c:out value="${msg}"></c:out>
+				<c:out value="${createAdErrorLoc}"></c:out>
 			</div>
 		</c:if>
 	</div>

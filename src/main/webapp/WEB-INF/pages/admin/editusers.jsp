@@ -12,6 +12,9 @@
 	<fmt:message key="userUpdateButton" var="userUpdateButtonLoc" />
 	<fmt:message key="userDeleteButton" var="userDeleteButtonLoc" />
 </fmt:bundle>
+<fmt:bundle basename="localization.msg" prefix="msg.message.editUser.">
+	<fmt:message key="editUserError" var="editUserErrorLoc" />
+</fmt:bundle>
 <div align="center">
 	<br>
 	<div class="container">
@@ -67,14 +70,9 @@
 			</form>
 			<br>
 		</c:forEach>
-		<c:if test="${msg!=null}">
-			<div class="alert alert-success" role="alert">
-				<c:out value="${msg}"></c:out>
-			</div>
-		</c:if>
-		<c:if test="${msg_alert!=null}">
+		<c:if test="${not empty requestScope.editUserError}">
 			<div class="alert alert-danger" role="alert">
-				<c:out value="${msg_alert}"></c:out>
+				<c:out value="${editUserErrorLoc}"></c:out>
 			</div>
 		</c:if>
 	</div>

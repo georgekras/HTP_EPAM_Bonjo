@@ -56,9 +56,8 @@ public class EditUsersCommand implements Command {
 				int roleId = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_ROLES_ID);
 				HttpRequestParamValidator.validateRequestParamObjectNotNull(id, roleId);
 				RegexParamValidator.userRegistrationValidation(login, password, email, nickname, phoneNumber);
-				User user = User.userBuilder().setId(id).setLogin(login).setEmail(email)
-						.setPassword(password).setNickname(nickname).setPhoneNumber(phoneNumber)
-						.setRolesId(roleId).build();
+				User user = User.userBuilder().setId(id).setLogin(login).setEmail(email).setPassword(password)
+						.setNickname(nickname).setPhoneNumber(phoneNumber).setRolesId(roleId).build();
 				if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
 					userService.update(user);
 				} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
@@ -67,8 +66,10 @@ public class EditUsersCommand implements Command {
 				response.sendRedirect(UrlManager
 						.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_EDIT_USERS_PAGE));
 			} catch (RegexValidateParamException e) {
-				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_ALERT, "can't update user.");
-				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USERS).forward(request, response);
+				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_USER_ERROR,
+						ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_USER_ERROR);
+				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USERS).forward(request,
+						response);
 			}
 		} else {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USERS).forward(request, response);

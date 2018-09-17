@@ -6,6 +6,9 @@
 	<fmt:message key="categoryName" var="categoryNameLoc" />
 	<fmt:message key="createCategoryButton" var="createCategoryButtonLoc" />
 </fmt:bundle>
+<fmt:bundle basename="localization.msg" prefix="msg.message.createCategory.">
+	<fmt:message key="createCategoryError" var="createCategoryErrorLoc" />
+</fmt:bundle>
 <div align="center">
 	<br>
 	<div class="container">
@@ -38,9 +41,9 @@
 			</fieldset>
 		</form>
 
-		<c:if test="${msg!=null}">
+		<c:if test="${not empty requestScope.createCategoryError}">
 			<div class="alert alert-danger" role="alert">
-				<c:out value="${msg}"></c:out>
+				<c:out value="${createCategoryErrorLoc}"></c:out>
 			</div>
 		</c:if>
 	</div>

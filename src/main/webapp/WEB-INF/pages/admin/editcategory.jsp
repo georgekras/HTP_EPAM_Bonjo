@@ -7,6 +7,11 @@
 	<fmt:message key="updateCategoryButton" var="updateCategoryButtonLoc" />
 	<fmt:message key="deleteCategoryButton" var="deleteCategoryButtonLoc" />
 </fmt:bundle>
+<fmt:bundle basename="localization.msg" prefix="msg.message.editCategory.">
+	<fmt:message key="editCategoryUpdate" var="editCategoryUpdateLoc" />
+	<fmt:message key="editCategoryDelete" var="editCategoryDeleteLoc" />
+	<fmt:message key="editCategoryError" var="editCategoryErrorLoc" />
+</fmt:bundle>
 <div align="center">
 	<br>
 	<div class="container">
@@ -43,6 +48,21 @@
 			</form>
 			<br>
 		</c:forEach>
+		<c:if test="${not empty requestScope.editCategoryUpdate}">
+			<div class="alert alert-danger" role="alert">
+				<c:out value="${editCategoryUpdateLoc}"></c:out>
+			</div>
+		</c:if>
+		<c:if test="${not empty requestScope.editCategoryDelete}">
+			<div class="alert alert-danger" role="alert">
+				<c:out value="${editCategoryDeleteLoc}"></c:out>
+			</div>
+		</c:if>
+		<c:if test="${not empty requestScope.editCategoryError}">
+			<div class="alert alert-danger" role="alert">
+				<c:out value="${editCategoryErrorLoc}"></c:out>
+			</div>
+		</c:if>
 	</div>
 </div>
 <script src="assets/js/jquery-1.9.1.js"></script>

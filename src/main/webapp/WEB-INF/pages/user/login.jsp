@@ -1,12 +1,16 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/include/begin-html.jsp"%>
-	<fmt:setLocale value="${currentLocale}" />
-	<fmt:bundle basename="localization.msg" prefix="msg.jsp.login.">
-		<fmt:message key="header" var="headerLoc" />
-		<fmt:message key="login" var="loginLoc" />
-		<fmt:message key="password" var="passwordLoc" />
-		<fmt:message key="buttonLogin" var="buttonLoginLoc" />
-	</fmt:bundle>
+<fmt:setLocale value="${currentLocale}" />
+<fmt:bundle basename="localization.msg" prefix="msg.jsp.login.">
+	<fmt:message key="header" var="headerLoc" />
+	<fmt:message key="login" var="loginLoc" />
+	<fmt:message key="password" var="passwordLoc" />
+	<fmt:message key="buttonLogin" var="buttonLoginLoc" />
+</fmt:bundle>
+<fmt:bundle basename="localization.msg" prefix="msg.message.login.">
+	<fmt:message key="loginError" var="loginErrorLoc" />
+	<fmt:message key="loginDuplication" var="loginDuplicationLoc" />
+</fmt:bundle>
 <div align="center">
 	<br>
 	<div class="container">
@@ -48,9 +52,14 @@
 			</fieldset>
 		</form>
 
-		<c:if test="${msg!=null}">
+		<c:if test="${not empty requestScope.loginError}">
 			<div class="alert alert-danger" role="alert">
-				<c:out value="${msg}"></c:out>
+				<c:out value="${loginErrorLoc}"></c:out>
+			</div>
+		</c:if>
+		<c:if test="${not empty requestScope.loginDuplication}">
+			<div class="alert alert-danger" role="alert">
+				<c:out value="${loginDuplicationLoc}"></c:out>
 			</div>
 		</c:if>
 	</div>

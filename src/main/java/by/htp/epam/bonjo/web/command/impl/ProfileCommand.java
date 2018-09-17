@@ -45,8 +45,8 @@ public class ProfileCommand implements Command {
 				userService.update(user);
 				HttpSession session = request.getSession();
 				session.setAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER, user);
-				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_SUCCESS,
-						"Your profile was updated.");
+				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_PROFILE_UPDATE,
+						ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_PROFILE_UPDATE);
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_PROFILE).forward(request, response);
 			} catch (RegexValidateParamException e) {
 				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_ALERT, "Check inputs.");

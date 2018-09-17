@@ -16,6 +16,7 @@ import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 import by.htp.epam.bonjo.web.util.UrlManager;
 import by.htp.epam.bonjo.web.util.exceptions.RegexValidateParamException;
+import by.htp.epam.bonjo.web.util.exceptions.ValidateNullParamException;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RegexParamValidator;
 
@@ -38,8 +39,8 @@ public class LogInCommand implements Command {
 						user.getRoles_ID());
 				response.sendRedirect(UrlManager
 						.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_PROFILE_PAGE));
-			} catch (RegexValidateParamException e) {
-				session.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_LOGIN_ERROR,
+			} catch (RegexValidateParamException | ValidateNullParamException e) {
+				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_LOGIN_ERROR,
 						ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_LOGIN_ERROR);
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_LOGIN).forward(request, response);
 			}

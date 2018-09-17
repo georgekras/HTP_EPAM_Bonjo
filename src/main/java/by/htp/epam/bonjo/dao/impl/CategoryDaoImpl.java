@@ -20,11 +20,12 @@ import by.htp.epam.bonjo.domain.Category;
  * Works with a {@link by.htp.epam.bonjo.domain.Category} entity class and has
  * access to the 'category' database table.
  *
+ * @author George Krasutski
  */
 public class CategoryDaoImpl implements CategoryDAO {
 
 	private final BaseConnectionPool connectionPool = new ConnectionPool();
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(CategoryDaoImpl.class);
 
 	private static final String SQL_QUERY_CATEGORY_CREATE = "INSERT INTO `krasutski`.`category` (`Name`) VALUES(?);";
@@ -32,12 +33,9 @@ public class CategoryDaoImpl implements CategoryDAO {
 	private static final String SQL_QUERY_CATEGORY_READ_ALL = "SELECT * FROM `krasutski`.`category`";
 	private static final String SQL_QUERY_CATEGORY_UPDATE = "UPDATE `krasutski`.`category` SET `Name`=? WHERE `ID`=?;";
 	private static final String SQL_QUERY_CATEGORY_DELETE = "DELETE FROM `krasutski`.`category` WHERE `ID`=?;";
-
+	
 	/**
-	 * Creates a new category entry in the database.
-	 *
-	 * @param category
-	 *            the {@link by.htp.epam.bonjo.domain.Category} entity.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void create(Category category) {
@@ -51,7 +49,10 @@ public class CategoryDaoImpl implements CategoryDAO {
 			connectionPool.putConnection(connection);
 		}
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Category read(int id) {
 		ResultSet rs = null;
@@ -78,11 +79,9 @@ public class CategoryDaoImpl implements CategoryDAO {
 		}
 		return null;
 	}
-
+	
 	/**
-	 * Retrieves a list of categories from the database.
-	 *
-	 * @return {@code List<Category>} - the list of categories.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<Category> readAll() {
@@ -111,12 +110,9 @@ public class CategoryDaoImpl implements CategoryDAO {
 		}
 		return categories;
 	}
-
+	
 	/**
-	 * Updates category entry in the database.
-	 *
-	 * @param category
-	 *            the {@link by.htp.epam.bonjo.domain.Category} entity.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void update(Category category) {
@@ -131,12 +127,9 @@ public class CategoryDaoImpl implements CategoryDAO {
 			connectionPool.putConnection(connection);
 		}
 	}
-
+	
 	/**
-	 * Deletes category entry in the database.
-	 *
-	 * @param category
-	 *            the {@link by.htp.epam.bonjo.domain.Category} entity.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void delete(int id) {
@@ -150,4 +143,5 @@ public class CategoryDaoImpl implements CategoryDAO {
 			connectionPool.putConnection(connection);
 		}
 	}
+
 }

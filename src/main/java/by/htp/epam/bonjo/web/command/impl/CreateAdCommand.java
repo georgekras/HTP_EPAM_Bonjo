@@ -50,7 +50,7 @@ public class CreateAdCommand implements Command {
 				int price = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_AD_PRICE);
 				int category_Id = RequestParamUtil.getInt(request,
 						ParamNameConstantDeclaration.REQUEST_PARAM_AD_CATEGORY_ID);
-				RegexParamValidator.userCreateAdValidation(title, smallDesc, description, price, category_Id);
+//				RegexParamValidator.userCreateAdValidation(title, smallDesc, description, price, category_Id);
 				Ad ad = Ad.adBuilder().setId(0).setTitle(title).setSmallDesc(smallDesc).setDescription(description)
 						.setPrice(price).setUsersId(user.getId()).setCategoryId(category_Id).build();
 				adService.create(ad);

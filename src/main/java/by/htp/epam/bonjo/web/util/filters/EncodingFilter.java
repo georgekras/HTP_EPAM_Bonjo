@@ -9,7 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 /**
- * filter class for state request and response encoding
+ * Filter class for state request and response encoding
  */
 public class EncodingFilter implements Filter {
 	/**
@@ -50,5 +50,4 @@ public class EncodingFilter implements Filter {
 	public void destroy() {
 		encoding = null;
 	}
-
 }

@@ -15,19 +15,19 @@ $(document).ready(function() {
 					required : true,
 					minlength : 5,
 					maxlength : 45,
-					regex : /[а-яА-Яa-zA-Z0-9%_-\\s]/,
+					regex : /^[а-яА-Яa-zA-Z0-9%_-\\s]$/,
 				},
 				ad_smalldesc : {
 					required : true,
 					minlength : 4,
 					maxlength : 100,
-					regex : /[а-яА-Яa-zA-Z0-9,.-_%()\\s]/,
+					regex : /[а-яА-Яa-zA-Z0-9,.\-_%()\s]/,
 				},
 				ad_description : {
 					required : true,
 					minlength : 4,
 					maxlength : 200,
-					regex : /[а-яА-Яa-zA-Z0-9,.-_%()\\s]/,
+					regex : /[а-яА-Яa-zA-Z0-9,.\-_%()\s]/,
 				},
 				ad_price : {
 					required : true,

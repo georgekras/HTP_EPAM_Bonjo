@@ -24,7 +24,7 @@ import by.htp.epam.bonjo.domain.User;
 public class UserDaoImpl implements UserDAO {
 
 	private final BaseConnectionPool connectionPool = new ConnectionPool();
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
 	private static final String SQL_QUERY_USER_CREATE = "INSERT INTO `krasutski`.`users` (`Login`, `Password`, `Email`,"
@@ -42,10 +42,7 @@ public class UserDaoImpl implements UserDAO {
 	private static final String SQL_QUERY_AD_READ_BY_USER_ID = "SELECT * FROM `krasutski`.`ads` WHERE users_id=?;";
 
 	/**
-	 * Creates a new user entry in the database.
-	 *
-	 * @param user
-	 *            the {@link by.htp.epam.bonjo.domain.User} entity.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void create(User user) {
@@ -67,10 +64,7 @@ public class UserDaoImpl implements UserDAO {
 	}
 
 	/**
-	 * Find a user by id in the database.
-	 *
-	 * @param id
-	 *            the id of a user.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public User read(int id) {
@@ -95,12 +89,7 @@ public class UserDaoImpl implements UserDAO {
 	}
 
 	/**
-	 * Find a user by login and password in the database.
-	 *
-	 * @param login
-	 *            the login of a user.
-	 * @param password
-	 *            the password of a user.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public User loginRead(String login, String password) {
@@ -126,9 +115,7 @@ public class UserDaoImpl implements UserDAO {
 	}
 
 	/**
-	 * Retrieves a list of users from the database.
-	 *
-	 * @return {@code List<User>} - the list of users.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<User> readAll() {
@@ -153,11 +140,9 @@ public class UserDaoImpl implements UserDAO {
 		}
 		return users;
 	}
-	
+
 	/**
-	 * Retrieves a list of users from the database.
-	 *
-	 * @return {@code List<User>} - the list of users.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<User> readAllWithPage(int start, int end) {
@@ -186,10 +171,7 @@ public class UserDaoImpl implements UserDAO {
 	}
 
 	/**
-	 * Updates user entry in the database.
-	 *
-	 * @param user
-	 *            the {@link by.htp.epam.bonjo.domain.User} entity.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void update(User user) {
@@ -212,10 +194,7 @@ public class UserDaoImpl implements UserDAO {
 	}
 
 	/**
-	 * Deletes user entry and his ads in the database.
-	 *
-	 * @param id
-	 *            the {@link by.htp.epam.bonjo.domain.User} entity.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void delete(int id) {

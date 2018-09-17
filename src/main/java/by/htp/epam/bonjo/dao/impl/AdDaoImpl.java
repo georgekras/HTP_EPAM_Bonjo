@@ -19,6 +19,8 @@ import by.htp.epam.bonjo.domain.Ad;
 /**
  * Works with a {@link by.htp.epam.bonjo.domain.Ad} entity class and has access
  * to the 'ads' database table.
+ * 
+ * @author George Krasutki
  *
  */
 public class AdDaoImpl implements AdDAO {
@@ -39,10 +41,7 @@ public class AdDaoImpl implements AdDAO {
 	private static final String SQL_QUERY_AD_READ_BY_USER_ID_WITH_PAGE = "SELECT * FROM `krasutski`.`ads` WHERE users_id=? LIMIT ?,?";
 
 	/**
-	 * Creates a new ad entry in the database.
-	 *
-	 * @param ad
-	 *            the {@link by.htp.epam.bonjo.domain.Ad} entity.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void create(Ad ad) {
@@ -64,10 +63,7 @@ public class AdDaoImpl implements AdDAO {
 	}
 
 	/**
-	 * Find a ad by id in the database.
-	 *
-	 * @param id
-	 *            the id of a ad.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Ad read(int id) {
@@ -93,9 +89,7 @@ public class AdDaoImpl implements AdDAO {
 	}
 
 	/**
-	 * Retrieves a list of ads from the database.
-	 *
-	 * @return {@code List<Ad>} - the list of ads.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<Ad> readAll() {
@@ -122,9 +116,7 @@ public class AdDaoImpl implements AdDAO {
 	}
 	
 	/**
-	 * Retrieves a list of ads from the database.
-	 *
-	 * @return {@code List<Ad>} - the list of ads.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<Ad> readAllWithPage(int start, int end) {
@@ -153,10 +145,7 @@ public class AdDaoImpl implements AdDAO {
 	}
 
 	/**
-	 * Updates ad entry in the database.
-	 *
-	 * @param ad
-	 *            the {@link by.htp.epam.bonjo.domain.Ad} entity.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void update(Ad ad) {
@@ -179,10 +168,7 @@ public class AdDaoImpl implements AdDAO {
 	}
 
 	/**
-	 * Deletes ad entry in the database.
-	 *
-	 * @param ad
-	 *            the {@link by.htp.epam.bonjo.domain.Ad} entity.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void delete(int id) {
@@ -199,11 +185,7 @@ public class AdDaoImpl implements AdDAO {
 	}
 
 	/**
-	 * Retrieves a list of ads by user id from the database.
-	 *
-	 * @param user_ID
-	 *            is the user id
-	 * @return {@code List<Ad>} - the list of ads by user id.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<Ad> readUserAds(int user_ID) {
@@ -229,13 +211,9 @@ public class AdDaoImpl implements AdDAO {
 		}
 		return ads;
 	}
-	
+
 	/**
-	 * Retrieves a list of ads by user id from the database.
-	 *
-	 * @param user_ID
-	 *            is the user id
-	 * @return {@code List<Ad>} - the list of ads by user id.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<Ad> readUserAdsWithPage(int user_ID, int start, int end) {

@@ -3,13 +3,13 @@ package by.htp.epam.bonjo.service.impl;
 import java.util.List;
 
 import by.htp.epam.bonjo.dao.AdDAO;
-import by.htp.epam.bonjo.dao.impl.AdDaoImpl;
+import by.htp.epam.bonjo.dao.DAOFactory;
 import by.htp.epam.bonjo.domain.Ad;
 import by.htp.epam.bonjo.service.AdService;
 
 public class AdServiceImpl implements AdService {
 
-	private AdDAO adDao = new AdDaoImpl();
+	private AdDAO adDao = DAOFactory.getDaoInstance().getAdDao();
 
 	@Override
 	public void create(Ad ad) {

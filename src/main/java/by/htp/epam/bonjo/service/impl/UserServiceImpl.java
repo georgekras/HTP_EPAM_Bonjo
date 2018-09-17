@@ -5,15 +5,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import by.htp.epam.bonjo.dao.DAOFactory;
 import by.htp.epam.bonjo.dao.UserDAO;
-import by.htp.epam.bonjo.dao.impl.UserDaoImpl;
 import by.htp.epam.bonjo.domain.User;
 import by.htp.epam.bonjo.service.UserService;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 
 public class UserServiceImpl implements UserService {
 
-	private UserDAO userDao = new UserDaoImpl();
+	private UserDAO userDao = DAOFactory.getDaoInstance().getUserDao();
 
 	@Override
 	public void create(User user) {

@@ -2,46 +2,107 @@ package by.htp.epam.bonjo.domain;
 
 import java.io.Serializable;
 
+/**
+ * Class describing User entity
+ * 
+ * @author George Krasutki
+ *
+ */
 public class User implements Serializable {
 
+	/**
+	 * An unique serial version identifier
+	 */
 	private static final long serialVersionUID = 7149316319217521151L;
 
+	/**
+	 * User id
+	 */
 	private int id;
-	private String login, email, password, nickname, phoneNumber;
+	/**
+	 * User login
+	 */
+	private String login;
+	/**
+	 * User email
+	 */
+	private String email;
+	/**
+	 * User password
+	 */
+	private String password;
+	/**
+	 * User nickname
+	 */
+	private String nickname;
+	/**
+	 * User phone number
+	 */
+	private String phoneNumber;
+	/**
+	 * User role id
+	 */
 	private int roles_ID;
 
+	/**
+	 * Constructor without parameters
+	 */
 	public User() {
 
 	}
 
+	/**
+	 * @return {@link #id}
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * @return {@link #login}
+	 */
 	public String getLogin() {
 		return login;
 	}
 
+	/**
+	 * @return {@link #email}
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * @return {@link #password}
+	 */
 	public String getPassword() {
 		return password;
 	}
-	
+
+	/**
+	 * @return {@link #nickname}
+	 */
 	public String getNickname() {
 		return nickname;
 	}
 
+	/**
+	 * @return {@link #phoneNumber}
+	 */
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
+	/**
+	 * @return {@link #roles_ID}
+	 */
 	public int getRoles_ID() {
 		return roles_ID;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -56,6 +117,9 @@ public class User implements Serializable {
 		return result;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -97,6 +161,9 @@ public class User implements Serializable {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		return "User{" + "ID=" + id + ", Login='" + login + '\'' + ", Email='" + email + '\'' + ", Password='"
@@ -104,50 +171,116 @@ public class User implements Serializable {
 				+ ", roles_ID=" + roles_ID + '}';
 	}
 
+	/**
+	 * Static method for create inner Builder class object
+	 * 
+	 * @return inner Builder class object
+	 */
 	public static Builder userBuilder() {
 		return new User().new Builder();
 	}
 
+	/**
+	 * Inner class for build User class object
+	 * 
+	 * @author George Krasutski
+	 *
+	 */
 	public class Builder {
 
+		/**
+		 * Constructor without parameters
+		 */
 		private Builder() {
 		}
 
+		/**
+		 * Sets id
+		 * 
+		 * @param id
+		 *            {@link #id}
+		 * @return Builder class object
+		 */
 		public Builder setId(int id) {
 			User.this.id = id;
 			return this;
 		}
 
+		/**
+		 * Sets login
+		 * 
+		 * @param login
+		 *            {@link #login}
+		 * @return Builder class object
+		 */
 		public Builder setLogin(String login) {
 			User.this.login = login;
 			return this;
 		}
 
+		/**
+		 * Sets email
+		 * 
+		 * @param email
+		 *            {@link #email}
+		 * @return Builder class object
+		 */
 		public Builder setEmail(String email) {
 			User.this.email = email;
 			return this;
 		}
 
+		/**
+		 * Sets password
+		 * 
+		 * @param password
+		 *            {@link #password}
+		 * @return Builder class object
+		 */
 		public Builder setPassword(String password) {
 			User.this.password = password;
 			return this;
 		}
 
+		/**
+		 * Sets nickname
+		 * 
+		 * @param nickname
+		 *            {@link #nickname}
+		 * @return Builder class object
+		 */
 		public Builder setNickname(String nickname) {
 			User.this.nickname = nickname;
 			return this;
 		}
 
+		/**
+		 * Sets phone number
+		 * 
+		 * @param phoneNumber
+		 *            {@link #phoneNumber}
+		 * @return Builder class object
+		 */
 		public Builder setPhoneNumber(String phoneNumber) {
 			User.this.phoneNumber = phoneNumber;
 			return this;
 		}
 
+		/**
+		 * Sets role id
+		 * 
+		 * @param roles_ID
+		 *            {@link #roles_ID}
+		 * @return Builder class object
+		 */
 		public Builder setRolesId(int roles_ID) {
 			User.this.roles_ID = roles_ID;
 			return this;
 		}
 
+		/**
+		 * @return ready User class object
+		 */
 		public User build() {
 			return User.this;
 		}

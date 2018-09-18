@@ -95,5 +95,6 @@ public interface UserService {
 	 * @return {@link by.htp.epam.bonjo.domain.User} user
 	 */
 	User isUserInSession(HttpServletRequest request);
-
+	
+	
 }

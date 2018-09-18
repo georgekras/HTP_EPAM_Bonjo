@@ -74,4 +74,21 @@ public interface UserDAO {
 	 */
 	void delete(int id);
 
+	/**
+	 * Find a user by login in the database
+	 *
+	 * @param login
+	 *            the login of a user
+	 * @return {@link by.htp.epam.bonjo.domain.User} user
+	 */
+	User readByLogin(String login);
+
+	/**
+	 * Find a user by email in the database
+	 *
+	 * @param email
+	 *            the email of a user
+	 * @return {@link by.htp.epam.bonjo.domain.User} user
+	 */
+	User readByEmail(String email);
 }

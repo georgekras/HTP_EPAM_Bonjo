@@ -24,6 +24,7 @@ public interface UserDAO {
 	 *
 	 * @param id
 	 *            the id of a user
+	 * @return {@link by.htp.epam.bonjo.domain.User} user
 	 */
 	User read(int id);
 
@@ -34,6 +35,7 @@ public interface UserDAO {
 	 *            the login of a user
 	 * @param password
 	 *            the password of a user
+	 * @return {@link by.htp.epam.bonjo.domain.User} user
 	 */
 	User loginRead(String login, String password);
 

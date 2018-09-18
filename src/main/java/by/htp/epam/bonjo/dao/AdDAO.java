@@ -24,6 +24,7 @@ public interface AdDAO {
 	 *
 	 * @param id
 	 *            the id of a ad
+	 * @return {@link by.htp.epam.bonjo.domain.Ad} ad
 	 */
 	Ad read(int id);
 
@@ -57,8 +58,8 @@ public interface AdDAO {
 	/**
 	 * Deletes ad entry in the database
 	 *
-	 * @param ad
-	 *            the {@link by.htp.epam.bonjo.domain.Ad} entity
+	 * @param id
+	 *            the {@link by.htp.epam.bonjo.domain.Ad} id
 	 */
 	void delete(int id);
 

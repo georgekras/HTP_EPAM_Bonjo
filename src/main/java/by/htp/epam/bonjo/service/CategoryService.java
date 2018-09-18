@@ -32,7 +32,7 @@ public interface CategoryService {
 	/**
 	 * Deletes category
 	 *
-	 * @param category
+	 * @param categoryId
 	 *            the {@link by.htp.epam.bonjo.domain.Category} entity
 	 */
 	void delete(int categoryId);
@@ -49,6 +49,7 @@ public interface CategoryService {
 	 *
 	 * @param id
 	 *            the id of a category
+	 * @return {@link by.htp.epam.bonjo.domain.Category} category
 	 */
 	Category read(int id);
 

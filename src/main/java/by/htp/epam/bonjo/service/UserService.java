@@ -54,7 +54,7 @@ public interface UserService {
 	/**
 	 * Deletes user entry and his ads
 	 *
-	 * @param id
+	 * @param userId
 	 *            the id of user
 	 */
 	void delete(int userId);

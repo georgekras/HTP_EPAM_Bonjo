@@ -26,6 +26,7 @@ public interface AdService {
 	 *
 	 * @param id
 	 *            the id of a ad
+	 * @return {@link by.htp.epam.bonjo.domain.Ad} ad
 	 */
 	Ad read(int id);
 
@@ -40,7 +41,7 @@ public interface AdService {
 	/**
 	 * Deletes ad
 	 *
-	 * @param ad
+	 * @param adId
 	 *            the {@link by.htp.epam.bonjo.domain.Ad} entity
 	 */
 	void delete(int adId);

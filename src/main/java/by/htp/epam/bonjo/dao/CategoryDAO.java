@@ -24,6 +24,7 @@ public interface CategoryDAO {
 	 *
 	 * @param id
 	 *            the id of a category
+	 * @return {@link by.htp.epam.bonjo.domain.Category} category
 	 */
 	Category read(int id);
 
@@ -45,8 +46,8 @@ public interface CategoryDAO {
 	/**
 	 * Deletes category entry in the database.
 	 *
-	 * @param category
-	 *            the {@link by.htp.epam.bonjo.domain.Category} entity.
+	 * @param id
+	 *            the {@link by.htp.epam.bonjo.domain.Category} id
 	 */
 	void delete(int id);
 

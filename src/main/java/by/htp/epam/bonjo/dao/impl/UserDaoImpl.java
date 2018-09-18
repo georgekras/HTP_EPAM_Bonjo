@@ -23,7 +23,7 @@ import by.htp.epam.bonjo.domain.User;
  */
 public class UserDaoImpl implements UserDAO {
 
-	private final BaseConnectionPool connectionPool = new ConnectionPool();
+	private final BaseConnectionPool connectionPool = ConnectionPool.getInstance();
 
 	private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 

@@ -24,7 +24,7 @@ import by.htp.epam.bonjo.domain.Category;
  */
 public class CategoryDaoImpl implements CategoryDAO {
 
-	private final BaseConnectionPool connectionPool = new ConnectionPool();
+	private final BaseConnectionPool connectionPool = ConnectionPool.getInstance();
 
 	private static final Logger logger = LoggerFactory.getLogger(CategoryDaoImpl.class);
 

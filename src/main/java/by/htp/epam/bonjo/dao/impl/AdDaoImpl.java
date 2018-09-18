@@ -25,7 +25,7 @@ import by.htp.epam.bonjo.domain.Ad;
  */
 public class AdDaoImpl implements AdDAO {
 
-	private final BaseConnectionPool connectionPool = new ConnectionPool();
+	private final BaseConnectionPool connectionPool = ConnectionPool.getInstance();
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdDaoImpl.class);
 

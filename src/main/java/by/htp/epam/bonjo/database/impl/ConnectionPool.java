@@ -12,24 +12,60 @@ import org.slf4j.LoggerFactory;
 
 import by.htp.epam.bonjo.database.BaseConnectionPool;
 
-public class ConnectionPool implements BaseConnectionPool{
+/**
+ * Class provides connections to the database
+ * 
+ * @author George Krasutski
+ *
+ */
+
+public class ConnectionPool implements BaseConnectionPool {
 
 	private static Logger logger = LoggerFactory.getLogger(ConnectionPool.class);
 
+	/**
+	 * Resource bundle gets database config
+	 */
 	private final static ResourceBundle rb = ResourceBundle.getBundle("db_config");
 
+	/**
+	 * Singleton instance
+	 */
 	private static ConnectionPool instance;
-	
+
+	/**
+	 * Connection pool size
+	 */
 	private final static int POOL_SIZE = 40;
+	/**
+	 * Database driver
+	 */
 	private final static String DRIVER = rb.getString("db.driver");
+	/**
+	 * Database URL
+	 */
 	private final static String URL = rb.getString("db.url");
+	/**
+	 * Database login
+	 */
 	private final static String LOGIN = rb.getString("db.login");
+	/**
+	 * Database password
+	 */
 	private final static String PASSWORD = rb.getString("db.pass");
-	
+
+	/**
+	 * queue for containing free connections
+	 */
 	private static BlockingQueue<Connection> connectionQueue = new ArrayBlockingQueue<>(POOL_SIZE);
+	/**
+	 * queue for containing occupied connections
+	 */
 	private static BlockingQueue<Connection> givenAwayConectionQueue = new ArrayBlockingQueue<>(POOL_SIZE);
 
-
+	/**
+	 * Constructor without parameters
+	 */
 	public ConnectionPool() {
 
 	}
@@ -49,7 +85,7 @@ public class ConnectionPool implements BaseConnectionPool{
 		}
 		return instance;
 	}
-	
+
 	public static void connectionPoolInitialization() {
 		try {
 			Class.forName(DRIVER);

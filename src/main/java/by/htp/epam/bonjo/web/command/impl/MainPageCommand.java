@@ -30,7 +30,7 @@ public class MainPageCommand implements Command {
 		if (strStart != null) {
 			startAd = Integer.parseInt(strStart);
 		}
-		ads = adService.getAllAdsWithPage(startAd, startAd + 9);
+		ads = adService.getAllAdsWithPage(startAd, 9);
 		List<Category> categories = categoryService.getAllCategories();
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_ADS_LIST, ads);
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, categories);

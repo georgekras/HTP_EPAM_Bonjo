@@ -66,7 +66,6 @@ public class EditAdCommand implements Command {
 					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_AD_DELETE,
 							ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_AD_DELETE);
 					adService.delete(chosenAdId);
-					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_USER_ADS_PAGE);
 				}
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_EDIT_AD).forward(request, response);
 			} catch (RegexValidateParamException e) {

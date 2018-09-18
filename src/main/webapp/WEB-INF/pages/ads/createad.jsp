@@ -28,7 +28,7 @@
 					<label class="col-md-4 control-label" for="title">${titleLoc}</label>
 					<div class="col-md-4">
 						<input id="title" name="ad_title" type="text" placeholder=""
-							class="form-control input-md" value="test">
+							class="form-control input-md" value="testa">
 					</div>
 				</div>
 
@@ -96,5 +96,5 @@
 </div>
 <script src="assets/js/jquery-1.9.1.js"></script>
 <script src="assets/js/jquery.validate.js"></script>
-<script src="assets/js/createad.validation2.js"></script>
+<script src="assets/js/createad.validate.js"></script>
 <%@ include file="/include/end-html.jsp"%>

@@ -42,7 +42,7 @@ public class UserAdsCommand implements Command {
 		if (strStart != null) {
 			startAd = Integer.parseInt(strStart);
 		}
-		userAds = adService.getUserAdsWithPage(user.getId(), startAd, startAd + 9);
+		userAds = adService.getUserAdsWithPage(user.getId(), startAd, 9);
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_ADS_LIST, userAds);
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, categories);
 		request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_USER_ADS).forward(request, response);

@@ -66,7 +66,6 @@
 	</div>
 </div>
 <script src="assets/js/jquery-1.9.1.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.validate.js"></script>
-<script src="assets/js/editcategory.validation.js"></script>
+<script src="assets/js/editcategory.validate.js"></script>
 <%@ include file="/include/end-html.jsp"%>

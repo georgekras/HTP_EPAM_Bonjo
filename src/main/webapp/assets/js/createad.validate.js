@@ -15,25 +15,25 @@ $(document).ready(function() {
 					required : true,
 					minlength : 5,
 					maxlength : 45,
-					regex : /[а-яА-Яa-zA-Z0-9%_-\\s]/,
+					regex : /^[а-яА-Яa-zA-Z0-9\-_%\s]{5,45}$/,
 				},
 				ad_smalldesc : {
 					required : true,
 					minlength : 4,
 					maxlength : 100,
-					regex : /[а-яА-Яa-zA-Z0-9,.-_%()\\s]/,
+					regex : /^[а-яА-Яa-zA-Z0-9,.\-_%()\s]{4,100}$/,
 				},
 				ad_description : {
 					required : true,
 					minlength : 4,
 					maxlength : 200,
-					regex : /[а-яА-Яa-zA-Z0-9,.-_%()\\s]/,
+					regex : /^[а-яА-Яa-zA-Z0-9,.\-_%()\s]{4,200}$/,
 				},
 				ad_price : {
 					required : true,
 					minlength : 1,
 					maxlength : 10,
-					regex : /^[0-9]$/,
+					regex : /^[0-9]{1,10}$/,
 				}
 			},
 			messages : {
@@ -41,7 +41,7 @@ $(document).ready(function() {
 					required : "This field is required",
 					minlength : "Title must be 5-45 characters long",
 					maxlength : "Title must be 5-45 characters long",
-					regex : "Title contains only eng letters and numbers"
+					regex : "Title contains invalid characters"
 				},
 				ad_smalldesc : {
 					required : "This field is required",

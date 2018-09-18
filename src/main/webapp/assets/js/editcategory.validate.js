@@ -15,7 +15,7 @@ $(document).ready(function() {
 					required : true,
 					minlength : 3,
 					maxlength : 40,
-					regex : /^[a-zA-Z0-9_-\\s]{3,40}$/,
+					regex : /^[а-яА-Яa-zA-Z0-9\-\s_]{3,40}$/,
 				}
 			},
 			messages : {
@@ -23,7 +23,7 @@ $(document).ready(function() {
 					required : "This field is required",
 					minlength : "Category name must be 3-40 characters long",
 					maxlength : "Category name must be 3-40 characters long",
-					regex : "Invalid characters"
+					regex : "Category name contains invalid characters"
 				},
 			},
 		});

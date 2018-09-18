@@ -9,7 +9,7 @@ $(document).ready(function() {
 			return regexpr.test(value);
 		});
 
-		$("#editusersForm").validate({
+		$("#signupForm").validate({
 			rules : {
 				user_login : {
 					required : true,
@@ -25,14 +25,14 @@ $(document).ready(function() {
 				},
 				user_email : {
 					required : true,
-					regex : /^[a-zA-Z0-9._+-]{3,24}+@[a-zA-Z0-9.]{3,20}+.[a-zA-Z]{2,6}$/,
+					regex : /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9]+.[a-zA-Z]{2,6}$/,
 					maxlength : 50,
 				},
 				user_nickname : {
 					required : true,
 					minlength : 5,
 					maxlength : 20,
-					regex : /^[a-zA-Z0-9]{5,20}$/,
+					regex : /^[а-яА-Яa-zA-Z0-9_]{5,20}$/,
 				},
 				user_phone : {
 					required : true,
@@ -62,7 +62,7 @@ $(document).ready(function() {
 					required : "This field is required",
 					minlength : "Nickname must be 5-20 characters long",
 					maxlength : "Nickname must be 5-20 characters long",
-					regex : "Nickname contains only eng letters and numbers"
+					regex : "Nickname contains invalid characters"
 				},
 				user_phone : {
 					required : "This field is required",
@@ -71,6 +71,6 @@ $(document).ready(function() {
 				}
 			},
 		});
-		$("#editusersForm").valid();
+		$("#signupForm").valid();
 	});
 });

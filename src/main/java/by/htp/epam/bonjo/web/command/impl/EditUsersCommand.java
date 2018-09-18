@@ -38,7 +38,7 @@ public class EditUsersCommand implements Command {
 		if (strStart != null) {
 			startUser = Integer.parseInt(strStart);
 		}
-		users = userService.getAllUsersWithPage(startUser, startUser + 9);
+		users = userService.getAllUsersWithPage(startUser, 8);
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_USER_LIST, users);
 		if (HttpRequestParamValidator.isPost(request)) {
 			try {

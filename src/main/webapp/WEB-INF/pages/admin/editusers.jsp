@@ -77,7 +77,7 @@
 		</c:if>
 	</div>
 	<div class="row col-md-2">
-		<mytag:paginator count="${usersSize}" step="9"
+		<mytag:paginator count="${usersSize}" step="8"
 			urlprefix="?command=editusers&users=" />
 	</div>
 </div>

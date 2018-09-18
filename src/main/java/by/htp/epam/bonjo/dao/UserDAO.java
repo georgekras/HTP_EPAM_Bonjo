@@ -4,6 +4,11 @@ import java.util.List;
 
 import by.htp.epam.bonjo.domain.User;
 
+/**
+ * Interface provides specific methods for access to data in users table
+ * 
+ * @author George Krasutski
+ */
 public interface UserDAO {
 
 	/**

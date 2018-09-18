@@ -13,19 +13,30 @@ import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 
 public class UserServiceImpl implements UserService {
 
+	/**
+	 * UserDao instance
+	 */
 	private UserDAO userDao = DAOFactory.getDaoInstance().getUserDao();
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void create(User user) {
 		userDao.create(user);
-
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public User read(int id) {
 		return userDao.read(id);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void update(User user) {
 		userDao.update(user);
@@ -36,21 +47,33 @@ public class UserServiceImpl implements UserService {
 		userDao.delete(userId);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<User> getAllUsers() {
 		return userDao.readAll();
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<User> getAllUsersWithPage(int start, int end) {
 		return userDao.readAllWithPage(start, end);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public User loginRead(String login, String password) {
 		return userDao.loginRead(login, password);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean isUserAdmin(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -58,6 +81,9 @@ public class UserServiceImpl implements UserService {
 		return user != null && user.getRoles_ID() == 1;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public User isUserInSession(HttpServletRequest request) {
 		HttpSession session = request.getSession();

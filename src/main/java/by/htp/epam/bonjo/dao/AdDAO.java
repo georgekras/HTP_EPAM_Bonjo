@@ -5,7 +5,7 @@ import java.util.List;
 import by.htp.epam.bonjo.domain.Ad;
 
 /**
- * Interface provides specific methods for access to data in ads table.
+ * Interface provides specific methods for access to data in ads table
  * 
  * @author George Krasutski
  */

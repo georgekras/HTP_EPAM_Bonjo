@@ -5,7 +5,7 @@ import java.util.List;
 import by.htp.epam.bonjo.domain.Category;
 
 /**
- * Interface provides specific methods for access to data in category table.
+ * Interface provides specific methods for access to data in category table
  * 
  * @author George Krasutski
  */

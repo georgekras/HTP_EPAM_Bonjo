@@ -31,6 +31,8 @@ public class UserDaoImpl implements UserDAO {
 			+ " `Nickname`, `PhoneNumber`, `roles_ID`) VALUES(?,?,?,?,?,?);";
 	private static final String SQL_QUERY_USER_READ = "SELECT * FROM `krasutski`.`users` WHERE ID=?;";
 	private static final String SQL_QUERY_USER_READ_BY_LOGIN_AND_PASSWORD = "SELECT * FROM `krasutski`.`users` WHERE `login`=? AND `password`=?;";
+	private static final String SQL_QUERY_USER_READ_BY_LOGIN = "SELECT * FROM `krasutski`.`users` WHERE `login`=?;";
+	private static final String SQL_QUERY_USER_READ_BY_EMAIL = "SELECT * FROM `krasutski`.`users` WHERE `email`=?;";
 	private static final String SQL_QUERY_USER_READ_ALL = "SELECT * FROM `krasutski`.`users`";
 	private static final String SQL_QUERY_USER_READ_ALL_WITH_PAGE = "SELECT * FROM `krasutski`.`users` LIMIT ?,?";
 	private static final String SQL_QUERY_USER_UPDATE = "UPDATE `krasutski`.`users` SET `Login`=?, `Password`=?, `Email`=?,"
@@ -102,7 +104,7 @@ public class UserDaoImpl implements UserDAO {
 			if (rs.next())
 				return buildUser(rs);
 		} catch (SQLException e) {
-			logger.error("SQLException in read(String login, String password) method of UserDaoImpl class", e);
+			logger.error("SQLException in read method of UserDaoImpl class", e);
 		} finally {
 			connectionPool.putConnection(con);
 			try {
@@ -232,6 +234,56 @@ public class UserDaoImpl implements UserDAO {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public User readByLogin(String login) {
+		ResultSet rs = null;
+		Connection connection = connectionPool.getConnection();
+		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_READ_BY_LOGIN)) {
+			ps.setString(1, login);
+			rs = ps.executeQuery();
+			if (rs.next())
+				return buildUser(rs);
+		} catch (SQLException e) {
+			logger.error("SQLException in readByLogin method of UserDaoImpl class", e);
+		} finally {
+			connectionPool.putConnection(connection);
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				logger.error("Fail to close result set in userDao readByLogin method", e);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public User readByEmail(String email) {
+		ResultSet rs = null;
+		Connection connection = connectionPool.getConnection();
+		try (PreparedStatement ps = connection.prepareStatement(SQL_QUERY_USER_READ_BY_EMAIL)) {
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			if (rs.next())
+				return buildUser(rs);
+		} catch (SQLException e) {
+			logger.error("SQLException in readByEmail method of UserDaoImpl class", e);
+		} finally {
+			connectionPool.putConnection(connection);
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				logger.error("Fail to close result set in userDao loginRead method", e);
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Build user.
 	 *
 	 * @param rs
@@ -245,5 +297,4 @@ public class UserDaoImpl implements UserDAO {
 				.setRolesId(rs.getInt("roles_ID")).build();
 		return user;
 	}
-
 }

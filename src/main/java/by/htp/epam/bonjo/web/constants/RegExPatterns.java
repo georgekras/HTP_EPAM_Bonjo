@@ -1,5 +1,11 @@
 package by.htp.epam.bonjo.web.constants;
 
+/**
+ * Class contains regex constants
+ * 
+ * @author George Krasutski
+ *
+ */
 public class RegExPatterns {
 
 	public static final String USER_LOGIN = "^[a-zA-Z0-9]{5,20}$";
@@ -14,5 +20,4 @@ public class RegExPatterns {
 	public static final String AD_PRICE = "[0-9]{1,10}";
 	
 	public static final String CATEGORY_NAME = "^[а-яА-Яa-zA-Z0-9\\-\\s_]{3,40}$";
-
 }

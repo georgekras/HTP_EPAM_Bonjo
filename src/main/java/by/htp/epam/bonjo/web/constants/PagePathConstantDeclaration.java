@@ -1,5 +1,11 @@
 package by.htp.epam.bonjo.web.constants;
 
+/**
+ * Class contains pages path constants
+ * 
+ * @author George Krasutski
+ *
+ */
 public class PagePathConstantDeclaration {
 
 	public static final String PAGE_ADMIN_CREATE_CATEGORY = "/WEB-INF/pages/admin/createcategory.jsp";
@@ -17,5 +23,4 @@ public class PagePathConstantDeclaration {
 	public static final String PAGE_USER_SIGNUP = "/WEB-INF/pages/user/signup.jsp";
 	public static final String PAGE_USER_PROFILE = "/WEB-INF/pages/user/profile.jsp";
 	public static final String PAGE_USER_ERROR = "/WEB-INF/pages/user/error.jsp";
-
 }

@@ -20,10 +20,24 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Class implementing Command interface
+ * 
+ * @author George Krasutski
+ *
+ */
 public class EditUsersCommand implements Command {
 
+	/**
+	 * UserService instance
+	 * 
+	 * {@link by.htp.epam.bonjo.service.UserService}
+	 */
 	private UserService userService = ServiceFactory.getServiceInstance().getUserService();
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (!userService.isUserAdmin(request)) {

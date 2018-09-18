@@ -17,12 +17,36 @@ import by.htp.epam.bonjo.web.command.Command;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 
-public class ViewAdCommand implements Command{
-	
+/**
+ * Class implementing Command interface
+ * 
+ * @author George Krasutski
+ *
+ */
+public class ViewAdCommand implements Command {
+
+	/**
+	 * AdService instance
+	 * 
+	 * {@link by.htp.epam.bonjo.service.AdService}
+	 */
 	private AdService adService = ServiceFactory.getServiceInstance().getAdService();
+	/**
+	 * CategoryService instance
+	 * 
+	 * {@link by.htp.epam.bonjo.service.CategoryService}
+	 */
 	private CategoryService categoryService = ServiceFactory.getServiceInstance().getCategoryService();
+	/**
+	 * UserService instance
+	 * 
+	 * {@link by.htp.epam.bonjo.service.UserService}
+	 */
 	private UserService userService = ServiceFactory.getServiceInstance().getUserService();
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String adId = request.getParameter("adId");
@@ -38,5 +62,4 @@ public class ViewAdCommand implements Command{
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORY, category);
 		request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_VIEW_AD).forward(request, response);
 	}
-
 }

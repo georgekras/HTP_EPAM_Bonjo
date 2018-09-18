@@ -21,11 +21,30 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Class implementing Command interface
+ * 
+ * @author George Krasutski
+ *
+ */
 public class EditCategoryCommand implements Command {
 
+	/**
+	 * CategoryService instance
+	 * 
+	 * {@link by.htp.epam.bonjo.service.CategoryService}
+	 */
 	private CategoryService categoryService = ServiceFactory.getServiceInstance().getCategoryService();
+	/**
+	 * UserService instance
+	 * 
+	 * {@link by.htp.epam.bonjo.service.UserService}
+	 */
 	private UserService userService = ServiceFactory.getServiceInstance().getUserService();
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (!userService.isUserAdmin(request)) {
@@ -54,7 +73,7 @@ public class EditCategoryCommand implements Command {
 				}
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_CATEGORY).forward(request,
 						response);
-			} catch (RegexValidateParamException e) {
+			} catch (RegexValidateParamException | NullPointerException e) {
 				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_CATEGORY_ERROR,
 						ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_CATEGORY_ERROR);
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_CATEGORY).forward(request,

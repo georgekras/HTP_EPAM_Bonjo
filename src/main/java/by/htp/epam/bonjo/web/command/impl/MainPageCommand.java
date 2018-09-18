@@ -16,11 +16,30 @@ import by.htp.epam.bonjo.web.command.Command;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 
+/**
+ * Class implementing Command interface
+ * 
+ * @author George Krasutski
+ *
+ */
 public class MainPageCommand implements Command {
 
+	/**
+	 * AdService instance
+	 * 
+	 * {@link by.htp.epam.bonjo.service.AdService}
+	 */
 	private AdService adService = ServiceFactory.getServiceInstance().getAdService();
+	/**
+	 * CategoryService instance
+	 * 
+	 * {@link by.htp.epam.bonjo.service.CategoryService}
+	 */
 	private CategoryService categoryService = ServiceFactory.getServiceInstance().getCategoryService();
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Ad> ads = adService.getAllAds();
@@ -36,5 +55,4 @@ public class MainPageCommand implements Command {
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, categories);
 		request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_HOME).forward(request, response);
 	}
-
 }

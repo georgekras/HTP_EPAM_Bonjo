@@ -10,8 +10,11 @@ import javax.servlet.ServletResponse;
 
 /**
  * Filter class for state request and response encoding
+ * 
+ * @author George Krasutski
  */
 public class EncodingFilter implements Filter {
+	
 	/**
 	 * encoding field
 	 */

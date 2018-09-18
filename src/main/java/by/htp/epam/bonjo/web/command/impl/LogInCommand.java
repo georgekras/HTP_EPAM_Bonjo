@@ -20,10 +20,24 @@ import by.htp.epam.bonjo.web.util.exceptions.ValidateNullParamException;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RegexParamValidator;
 
+/**
+ * Class implementing Command interface
+ * 
+ * @author George Krasutski
+ *
+ */
 public class LogInCommand implements Command {
 
+	/**
+	 * UserService instance
+	 * 
+	 * {@link by.htp.epam.bonjo.service.UserService}
+	 */
 	private UserService userService = ServiceFactory.getServiceInstance().getUserService();
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();

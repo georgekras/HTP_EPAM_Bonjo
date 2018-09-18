@@ -9,10 +9,24 @@ import org.slf4j.LoggerFactory;
 
 import by.htp.epam.bonjo.web.util.exceptions.ValidateNullParamException;
 
+/**
+ * Class for parameters validation
+ * 
+ * @author George Krasutski
+ *
+ */
 public class HttpRequestParamValidator {
 
 	private static Logger logger = LoggerFactory.getLogger(HttpRequestParamValidator.class);
 
+	/**
+	 * Validates strings. Check is if parameter null or not
+	 * 
+	 * @param str
+	 *            parameters
+	 * @throws ValidateParamException
+	 *             if parameter null
+	 */
 	public static void validateRequestParamNotNull(String... str) {
 		for (String s : str) {
 			if (s == null) {
@@ -22,6 +36,14 @@ public class HttpRequestParamValidator {
 		}
 	}
 
+	/**
+	 * Validates objects. Check is if parameter null or not
+	 * 
+	 * @param objects
+	 *            parameters
+	 * @throws ValidateParamException
+	 *             if parameter null
+	 */
 	public static void validateRequestParamObjectNotNull(Object... objects) {
 		for (Object o : objects) {
 			if (o == null) {
@@ -31,6 +53,14 @@ public class HttpRequestParamValidator {
 		}
 	}
 
+	/**
+	 * Validates locale
+	 * 
+	 * @param locale
+	 *            locale
+	 * @throws ValidateParamException
+	 *             if locale not valid
+	 */
 	public static void validateRequestParamLocaleNotNull(String locale) {
 		if (locale == null || !Pattern.matches("[a-zA-Z]{2}_[a-zA-Z]{2}", locale)) {
 			logger.error("Empty parameter recieved");
@@ -39,6 +69,13 @@ public class HttpRequestParamValidator {
 		}
 	}
 
+	/**
+	 * check method post or not
+	 * 
+	 * @param request
+	 *            HttpServletRequest object
+	 * @return {@code true} if method post, {@code false} otherwise
+	 */
 	public static boolean isPost(HttpServletRequest request) {
 		return request.getMethod().toUpperCase().equals("POST");
 	}

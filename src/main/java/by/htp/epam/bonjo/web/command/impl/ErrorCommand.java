@@ -9,16 +9,23 @@ import javax.servlet.http.HttpServletResponse;
 import by.htp.epam.bonjo.web.command.Command;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 
-public class ErrorCommand implements Command{
+/**
+ * Class implementing Command interface
+ * 
+ * @author George Krasutski
+ *
+ */
+public class ErrorCommand implements Command {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_ERROR).forward(request, response);
 		} catch (ServletException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
 }

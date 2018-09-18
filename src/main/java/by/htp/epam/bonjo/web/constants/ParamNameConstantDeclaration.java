@@ -1,5 +1,11 @@
 package by.htp.epam.bonjo.web.constants;
 
+/**
+ * Class contains parameters constants
+ * 
+ * @author George Krasutski
+ *
+ */
 public class ParamNameConstantDeclaration {
 
 	public static final String SESSION_PARAM_CURRENT_USER = "currentUser";
@@ -56,6 +62,5 @@ public class ParamNameConstantDeclaration {
 	public static final String REQUEST_PARAM_MESSAGE_LOGIN_DUPLICATION = "loginDuplication";
 	public static final String REQUEST_PARAM_MESSAGE_SIGNUP_ERROR = "signupError";
 	public static final String REQUEST_PARAM_MESSAGE_SIGNUP_LOGIN_TAKEN = "signupLoginTaken";
-	public static final String REQUEST_PARAM_MESSAGE_SIGNUP_EMAIL_TAKEN = "signupEmailTaken";
-	
+	public static final String REQUEST_PARAM_MESSAGE_SIGNUP_EMAIL_TAKEN = "signupEmailTaken";	
 }

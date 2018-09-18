@@ -24,12 +24,36 @@ import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RegexParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
+/**
+ * Class implementing Command interface
+ * 
+ * @author George Krasutski
+ *
+ */
 public class EditAdCommand implements Command {
 
+	/**
+	 * AdService instance
+	 * 
+	 * {@link by.htp.epam.bonjo.service.AdService}
+	 */
 	private AdService adService = ServiceFactory.getServiceInstance().getAdService();
+	/**
+	 * CategoryService instance
+	 * 
+	 * {@link by.htp.epam.bonjo.service.CategoryService}
+	 */
 	private CategoryService categoryService = ServiceFactory.getServiceInstance().getCategoryService();
+	/**
+	 * UserService instance
+	 * 
+	 * {@link by.htp.epam.bonjo.service.UserService}
+	 */
 	private UserService userService = ServiceFactory.getServiceInstance().getUserService();
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user = userService.isUserInSession(request);

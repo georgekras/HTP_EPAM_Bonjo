@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import by.htp.epam.bonjo.web.command.Command;
 import by.htp.epam.bonjo.web.command.CommandManager;
+import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 
 /**
@@ -53,14 +54,18 @@ public class Controller extends HttpServlet {
 	 *            request from client to server
 	 * @param response
 	 *            response from server to client
+	 * @throws IOException
+	 * @throws ServletException
 	 */
-	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
+	private void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 		try {
 			String commandName = request.getParameter(ParamNameConstantDeclaration.REQUEST_PARAM_COMMAND);
 			Command command = CommandManager.defineCommand(commandName);
 			command.execute(request, response);
 		} catch (NullPointerException | ServletException | IOException e) {
 			logger.error(e.getMessage() + " in Controller class", e);
+			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_ERROR).forward(request, response);
 		}
 	}
 }

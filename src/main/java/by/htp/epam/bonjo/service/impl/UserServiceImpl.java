@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAllUsers() {
 		return userDao.readAll();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -91,4 +91,19 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public User readByLogin(String login) {
+		return userDao.readByLogin(login);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public User readByEmail(String email) {
+		return userDao.readByEmail(email);
+	}
 }

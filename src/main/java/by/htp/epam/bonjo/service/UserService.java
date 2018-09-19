@@ -96,5 +96,22 @@ public interface UserService {
 	 */
 	User isUserInSession(HttpServletRequest request);
 	
+	/**
+	 * Find a user by login
+	 *
+	 * @param login
+	 *            the login of a user
+	 * @return {@link by.htp.epam.bonjo.domain.User} user
+	 */
+	User readByLogin(String login);
+	
+	/**
+	 * Find a user by email
+	 *
+	 * @param email
+	 *            the email of a user
+	 * @return {@link by.htp.epam.bonjo.domain.User} user
+	 */
+	User readByEmail(String email);
 	
 }

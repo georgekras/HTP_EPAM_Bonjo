@@ -40,13 +40,19 @@ public class LogInCommand implements Command {
 	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User user = userService.isUserInSession(request);
+		if (user != null) {
+			response.sendRedirect(
+					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_HOME_PAGE));
+			return;
+		}
 		HttpSession session = request.getSession();
 		if (HttpRequestParamValidator.isPost(request)) {
 			String login = request.getParameter(ParamNameConstantDeclaration.REQUEST_PARAM_USER_LOGIN);
 			String password = request.getParameter(ParamNameConstantDeclaration.REQUEST_PARAM_USER_PASSWORD);
 			try {
 				RegexParamValidator.userLoginValidation(login, password);
-				User user = userService.loginRead(login, password);
+				user = userService.loginRead(login, password);
 				HttpRequestParamValidator.validateRequestParamObjectNotNull(user);
 				session.setAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER, user);
 				session.setAttribute(ParamNameConstantDeclaration.SESSION_PARAM_CURRENT_USER_ROLE_ID,

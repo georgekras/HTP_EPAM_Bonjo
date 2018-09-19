@@ -6,8 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import by.htp.epam.bonjo.dao.DAOFactory;
-import by.htp.epam.bonjo.dao.UserDAO;
 import by.htp.epam.bonjo.domain.User;
 import by.htp.epam.bonjo.service.ServiceFactory;
 import by.htp.epam.bonjo.service.UserService;
@@ -41,7 +39,6 @@ public class SignUpCommand implements Command {
 	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserDAO userDao = DAOFactory.getDaoInstance().getUserDao();
 		if (HttpRequestParamValidator.isPost(request)) {
 			String login = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_LOGIN);
 			String email = RequestParamUtil.getString(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_EMAIL);
@@ -53,12 +50,12 @@ public class SignUpCommand implements Command {
 					ParamNameConstantDeclaration.REQUEST_PARAM_USER_PHONENUMBER);
 			try {
 				RegexParamValidator.userRegistrationValidation(login, password, email, nickname, phoneNumber);
-				if (userDao.readByLogin(login) != null) {
+				if (userService.readByLogin(login) != null) {
 					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_SIGNUP_LOGIN_TAKEN,
 							ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_SIGNUP_LOGIN_TAKEN);
 					request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_SIGNUP).forward(request,
 							response);
-				} else if (userDao.readByEmail(email) != null) {
+				} else if (userService.readByEmail(email) != null) {
 					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_SIGNUP_EMAIL_TAKEN,
 							ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_SIGNUP_EMAIL_TAKEN);
 					request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_USER_SIGNUP).forward(request,

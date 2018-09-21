@@ -17,6 +17,7 @@ import by.htp.epam.bonjo.web.command.impl.ProfileCommand;
 import by.htp.epam.bonjo.web.command.impl.SignUpCommand;
 import by.htp.epam.bonjo.web.command.impl.UserAdsCommand;
 import by.htp.epam.bonjo.web.command.impl.ViewAdCommand;
+import by.htp.epam.bonjo.web.command.impl.ViewUsersCommand;
 import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 
 /**
@@ -39,7 +40,7 @@ public class CommandManager {
 		commands.put(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_CREATE_CATEGORY_PAGE, new CreateCategoryCommand());
 		commands.put(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_EDIT_AD_PAGE, new EditAdCommand());
 		commands.put(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_EDIT_CATEGORY_PAGE, new EditCategoryCommand());
-		commands.put(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_EDIT_USERS_PAGE, new EditUsersCommand());
+		commands.put(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_EDIT_USER_PAGE, new EditUsersCommand());
 		commands.put(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_HOME_PAGE, new MainPageCommand());
 		commands.put(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_LOGIN_PAGE, new LogInCommand());
 		commands.put(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_LOGOUT_PAGE, new LogOutCommand());
@@ -48,6 +49,7 @@ public class CommandManager {
 		commands.put(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_USER_ADS_PAGE, new UserAdsCommand());
 		commands.put(CommandNameConstantDeclaration.COMMAND_NAME_CHANGE_LOCALE, new ChangeLocaleCommand());
 		commands.put(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_ERROR_PAGE, new ErrorCommand());
+		commands.put(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_USERS_PAGE, new ViewUsersCommand());
 	}
 
 	/**

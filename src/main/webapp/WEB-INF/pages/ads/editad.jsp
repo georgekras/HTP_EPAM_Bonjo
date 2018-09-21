@@ -14,7 +14,6 @@
 </fmt:bundle>
 <fmt:bundle basename="localization.msg" prefix="msg.message.editAd.">
 	<fmt:message key="editAdUpdate" var="editAdUpdateLoc" />
-	<fmt:message key="editAdDelete" var="editAdDeleteLoc" />
 	<fmt:message key="editAdError" var="editAdErrorLoc" />
 </fmt:bundle>
 <div align="center">
@@ -98,15 +97,9 @@
 				</div>
 			</fieldset>
 		</form>
-
 		<c:if test="${not empty requestScope.editAdUpdate}">
 			<div class="alert alert-danger" role="alert">
 				<c:out value="${editAdUpdateLoc}"></c:out>
-			</div>
-		</c:if>
-		<c:if test="${not empty requestScope.editAdDelete}">
-			<div class="alert alert-danger" role="alert">
-				<c:out value="${editAdDeleteLoc}"></c:out>
 			</div>
 		</c:if>
 		<c:if test="${not empty requestScope.editAdError}">

@@ -40,10 +40,10 @@
 				</div>
 			</c:forEach>
 		</div>
-	</div>
-	<div class="row col-md-1">
-		<mytag:paginator count="${adsSize}" step="9"
-			urlprefix="?command=home&ads=" />
+		<div class="row col-md-1">
+			<mytag:paginator count="${adsSize}" step="9"
+				urlprefix="?command=home&ads=" />
+		</div>
 	</div>
 </div>
 <%@ include file="/include/end-html.jsp"%>

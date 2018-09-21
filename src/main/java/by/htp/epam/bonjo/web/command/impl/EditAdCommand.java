@@ -65,6 +65,11 @@ public class EditAdCommand implements Command {
 		String adId = request.getParameter("adId");
 		int chosenAdId = Integer.parseInt(adId);
 		Ad chosenUserAd = adService.read(chosenAdId);
+		if (chosenUserAd.getUsers_ID() != user.getId()) {
+			response.sendRedirect(
+					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_HOME_PAGE));
+			return;
+		}
 		List<Category> categories = categoryService.getAllCategories();
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_USER_AD, chosenUserAd);
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, categories);
@@ -83,19 +88,20 @@ public class EditAdCommand implements Command {
 						.build();
 				RegexParamValidator.userEditAdValidation(title, smallDesc, description, price, category_Id);
 				if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
+					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_USER_AD, ad);
 					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_AD_UPDATE,
 							ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_AD_UPDATE);
 					adService.update(ad);
 				} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
-					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_AD_DELETE,
-							ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_AD_DELETE);
 					adService.delete(chosenAdId);
+					response.sendRedirect(UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_USER_ADS_PAGE));
 				}
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_EDIT_AD).forward(request, response);
 			} catch (RegexValidateParamException e) {
 				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_AD_ERROR,
 						ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_AD_ERROR);
 			}
+
 		} else {
 			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_EDIT_AD).forward(request, response);
 		}

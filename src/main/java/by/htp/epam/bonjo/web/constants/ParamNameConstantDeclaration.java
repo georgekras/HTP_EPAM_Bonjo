@@ -58,6 +58,7 @@ public class ParamNameConstantDeclaration {
 	public static final String REQUEST_PARAM_MESSAGE_EDIT_CATEGORY_DELETE = "editCategoryDelete";
 	public static final String REQUEST_PARAM_MESSAGE_EDIT_CATEGORY_ERROR = "editCategoryError";
 	public static final String REQUEST_PARAM_MESSAGE_EDIT_USER_ERROR = "editUserError";
+	public static final String REQUEST_PARAM_MESSAGE_EDIT_USER_UPDATE = "editUserUpdate";
 	public static final String REQUEST_PARAM_MESSAGE_LOGIN_ERROR = "loginError";
 	public static final String REQUEST_PARAM_MESSAGE_LOGIN_DUPLICATION = "loginDuplication";
 	public static final String REQUEST_PARAM_MESSAGE_SIGNUP_ERROR = "signupError";

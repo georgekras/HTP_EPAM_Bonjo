@@ -64,7 +64,7 @@ public class Ad implements Serializable {
 	public String getTitle() {
 		return title;
 	}
-	
+
 	/**
 	 * @return {@link #smallDesc}
 	 */
@@ -261,7 +261,7 @@ public class Ad implements Serializable {
 		}
 
 		/**
-		 * Sets category id 
+		 * Sets category id
 		 * 
 		 * @param category_ID
 		 *            {@link #category_ID}

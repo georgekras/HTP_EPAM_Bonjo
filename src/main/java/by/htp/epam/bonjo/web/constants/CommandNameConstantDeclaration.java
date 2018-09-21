@@ -23,5 +23,6 @@ public class CommandNameConstantDeclaration {
 
 	public static final String COMMAND_NAME_VIEW_CREATE_CATEGORY_PAGE = "createcategory";
 	public static final String COMMAND_NAME_VIEW_EDIT_CATEGORY_PAGE = "editcategory";
-	public static final String COMMAND_NAME_VIEW_EDIT_USERS_PAGE = "editusers";
+	public static final String COMMAND_NAME_VIEW_EDIT_USER_PAGE = "edituser";
+	public static final String COMMAND_NAME_VIEW_USERS_PAGE = "viewusers";
 }

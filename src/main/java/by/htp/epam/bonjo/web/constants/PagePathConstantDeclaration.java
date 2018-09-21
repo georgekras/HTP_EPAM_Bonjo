@@ -10,7 +10,8 @@ public class PagePathConstantDeclaration {
 
 	public static final String PAGE_ADMIN_CREATE_CATEGORY = "/WEB-INF/pages/admin/createcategory.jsp";
 	public static final String PAGE_ADMIN_EDIT_CATEGORY = "/WEB-INF/pages/admin/editcategory.jsp";
-	public static final String PAGE_ADMIN_EDIT_USERS = "/WEB-INF/pages/admin/editusers.jsp";
+	public static final String PAGE_ADMIN_EDIT_USER = "/WEB-INF/pages/admin/edituser.jsp";
+	public static final String PAGE_ADMIN_VIEW_USERS = "/WEB-INF/pages/admin/viewusers.jsp";
 
 	public static final String PAGE_ADS_CREATE_AD = "/WEB-INF/pages/ads/createad.jsp";
 	public static final String PAGE_ADS_USER_ADS = "/WEB-INF/pages/ads/myads.jsp";

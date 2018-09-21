@@ -43,7 +43,7 @@
 						href="bonjo?command=home">${homeLoc}</a></li>
 					<c:if test="${currentUser!=null && currentUser.roles_ID==1}">
 						<li class="nav-item active"><a class="nav-link"
-							href="bonjo?command=editusers">${editUsersLoc}</a></li>
+							href="bonjo?command=viewusers">${editUsersLoc}</a></li>
 						<li class="nav-item active"><a class="nav-link"
 							href="bonjo?command=createcategory">${createCategoryLoc}</a></li>
 						<li class="nav-item active"><a class="nav-link"

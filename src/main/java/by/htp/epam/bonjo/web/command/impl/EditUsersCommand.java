@@ -14,7 +14,6 @@ import by.htp.epam.bonjo.web.util.validators.RegexParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -45,18 +44,12 @@ public class EditUsersCommand implements Command {
 					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_HOME_PAGE));
 			return;
 		}
-		List<User> users = userService.getAllUsers();
-		request.setAttribute("usersSize", users.size());
-		String strStart = request.getParameter(ParamNameConstantDeclaration.REQUEST_PARAM_USER_LIST);
-		int startUser = 0;
-		if (strStart != null) {
-			startUser = Integer.parseInt(strStart);
-		}
-		users = userService.getAllUsersWithPage(startUser, 8);
-		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_USER_LIST, users);
+		String userId = request.getParameter("userId");
+		int chosenUserId = Integer.parseInt(userId);
+		User chosenUser = userService.read(chosenUserId);
+		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_USER, chosenUser);
 		if (HttpRequestParamValidator.isPost(request)) {
 			try {
-				int id = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_ID);
 				String login = RequestParamUtil.getString(request,
 						ParamNameConstantDeclaration.REQUEST_PARAM_USER_LOGIN);
 				String email = RequestParamUtil.getString(request,
@@ -67,26 +60,23 @@ public class EditUsersCommand implements Command {
 						ParamNameConstantDeclaration.REQUEST_PARAM_USER_NICKNAME);
 				String phoneNumber = RequestParamUtil.getString(request,
 						ParamNameConstantDeclaration.REQUEST_PARAM_USER_PHONENUMBER);
-				int roleId = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_ROLES_ID);
-				HttpRequestParamValidator.validateRequestParamObjectNotNull(id, roleId);
 				RegexParamValidator.userRegistrationValidation(login, password, email, nickname, phoneNumber);
-				User user = User.userBuilder().setId(id).setLogin(login).setEmail(email).setPassword(password)
-						.setNickname(nickname).setPhoneNumber(phoneNumber).setRolesId(roleId).build();
-				if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
-					userService.update(user);
-				} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
-					userService.delete(id);
-				}
-				response.sendRedirect(UrlManager
-						.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_EDIT_USERS_PAGE));
+				User user = User.userBuilder().setId(chosenUserId).setLogin(login).setEmail(email).setPassword(password)
+						.setNickname(nickname).setPhoneNumber(phoneNumber).setRolesId(2).build();
+				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_USER, user);
+				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_USER_UPDATE,
+						ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_USER_UPDATE);
+				userService.update(user);
+				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USER).forward(request,
+						response);
 			} catch (RegexValidateParamException e) {
 				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_USER_ERROR,
 						ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_USER_ERROR);
-				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USERS).forward(request,
+				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USER).forward(request,
 						response);
 			}
 		} else {
-			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USERS).forward(request, response);
+			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_USER).forward(request, response);
 		}
 	}
 }

@@ -63,16 +63,18 @@ public class EditCategoryCommand implements Command {
 				RegexParamValidator.adminCategoryValidation(name);
 				Category category = new Category(id, name);
 				if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_UPDATE) != null) {
+					categoryService.update(category);
+					List<Category> updatedCategories = categoryService.getAllCategories();
 					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_CATEGORY_UPDATE,
 							ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_CATEGORY_UPDATE);
-					categoryService.update(category);
+					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORIES_LIST, updatedCategories);
+					request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_CATEGORY).forward(request,
+							response);
 				} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
-					request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_CATEGORY_DELETE,
-							ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_CATEGORY_DELETE);
 					categoryService.delete(id);
+					response.sendRedirect(UrlManager.getLocationForRedirect(
+							CommandNameConstantDeclaration.COMMAND_NAME_VIEW_EDIT_CATEGORY_PAGE));
 				}
-				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_EDIT_CATEGORY).forward(request,
-						response);
 			} catch (RegexValidateParamException | NullPointerException e) {
 				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_CATEGORY_ERROR,
 						ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_CATEGORY_ERROR);

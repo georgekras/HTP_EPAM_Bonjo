@@ -3,7 +3,7 @@
 <%@ taglib prefix="mytag" tagdir="/WEB-INF/tags/"%>
 <%@ include file="/include/begin-html.jsp"%>
 <fmt:setLocale value="${currentLocale}" />
-<fmt:bundle basename="localization.msg" prefix="msg.jsp.editUsers.">
+<fmt:bundle basename="localization.msg" prefix="msg.jsp.viewUsers.">
 	<fmt:message key="userLogin" var="loginLoc" />
 	<fmt:message key="userEmail" var="emailLoc" />
 	<fmt:message key="userPassword" var="passwordLoc" />
@@ -30,12 +30,11 @@
 	<div class="container">
 		<c:forEach items="${users}" var="user">
 			<form id="editusersForm" class="form-horizontal"
-				action="bonjo?command=editusers" method=post>
+				action="bonjo?command=viewusers" method=post>
 				<div class="row">
-					<input id="login" class="form-control input-md" name="user_id"
+					<input id="id" class="form-control input-md" name="user_id"
 						type="hidden" value="${user.id}" />
-					<div class=col-md-2>
-						<input id="login" class="form-control input-md" name="user_login"
+						<%-- 			<input id="login" class="form-control input-md" name="user_login"
 							value="${user.login}" />
 					</div>
 					<div class=col-md-2>
@@ -56,17 +55,22 @@
 					</div>
 					<input id="login" class="form-control input-md"
 						name="user_roles_id" type="hidden" value="${user.roles_ID}" />
+ --%>
+						<div class=col-md-2>${user.login}</div>
+						<div class=col-md-2>${user.email}</div>
+						<div class=col-md-2>${user.password}</div>
+						<div class=col-md-2>${user.nickname}</div>
+						<div class=col-md-2>${user.phoneNumber}</div>
 
-					<div class=col-md-1>
-						<button id="Update" value="Update" name="Update"
-							class="btn btn-success">${userUpdateButtonLoc}</button>
-					</div>
+						<div class=col-md-1>
+							<a href="bonjo?command=edituser&userId=${user.id}">${userUpdateButtonLoc}</a>
+						</div>
 
-					<div class=col-md-1>
-						<button id="Delete" value="Delete" name="Delete"
-							class="btn btn-danger">${userDeleteButtonLoc}</button>
+						<div class=col-md-1>
+							<button id="Delete" value="Delete" name="Delete"
+								class="btn btn-danger">${userDeleteButtonLoc}</button>
+						</div>
 					</div>
-				</div>
 			</form>
 			<br>
 		</c:forEach>
@@ -78,7 +82,7 @@
 	</div>
 	<div class="row col-md-2">
 		<mytag:paginator count="${usersSize}" step="8"
-			urlprefix="?command=editusers&users=" />
+			urlprefix="?command=viewusers&users=" />
 	</div>
 </div>
 <%@ include file="/include/end-html.jsp"%>

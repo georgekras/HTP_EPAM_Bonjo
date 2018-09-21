@@ -1,7 +1,6 @@
 package by.htp.epam.bonjo.web.command.impl;
 
-import by.htp.epam.bonjo.domain.Category;
-import by.htp.epam.bonjo.service.CategoryService;
+import by.htp.epam.bonjo.domain.User;
 import by.htp.epam.bonjo.service.ServiceFactory;
 import by.htp.epam.bonjo.service.UserService;
 import by.htp.epam.bonjo.web.command.Command;
@@ -11,10 +10,10 @@ import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
 import by.htp.epam.bonjo.web.util.UrlManager;
 import by.htp.epam.bonjo.web.util.exceptions.RegexValidateParamException;
 import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
-import by.htp.epam.bonjo.web.util.validators.RegexParamValidator;
 import by.htp.epam.bonjo.web.util.validators.RequestParamUtil;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,14 +25,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author George Krasutski
  *
  */
-public class CreateCategoryCommand implements Command {
+public class ViewUsersCommand implements Command {
 
-	/**
-	 * CategoryService instance
-	 * 
-	 * {@link by.htp.epam.bonjo.service.CategoryService}
-	 */
-	private CategoryService categoryService = ServiceFactory.getServiceInstance().getCategoryService();
 	/**
 	 * UserService instance
 	 * 
@@ -51,26 +44,29 @@ public class CreateCategoryCommand implements Command {
 					UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_HOME_PAGE));
 			return;
 		}
+		List<User> users = userService.getAllUsers();
+		request.setAttribute("usersSize", users.size());
+		String strStart = request.getParameter(ParamNameConstantDeclaration.REQUEST_PARAM_USER_LIST);
+		int startUser = 0;
+		if (strStart != null) {
+			startUser = Integer.parseInt(strStart);
+		}
+		users = userService.getAllUsersWithPage(startUser, 8);
+		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_USER_LIST, users);
 		if (HttpRequestParamValidator.isPost(request)) {
 			try {
-				String categoryName = RequestParamUtil.getString(request,
-						ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORY_NAME);
-				RegexParamValidator.adminCategoryValidation(categoryName);
-				Category category = new Category(0, categoryName);
-				categoryService.create(category);
-				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_CREATE_CATEGORY_SUCCESS,
-						ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_CREATE_CATEGORY_SUCCESS);
-				response.sendRedirect(UrlManager.getLocationForRedirect(
-						CommandNameConstantDeclaration.COMMAND_NAME_VIEW_EDIT_CATEGORY_PAGE));
+				int id = RequestParamUtil.getInt(request, ParamNameConstantDeclaration.REQUEST_PARAM_USER_ID);
+				HttpRequestParamValidator.validateRequestParamObjectNotNull(id);
+				userService.delete(id);
+				response.sendRedirect(UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_USERS_PAGE));
 			} catch (RegexValidateParamException e) {
-				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_CREATE_CATEGORY_ERROR,
-						ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_CREATE_CATEGORY_ERROR);
-				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_CREATE_CATEGORY).forward(request,
+				request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_USER_ERROR,
+						ParamNameConstantDeclaration.REQUEST_PARAM_MESSAGE_EDIT_USER_ERROR);
+				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_VIEW_USERS).forward(request,
 						response);
 			}
 		} else {
-			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_CREATE_CATEGORY).forward(request,
-					response);
+			request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADMIN_VIEW_USERS).forward(request, response);
 		}
 	}
 }

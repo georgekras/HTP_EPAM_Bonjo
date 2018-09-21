@@ -26,7 +26,7 @@ public class ConnectionPool implements BaseConnectionPool {
 	/**
 	 * Resource bundle gets database config
 	 */
-	private final static ResourceBundle rb = ResourceBundle.getBundle("db_config");
+	private static final ResourceBundle rb = ResourceBundle.getBundle("db_config");
 
 	/**
 	 * Singleton instance
@@ -36,23 +36,23 @@ public class ConnectionPool implements BaseConnectionPool {
 	/**
 	 * Connection pool size
 	 */
-	private final static int POOL_SIZE = 40;
+	private static final int POOL_SIZE = 10;
 	/**
 	 * Database driver
 	 */
-	private final static String DRIVER = rb.getString("db.driver");
+	private static final String DRIVER = rb.getString("db.driver");
 	/**
 	 * Database URL
 	 */
-	private final static String URL = rb.getString("db.url");
+	private static final String URL = rb.getString("db.url");
 	/**
 	 * Database login
 	 */
-	private final static String LOGIN = rb.getString("db.login");
+	private static final String LOGIN = rb.getString("db.login");
 	/**
 	 * Database password
 	 */
-	private final static String PASSWORD = rb.getString("db.pass");
+	private static final String PASSWORD = rb.getString("db.pass");
 
 	/**
 	 * queue for containing free connections

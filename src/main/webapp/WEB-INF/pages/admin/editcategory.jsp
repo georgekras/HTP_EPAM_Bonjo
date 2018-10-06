@@ -1,13 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"
 	pageEncoding="UTF-8"%>
-<%@ include file="/include/begin-html.jsp"%>
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <fmt:setLocale value="${currentLocale}" />
 <fmt:bundle basename="localization.msg" prefix="msg.jsp.editCategory.">
 	<fmt:message key="categoryName" var="categoryNameLoc" />
 	<fmt:message key="updateCategoryButton" var="updateCategoryButtonLoc" />
 	<fmt:message key="deleteCategoryButton" var="deleteCategoryButtonLoc" />
 </fmt:bundle>
-<fmt:bundle basename="localization.msg" prefix="msg.message.editCategory.">
+<fmt:bundle basename="localization.msg"
+	prefix="msg.message.editCategory.">
 	<fmt:message key="editCategoryUpdate" var="editCategoryUpdateLoc" />
 	<fmt:message key="editCategoryDelete" var="editCategoryDeleteLoc" />
 	<fmt:message key="editCategoryError" var="editCategoryErrorLoc" />
@@ -65,7 +66,7 @@
 		</c:if>
 	</div>
 </div>
-<script src="assets/js/jquery-1.9.1.js"></script>
-<script src="assets/js/jquery.validate.js"></script>
-<script src="assets/js/editcategory.validate.js"></script>
-<%@ include file="/include/end-html.jsp"%>
+<script src="/WEB-INF/assets/js/jquery-1.9.1.js"></script>
+<script src="/WEB-INF/assets/js/jquery.validate.js"></script>
+<script src="/WEB-INF/assets/js/editcategory.validate.js"></script>
+<%@ include file="/WEB-INF/include/footer.jsp"%>

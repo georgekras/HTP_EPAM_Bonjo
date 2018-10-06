@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="mytag" tagdir="/WEB-INF/tags/"%>
-<%@ include file="/include/begin-html.jsp"%>
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <fmt:setLocale value="${currentLocale}" />
 <fmt:bundle basename="localization.msg" prefix="msg.jsp.userAds.">
 	<fmt:message key="header" var="headerLoc" />
@@ -47,4 +47,4 @@
 		<br>
 	</div>
 </div>
-<%@ include file="/include/end-html.jsp"%>
+<%@ include file="/WEB-INF/include/footer.jsp"%>

@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/include/begin-html.jsp"%>
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <fmt:setLocale value="${currentLocale}" />
 <fmt:bundle basename="localization.msg" prefix="msg.jsp.editAd.">
 	<fmt:message key="header" var="headerLoc" />
@@ -39,7 +39,7 @@
 				<!-- Select Basic -->
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="category_ID">${categoryLoc}</label>
-					<div class="col-md-4">
+					<div class="col-md-6">
 						<select id="name" name="ad_category_id" class="form-control">
 							<c:forEach items="${categories}" var="category">
 								<option value="${category.id}" role=${category.id
@@ -54,7 +54,7 @@
 				<!-- Text input-->
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="smallDesc">${smallDescLoc}</label>
-					<div class="col-md-4">
+					<div class="col-md-8">
 						<input id="smallDesc" name="ad_smalldesc" type="text"
 							placeholder="" class="form-control input-md"
 							value="${user_ad.smallDesc}">
@@ -64,7 +64,7 @@
 				<!-- Text area-->
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="description">${descriptionLoc}</label>
-					<div class="col-md-4">
+					<div class="col-md-8">
 						<textarea id="description" name="ad_description" type="text"
 							placeholder="" class="form-control input-md">${user_ad.description}</textarea>
 					</div>
@@ -109,7 +109,7 @@
 		</c:if>
 	</div>
 </div>
-<script src="assets/js/jquery-1.9.1.js"></script>
-<script src="assets/js/jquery.validate.js"></script>
-<script src="assets/js/editad.validate.js"></script>
-<%@ include file="/include/end-html.jsp"%>
+<script src="/WEB-INF/assets/js/jquery-1.9.1.js"></script>
+<script src="/WEB-INF/assets/js/jquery.validate.js"></script>
+<script src="/WEB-INF/assets/js/editad.validate.js"></script>
+<%@ include file="/WEB-INF/include/footer.jsp"%>

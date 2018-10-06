@@ -11,7 +11,6 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
-<body>
-error 404
+<body>error 404
 </body>
 </html>

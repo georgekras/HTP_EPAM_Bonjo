@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/include/begin-html.jsp"%>
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <fmt:setLocale value="${currentLocale}" />
 <fmt:bundle basename="localization.msg" prefix="msg.jsp.editUser.">
 	<fmt:message key="header" var="headerLoc" />
@@ -19,7 +19,7 @@
 	<div align="center">
 		<div class="container">
 			<div class="page-header">
-				<h2>${headerLoc} ${user.nickname}</h2>
+				<h2>${headerLoc}${user.nickname}</h2>
 			</div>
 			<br>
 			<form id="signupForm" class="form-horizontal"
@@ -31,8 +31,7 @@
 						<label class="col-md-4 control-label" for="login">${loginLoc}</label>
 						<div class="col-md-4">
 							<input id="login" name="user_login" type="text"
-								value="${user.login}"
-								class="form-control input-md">
+								value="${user.login}" class="form-control input-md">
 						</div>
 					</div>
 
@@ -96,7 +95,7 @@
 		</div>
 	</div>
 </div>
-<script src="assets/js/jquery-1.9.1.js"></script>
-<script src="assets/js/jquery.validate.js"></script>
-<script src="assets/js/signup.validate.js"></script>
-<%@ include file="/include/end-html.jsp"%>
+<script src="/WEB-INF/assets/js/jquery-1.9.1.js"></script>
+<script src="/WEB-INF/assets/js/jquery.validate.js"></script>
+<script src="/WEB-INF/assets/js/signup.validate.js"></script>
+<%@ include file="/WEB-INF/include/footer.jsp"%>

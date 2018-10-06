@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/include/begin-html.jsp"%>
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <fmt:setLocale value="${currentLocale}" />
 <fmt:bundle basename="localization.msg" prefix="msg.jsp.profile.">
 	<fmt:message key="profilePhoneNumber" var="profilePhoneNumberLoc" />
@@ -70,7 +70,7 @@
 		</c:if>
 	</div>
 </div>
-<script src="assets/js/jquery-1.9.1.js"></script>
-<script src="assets/js/jquery.validate.js"></script>
-<script src="assets/js/profile.validate.js"></script>
-<%@ include file="/include/end-html.jsp"%>
+<script src="/WEB-INF/assets/js/jquery-1.9.1.js"></script>
+<script src="/WEB-INF/assets/js/jquery.validate.js"></script>
+<script src="/WEB-INF/assets/js/profile.validate.js"></script>
+<%@ include file="/WEB-INF/include/footer.jsp"%>

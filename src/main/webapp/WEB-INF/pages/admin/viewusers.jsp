@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="mytag" tagdir="/WEB-INF/tags/"%>
-<%@ include file="/include/begin-html.jsp"%>
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <fmt:setLocale value="${currentLocale}" />
 <fmt:bundle basename="localization.msg" prefix="msg.jsp.viewUsers.">
 	<fmt:message key="userLogin" var="loginLoc" />
@@ -34,7 +34,7 @@
 				<div class="row">
 					<input id="id" class="form-control input-md" name="user_id"
 						type="hidden" value="${user.id}" />
-						<%-- 			<input id="login" class="form-control input-md" name="user_login"
+					<%-- 			<input id="login" class="form-control input-md" name="user_login"
 							value="${user.login}" />
 					</div>
 					<div class=col-md-2>
@@ -56,21 +56,21 @@
 					<input id="login" class="form-control input-md"
 						name="user_roles_id" type="hidden" value="${user.roles_ID}" />
  --%>
-						<div class=col-md-2>${user.login}</div>
-						<div class=col-md-2>${user.email}</div>
-						<div class=col-md-2>${user.password}</div>
-						<div class=col-md-2>${user.nickname}</div>
-						<div class=col-md-2>${user.phoneNumber}</div>
+					<div class=col-md-2>${user.login}</div>
+					<div class=col-md-2>${user.email}</div>
+					<div class=col-md-2>${user.password}</div>
+					<div class=col-md-2>${user.nickname}</div>
+					<div class=col-md-2>${user.phoneNumber}</div>
 
-						<div class=col-md-1>
-							<a href="bonjo?command=edituser&userId=${user.id}">${userUpdateButtonLoc}</a>
-						</div>
-
-						<div class=col-md-1>
-							<button id="Delete" value="Delete" name="Delete"
-								class="btn btn-danger">${userDeleteButtonLoc}</button>
-						</div>
+					<div class=col-md-1>
+						<a href="bonjo?command=edituser&userId=${user.id}">${userUpdateButtonLoc}</a>
 					</div>
+
+					<div class=col-md-1>
+						<button id="Delete" value="Delete" name="Delete"
+							class="btn btn-danger">${userDeleteButtonLoc}</button>
+					</div>
+				</div>
 			</form>
 			<br>
 		</c:forEach>
@@ -85,4 +85,4 @@
 			urlprefix="?command=viewusers&users=" />
 	</div>
 </div>
-<%@ include file="/include/end-html.jsp"%>
+<%@ include file="/WEB-INF/include/footer.jsp"%>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="mytag" tagdir="/WEB-INF/tags/"%>
-<%@ include file="/include/begin-html.jsp"%>
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <fmt:setLocale value="${currentLocale}" />
 <fmt:bundle basename="localization.msg" prefix="msg.jsp.home.">
 	<fmt:message key="header" var="headerLoc" />
@@ -46,4 +46,4 @@
 		</div>
 	</div>
 </div>
-<%@ include file="/include/end-html.jsp"%>
+<%@ include file="/WEB-INF/include/footer.jsp"%>

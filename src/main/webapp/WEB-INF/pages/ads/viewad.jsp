@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/include/begin-html.jsp"%>
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <fmt:setLocale value="${currentLocale}" />
 <fmt:bundle basename="localization.msg" prefix="msg.jsp.viewAd.">
 	<fmt:message key="adDetails" var="adDetailsLoc" />
@@ -64,6 +64,4 @@
 		</div>
 	</div>
 </div>
-
-
-<%@ include file="/include/end-html.jsp"%>
+<%@ include file="/WEB-INF/include/header.jsp"%>

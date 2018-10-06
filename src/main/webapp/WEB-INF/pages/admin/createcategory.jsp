@@ -1,12 +1,13 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/include/begin-html.jsp"%>
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <fmt:setLocale value="${currentLocale}" />
 <fmt:bundle basename="localization.msg" prefix="msg.jsp.createCategory.">
 	<fmt:message key="header" var="headerLoc" />
 	<fmt:message key="categoryName" var="categoryNameLoc" />
 	<fmt:message key="createCategoryButton" var="createCategoryButtonLoc" />
 </fmt:bundle>
-<fmt:bundle basename="localization.msg" prefix="msg.message.createCategory.">
+<fmt:bundle basename="localization.msg"
+	prefix="msg.message.createCategory.">
 	<fmt:message key="createCategoryError" var="createCategoryErrorLoc" />
 </fmt:bundle>
 <div align="center">
@@ -16,8 +17,8 @@
 			<h2>${headerLoc}</h2>
 		</div>
 		<br>
-		<form id="createcategoryForm" class="form-horizontal" action="bonjo?command=createcategory"
-			method="post">
+		<form id="createcategoryForm" class="form-horizontal"
+			action="bonjo?command=createcategory" method="post">
 			<fieldset>
 
 				<!-- Text input-->
@@ -48,7 +49,7 @@
 		</c:if>
 	</div>
 </div>
-<script src="assets/js/jquery-1.9.1.js"></script>
-<script src="assets/js/jquery.validate.js"></script>
-<script src="assets/js/createcategory.validate.js"></script>
-<%@ include file="/include/end-html.jsp"%>
+<script src="/WEB-INF/assets/js/jquery-1.9.1.js"></script>
+<script src="/WEB-INF/assets/js/jquery.validate.js"></script>
+<script src="/WEB-INF/assets/js/createcategory.validate.js"></script>
+<%@ include file="/WEB-INF/include/footer.jsp"%>

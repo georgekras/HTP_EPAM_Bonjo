@@ -30,7 +30,7 @@
 				<!-- Text input-->
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="title">${titleLoc}</label>
-					<div class="col-md-4">
+					<div class="col-md-6">
 						<input id="title" name="ad_title" type="text" placeholder=""
 							class="form-control input-md" value="${user_ad.title}">
 					</div>
@@ -109,7 +109,7 @@
 		</c:if>
 	</div>
 </div>
-<script src="/WEB-INF/assets/js/jquery-1.9.1.js"></script>
-<script src="/WEB-INF/assets/js/jquery.validate.js"></script>
-<script src="/WEB-INF/assets/js/editad.validate.js"></script>
+<script src="assets/js/jquery-1.9.1.js"></script>
+<script src="assets/js/jquery.validate.js"></script>
+<script src="assets/js/editad.validate.js"></script>
 <%@ include file="/WEB-INF/include/footer.jsp"%>

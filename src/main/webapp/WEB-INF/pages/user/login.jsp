@@ -64,7 +64,7 @@
 		</c:if>
 	</div>
 </div>
-<script src="/WEB-INF/assets/js/jquery-1.9.1.js"></script>
-<script src="/WEB-INF/assets/js/jquery.validate.js"></script>
-<script src="/WEB-INF/assets/js/login.validate.js"></script>
+<script src="assets/js/jquery-1.9.1.js"></script>
+<script src="assets/js/jquery.validate.js"></script>
+<script src="assets/js/login.validate.js"></script>
 <%@ include file="/WEB-INF/include/footer.jsp"%>

@@ -76,11 +76,9 @@ public class ConnectionPool implements BaseConnectionPool {
 	 * @return BaseConnectionPool
 	 */
 	public static BaseConnectionPool getInstance() {
-		if (instance == null) {
-			synchronized (ConnectionPool.class) {
-				if (instance == null) {
-					instance = new ConnectionPool();
-				}
+		synchronized (ConnectionPool.class) {
+			if (instance == null) {
+				instance = new ConnectionPool();
 			}
 		}
 		return instance;

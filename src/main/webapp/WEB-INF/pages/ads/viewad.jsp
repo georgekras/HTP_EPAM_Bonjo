@@ -13,6 +13,9 @@
 	<fmt:message key="userNickname" var="userNicknameLoc" />
 	<fmt:message key="userPhoneNumber" var="userPhoneNumberLoc" />
 </fmt:bundle>
+<fmt:bundle basename="localization.msg" prefix="msg.jsp.editAd.">
+	<fmt:message key="deleteAdButton" var="deleteAdButtonLoc" />
+</fmt:bundle>
 <br>
 <div class="page-header">
 	<h2 align="center">${ad.title}</h2>
@@ -30,7 +33,7 @@
 				<b>${categoryLoc}</b>
 				<c:if test="${category.id==ad.category_ID}">
                         ${category.name}
-	</c:if>
+				</c:if>
 			</p>
 			<p>
 				<b>${smallDescLoc}</b>${ad.smallDesc}</p>
@@ -38,6 +41,17 @@
 				<b>${descriptionLoc}</b>${ad.description}</p>
 			<p>
 				<b>${priceLoc}</b>${ad.price}$</p>
+
+			<form id="viewadForm" class="form-horizontal"
+				action="bonjo?command=viewad&adId=${ad.id}" method=post>
+				<c:if test="${currentUser!=null && currentUser.roles_ID==1}">
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="Delete"></label>
+						<button id="Delete" value="Delete" name="Delete"
+							class="btn btn-danger">${deleteAdButtonLoc}</button>
+					</div>
+				</c:if>
+			</form>
 		</div>
 
 		<div class="col-md-5">

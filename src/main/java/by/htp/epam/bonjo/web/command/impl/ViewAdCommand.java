@@ -14,8 +14,11 @@ import by.htp.epam.bonjo.service.CategoryService;
 import by.htp.epam.bonjo.service.ServiceFactory;
 import by.htp.epam.bonjo.service.UserService;
 import by.htp.epam.bonjo.web.command.Command;
+import by.htp.epam.bonjo.web.constants.CommandNameConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.PagePathConstantDeclaration;
 import by.htp.epam.bonjo.web.constants.ParamNameConstantDeclaration;
+import by.htp.epam.bonjo.web.util.UrlManager;
+import by.htp.epam.bonjo.web.util.validators.HttpRequestParamValidator;
 
 /**
  * Class implementing Command interface
@@ -60,6 +63,14 @@ public class ViewAdCommand implements Command {
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_USER_NICKNAME, userInfo.getNickname());
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_USER_PHONENUMBER, userInfo.getPhoneNumber());
 		request.setAttribute(ParamNameConstantDeclaration.REQUEST_PARAM_CATEGORY, category);
+		if (HttpRequestParamValidator.isPost(request)) {
+			if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
+				adService.delete(chosenAdId);
+				response.sendRedirect(UrlManager
+						.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_HOME_PAGE));
+				return;
+			}
+		}
 		request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_VIEW_AD).forward(request, response);
 	}
 }

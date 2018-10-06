@@ -95,6 +95,7 @@ public class EditAdCommand implements Command {
 				} else if (request.getParameter(ParamNameConstantDeclaration.BUTTON_PARAM_DELETE) != null) {
 					adService.delete(chosenAdId);
 					response.sendRedirect(UrlManager.getLocationForRedirect(CommandNameConstantDeclaration.COMMAND_NAME_VIEW_USER_ADS_PAGE));
+					return;
 				}
 				request.getRequestDispatcher(PagePathConstantDeclaration.PAGE_ADS_EDIT_AD).forward(request, response);
 			} catch (RegexValidateParamException e) {
